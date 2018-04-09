@@ -16,8 +16,9 @@ import {
     Dimensions,
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
-import { withGlobalState } from 'react-globally';
 import { SafeAreaView } from 'react-navigation';
+import { Buffer } from 'buffer';
+import { withGlobalState } from 'react-globally';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -30,11 +31,16 @@ class BLEManager extends Component
     constructor ()
     {
         super();
+
+        var newStore = new Array(64);
+        for (var j = 0; j < 64; j++) newStore[j] = 0;
         
         this.state = {
             scanning:false,
             peripherals: new Map(),
-            appState: ''
+            appState: '',
+            curReadings: newStore,
+            readingsDone: 0
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -109,14 +115,126 @@ class BLEManager extends Component
 
     handleUpdateValueForCharacteristic (data) 
     {
-        console.log('Received data from ' + data.peripheral + ' characteristic ' + data.characteristic, data.value);
+        //console.log('Received data from ' + data.peripheral);
+        console.log('Value: ' + data.value);
+        console.log('peripheral: ' + data.peripheral);
 
-        var service = '96CDFDA3-4F55-D346-24A3-7CDAE787B6F9';
-        var readChar = '009DC8EC-8C77-20BD-2478-6DC266D0C5A9';
+        this.setState({readingsDone: 0});
 
-        BleManager.read(data.peripheral, service, readChar).then((readData) => {
-            console.log('Read ' + readData + ' from ' + readChar);
-        });
+        var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
+        console.log('service: ' + service);
+        var readChars = [
+            '056B0F3D-57D7-4842-A4F1-3177FD883A97',
+            '36142750-2A5A-450A-BA69-9C072DB93079',
+            '156B0F3D-57D7-4842-A4F1-3177FD883A97',
+            'ED887B10-87E3-43D8-8595-7F8C0394A9AE',
+            '38330731-44AC-462C-93A3-054F93A9A35A',
+            '09EC3E8F-4390-439D-BBDF-2B79370ABA51',
+            '7AC8C0E7-EBC7-4A44-9EE1-EEEA9FA2218D',
+            '0EBC4973-F784-4849-8891-7D759FB1E3B7',
+            '638E8CBF-BC8B-4B24-A719-D9F0DFE24784',
+            'DE76C062-35DD-44ED-B8C2-CB28B98CDEF4',
+            '90F1A21F-5D34-4B94-9797-E3873C66FA78',
+            'C3C8B0A0-A540-486D-A94E-405F2F3D1334',
+            '59A8A2B1-7E54-419A-A37F-F59D01D80CAE',
+            '3ACB209A-3B54-4B2D-8981-C5D8E2B85DB7',
+            '3D2A633F-5EEA-4346-A073-CBDD002040D1',
+            'C3151BB7-3E2C-4821-8EB9-4067A6585508'
+        ];
+        var readings = [];
+        var tcnt = 0;
+        var timer = setInterval(() => { tcnt += 10; }, 10)
+
+        var cnt = 0;
+        for (var i = 0; i < readChars.length; i++)
+        {
+            console.log('readchar' + i + ': ' + readChars[i]);
+            BleManager.read(data.peripheral, service, readChars[i])
+                .then((readData) => {
+                    console.log('----READ----');
+                    var temp = new Buffer(17);
+                    for (var j = 0; j < 17; j++)
+                        temp.writeUInt8(readData[j], j);
+                    var id = temp.readInt8(16);
+                    readings[id * 4] = temp.readFloatBE(0);
+                    readings[id * 4 + 1] = temp.readFloatBE(4);
+                    readings[id * 4 + 2] = temp.readFloatBE(8);
+                    readings[id * 4 + 3] = temp.readFloatBE(12);
+
+                    cnt++;
+                    console.log('cnt: ' + cnt);
+                    if (cnt == readChars.length)
+                    {
+                        console.log('Timer: ' + tcnt + 'ms');
+                        clearInterval(timer);
+
+                        var curr = this.state.curReadings;
+                        for (var j = 0; j < 64; j++)
+                        {
+                            curr[j] += readings[j];
+                            this.setState({curReadings: curr});
+                        }
+
+                        if (data.value == 4)
+                        {
+                            console.log('Values read');
+
+                            var avg = this.state.curReadings;
+                            for (var j = 0; j < 64; j++)
+                                avg[j] /= 5;
+                            var pendingReadings = this.props.globalState.pendingReadings;
+
+                            var da = new Date();
+                            var y = da.getUTCFullYear();
+                            var m = (da.getUTCMonth() + 1);
+                            m = (m < 10 ? '0' : '') + m;
+                            var d = da.getUTCDate();
+                            d = (d < 10 ? '0' : '') + d;
+                            var h = da.getUTCHours();
+                            h = (h < 10 ? '0' : '') + h;
+                            var mi = da.getUTCMinutes();
+                            mi = (mi < 10 ? '0' : '') + mi;
+                            var s = da.getUTCSeconds();
+                            s = (s < 10 ? '0' : '') + s;
+                            var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
+                            console.log(utc);
+
+                            var newReading = {
+                                timestamp: utc,
+                                channels: avg
+                            };
+                            pendingReadings.push(newReading);
+                            this.props.setGlobalState({pendingReadings});
+                            var postObj = {
+                                authCode: this.props.globalState.authCode,
+                                id: this.props.globalState.id,
+                                readings: pendingReadings
+                            };
+
+                            console.log('SEND HERE');
+                            console.log(postObj);
+
+                            //if able to post
+                            fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(postObj)
+                            })
+                            .then((result) => result.json())
+                            .then((json) => {
+                                console.log('Send done');
+                                console.log(json);
+                                pendingReadings = [];
+                                this.props.setGlobalState({pendingReadings});
+                            });
+
+                            var newStore = new Array(64);
+                            for (var j = 0; j < 64; j++) newStore[j] = 0;
+                            this.setState({curReadings: newStore});
+                        }
+                    }
+                });
+        }
     }
 
     handleStopScan () 
@@ -130,7 +248,7 @@ class BLEManager extends Component
         if (!this.state.scanning) 
         {
             this.setState({peripherals: new Map()});
-            BleManager.scan([], 10, true).then((results) => {
+            BleManager.scan([], 3, true).then((results) => {
                 console.log('Scanning...');
                 this.setState({scanning:true});
             });
@@ -187,8 +305,8 @@ class BLEManager extends Component
                             console.log('Peripheral Info');
                             console.log(peripheralInfo);
 
-                            var service = '96CDFDA3-4F55-D346-24A3-7CDAE787B6F9';
-                            var notifyChar = '0AAE4593-6F8C-ED56-F7B4-E1098BDC6E89';
+                            var service =    '72369D5C-94E1-41D7-ACAB-A88062C506A8';
+                            var notifyChar = '222B99A0-37CC-4799-9152-7C35D5C5FE07';
 
                             BleManager.startNotification(peripheral.id, service, notifyChar).then(() => {
                                 console.log('Started notification on ' + peripheral.id);
