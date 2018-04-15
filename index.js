@@ -7,7 +7,7 @@ import DashboardComponent from './Components/DashboardComponent';
 import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
 
-const DashboardStack = DrawerNavigator ({
+const DashboardStack = StackNavigator ({
     Dashboard: {
         screen: DashboardComponent,
         navigationOptions: {
@@ -36,7 +36,7 @@ const MessagesStack = StackNavigator ({
 });
 */
 
-const App = TabNavigator ({
+const Tabs = TabNavigator ({
     Dashboard: {screen: DashboardStack},
     Test: {screen: TestComponent},
     //History: {screen: HistoryStack},
@@ -50,6 +50,10 @@ const App = TabNavigator ({
     swipeEnabled: false,
     tabBarPosition: 'bottom',
     animationEnabled: true
+});
+
+const App = StackNavigator ({
+    Main: {screen: Tabs}
 });
 
 const initialState = {

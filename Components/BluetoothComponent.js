@@ -117,12 +117,12 @@ class BLEManager extends Component
     {
         //console.log('Received data from ' + data.peripheral);
         console.log('Value: ' + data.value);
-        console.log('peripheral: ' + data.peripheral);
+        //console.log('peripheral: ' + data.peripheral);
 
         this.setState({readingsDone: 0});
 
         var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
-        console.log('service: ' + service);
+        console.log('Service: ' + service);
         var readChars = [
             '056B0F3D-57D7-4842-A4F1-3177FD883A97',
             '36142750-2A5A-450A-BA69-9C072DB93079',
@@ -142,16 +142,13 @@ class BLEManager extends Component
             'C3151BB7-3E2C-4821-8EB9-4067A6585508'
         ];
         var readings = [];
-        var tcnt = 0;
-        var timer = setInterval(() => { tcnt += 10; }, 10)
 
         var cnt = 0;
-        for (var i = 0; i < readChars.length; i++)
-        {
-            console.log('readchar' + i + ': ' + readChars[i]);
-            BleManager.read(data.peripheral, service, readChars[i])
+        var readChar = () => {
+            BleManager.read(data.peripheral, service, readChars[cnt])
                 .then((readData) => {
                     console.log('----READ----');
+
                     var temp = new Buffer(17);
                     for (var j = 0; j < 17; j++)
                         temp.writeUInt8(readData[j], j);
@@ -163,11 +160,15 @@ class BLEManager extends Component
 
                     cnt++;
                     console.log('cnt: ' + cnt);
-                    if (cnt == readChars.length)
+                    if (cnt != readChars.length)
                     {
-                        console.log('Timer: ' + tcnt + 'ms');
-                        clearInterval(timer);
-
+                        console.log('continue');
+                        readCharBound();
+                    }
+                    else
+                    {
+                        //console.log('STATE:');
+                        //console.log(this.state);
                         var curr = this.state.curReadings;
                         for (var j = 0; j < 64; j++)
                         {
@@ -233,8 +234,14 @@ class BLEManager extends Component
                             this.setState({curReadings: newStore});
                         }
                     }
+                })
+                .catch((error) => {
+                    console.log('READ ERROR');
+                    console.log(error);
                 });
         }
+        var readCharBound = readChar.bind(this);
+        readCharBound();
     }
 
     handleStopScan () 
@@ -300,7 +307,7 @@ class BLEManager extends Component
                     }
                     console.log('Connected to ' + peripheral.id);
 
-                    setTimeout(() => {
+                    //setTimeout(() => {
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
                             console.log(peripheralInfo);
@@ -315,7 +322,7 @@ class BLEManager extends Component
                             });
                         });
 
-                    }, 900);
+                    //}, 900);
                 }).catch((error) => {
                     console.log('Connection error', error);
                 });
