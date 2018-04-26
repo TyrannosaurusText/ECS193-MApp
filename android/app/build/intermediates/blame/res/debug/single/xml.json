@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/res/xml/preferences.xml"
+    },
+    {
+        "merged": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/res/merged/debug/xml/preferences.xml",
+        "source": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/res/xml/preferences.xml"
+    }
+]

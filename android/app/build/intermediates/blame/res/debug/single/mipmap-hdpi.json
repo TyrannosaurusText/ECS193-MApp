@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/home/whenkek/NIBVA/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/res/merged/debug/mipmap-hdpi/ic_launcher.png",
+        "source": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+    }
+]

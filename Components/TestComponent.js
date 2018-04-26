@@ -8,9 +8,9 @@ import { SafeAreaView } from 'react-navigation';
 
 export default class TestComponent extends Component
 {
-    static navigationOptions = {
-        title: 'Testing State'
-    };
+    // static navigationOptions = {
+    //     title: 'Testing State'
+    // };
 
     constructor ()
     {

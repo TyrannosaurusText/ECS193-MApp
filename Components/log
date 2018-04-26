@@ -1,0 +1,247 @@
+
+04/25 18:07:35: Launching app
+No apk changes detected since last installation, skipping installation of /home/whenkek/NIBVA/android/app/build/outputs/apk/app-debug.apk
+$ adb shell am force-stop com.nibva
+$ adb shell am start -n "com.nibva/com.nibva.MainActivity" -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+Client not ready yet..Waiting for process to come online
+Connected to process 20829 on device google-pixel_2_xl-711KPFX0902483
+Capturing and displaying logcat messages from application. This behavior can be disabled in the "Logcat output" section of the "Debugger" settings page.
+D/FirebaseApp: com.google.firebase.auth.FirebaseAuth is not linked. Skipping initialization.
+D/FirebaseApp: com.google.firebase.crash.FirebaseCrash is not linked. Skipping initialization.
+I/FA: App measurement is starting up, version: 11020
+      To enable debug logging run: adb shell setprop log.tag.FA VERBOSE
+V/FA: Collection enabled
+      App package, google app id: com.nibva, 1:671445578517:android:0b964c4c7b87fa42
+I/FA: To enable faster debug mode event logging run:
+        adb shell setprop debug.firebase.analytics.app com.nibva
+D/FA: Debug-level message logging enabled
+V/FA: Cancelling job. JobID: 836858889
+V/FA: Registered activity lifecycle callback
+I/FirebaseInitProvider: FirebaseApp initialization successful
+V/fb-UnpackingSoSource: locked dso store /data/user/0/com.nibva/lib-main
+V/FA: Using measurement service
+I/fb-UnpackingSoSource: dso store is up-to-date: /data/user/0/com.nibva/lib-main
+V/fb-UnpackingSoSource: releasing dso store lock for /data/user/0/com.nibva/lib-main
+V/FA: Connecting to remote service
+V/FA: Using measurement service
+      Connection attempt already in progress
+D/libEGL: loaded /vendor/lib/egl/libEGL_adreno.so
+D/libEGL: loaded /vendor/lib/egl/libGLESv1_CM_adreno.so
+V/FA: onActivityCreated
+D/ReactNative: ReactInstanceManager.ctor()
+D/libEGL: loaded /vendor/lib/egl/libGLESv2_adreno.so
+D/NetworkSecurityConfig: No Network Security Config specified, using platform default
+D/ReactNative: ReactInstanceManager.createReactContextInBackground()
+               ReactInstanceManager.recreateReactContextInBackgroundInner()
+D/ReactNative: ReactInstanceManager.onJSBundleLoadedFromServer()
+D/ReactNative: ReactInstanceManager.recreateReactContextInBackground()
+               ReactInstanceManager.runCreateReactContextOnNewThread()
+I/zygote: Thread[16,tid=20858,Native,Thread*=0xec2f9000,peer=0x12dca430,"Thread-3"] recursive attempt to load library "/data/app/com.nibva-7cMQmk3DigShzSEeiwlCvg==/lib/arm/libfb.so"
+D/ReactNative: ReactInstanceManager.createReactContext()
+W/unknown:InspectorPackagerConnection: Couldn't connect to packager, will silently retry
+V/FA: Using measurement service
+      Connection attempt already in progress
+V/FA: Activity resumed, time: 243610830
+I/FA: Tag Manager is not found and thus will not be used
+D/FA: Logging event (FE): screen_view(_vs), Bundle[{firebase_event_origin(_o)=auto, firebase_screen_class(_sc)=MainActivity, firebase_screen_id(_si)=4371326344910270502}]
+D/OpenGLRenderer: HWUI GL Pipeline
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTGroupViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTGroupShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTShapeViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTShapeShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTTextViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTTextShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.checkbox.ReactCheckBoxManager
+D/JobRescheduleService: Reschedule service started
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.uimanager.LayoutShadowNode
+W/unknown:ReactNative: Packager connection already open, nooping.
+V/FA: Using measurement service
+      Connection attempt already in progress
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.picker.ReactDialogPickerManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.drawer.ReactDrawerLayoutManager
+I/Adreno: QUALCOMM build                   : 594927b, I916dfac403
+          Build Date                       : 10/11/17
+          OpenGL ES Shader Compiler Version: EV031.21.02.00
+          Local Branch                     : mybranch28618966
+          Remote Branch                    : quic/gfx-adreno.lnx.6.4.9-rel
+          Remote Branch                    : NONE
+          Reconstruct Branch               : NOTHING
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.picker.ReactDropdownPickerManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollViewManager
+I/Adreno: PFP: 0x005ff087, ME: 0x005ff063
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactHorizontalScrollContainerViewManager
+I/zygote: android::hardware::configstore::V1_0::ISurfaceFlingerConfigs::hasWideColorDisplay retrieved: 1
+I/OpenGLRenderer: Initialized EGL, version 1.4
+D/OpenGLRenderer: Swap behavior 2
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ReactProgressBarViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.progressbar.ProgressBarShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.scroll.ReactScrollViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.slider.ReactSliderManager
+D/FA: Connected to remote service
+V/FA: Processing queued up service tasks: 4
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.slider.ReactSliderManager$ReactSliderShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.switchview.ReactSwitchManager$ReactSwitchShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.toolbar.ReactToolbarManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.webview.ReactWebViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.swiperefresh.SwipeRefreshLayoutManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTSurfaceViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.art.ARTSurfaceViewShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.frescosupport.FrescoBasedReactTextInlineImageShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.image.ReactImageManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ReactModalHostManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.modal.ModalHostShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactRawTextShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.textinput.ReactTextInputShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactTextShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.view.ReactViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.viewpager.ReactViewPagerManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextViewManager
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class com.facebook.react.views.text.ReactVirtualTextShadowNode
+W/unknown:ViewManagerPropertyUpdater: Could not find generated setter for class co.apptailor.googlesignin.RNGoogleSigninButtonViewManager
+D/logs: BleManager created
+D/ReactNative: Initializing React Xplat Bridge.
+D/ReactNative: Initializing React Xplat Bridge before initializeBridge
+D/ReactNative: Initializing React Xplat Bridge after initializeBridge
+D/ReactNative: CatalystInstanceImpl.runJSBundle()
+D/ReactNative: ReactInstanceManager.setupReactContext()
+               CatalystInstanceImpl.initialize()
+W/unknown:ReactNative: Packager connection already open, nooping.
+D/ReactNative: ReactInstanceManager.attachRootViewToInstance()
+D/BackgroundTask: Initializing
+D/BackgroundTask: Setting foreground true
+I/WebViewFactory: Loading com.android.chrome version 66.0.3359.126 (code 335912652)
+I/cr_LibraryLoader: Time to load native libraries: 3 ms (timestamps 3181-3184)
+I/chromium: [INFO:library_loader_hooks.cc(36)] Chromium logging enabled: level = 0, default verbosity = 0
+I/cr_LibraryLoader: Expected native library version number "66.0.3359.126", actual native library version number "66.0.3359.126"
+I/ReactNativeJS: Running application "NIBVA" with appParams: {"rootTag":1}. __DEV__ === true, development-level warning are ON, performance optimizations are OFF
+I/zygote: Do partial code cache collection, code=30KB, data=26KB
+          After code cache collection, code=30KB, data=26KB
+          Increasing code cache capacity to 128KB
+D/BackgroundTask: @ReactMethod BackgroundTask.schedule
+I/zygote: Do partial code cache collection, code=38KB, data=59KB
+          After code cache collection, code=38KB, data=59KB
+          Increasing code cache capacity to 256KB
+          Compiler allocated 4MB to compile void android.widget.TextView.<init>(android.content.Context, android.util.AttributeSet, int, int)
+I/ReactNativeJS: Configured
+I/zygote: Do full code cache collection, code=126KB, data=95KB
+I/zygote: After code cache collection, code=110KB, data=65KB
+V/FA: Inactivity, disconnecting from the service
+I/zygote: Do partial code cache collection, code=126KB, data=83KB
+          After code cache collection, code=126KB, data=83KB
+          Increasing code cache capacity to 512KB
+D/JobRescheduleService: Reschedule 0 jobs of 0 jobs
+V/FA: Recording user engagement, ms: 16884
+      Using measurement service
+      Connecting to remote service
+V/FA: Activity paused, time: 243627714
+D/FA: Logging event (FE): user_engagement(_e), Bundle[{firebase_event_origin(_o)=auto, engagement_time_msec(_et)=16884, firebase_screen_class(_sc)=MainActivity, firebase_screen_id(_si)=4371326344910270502}]
+D/BackgroundTask: Setting foreground false
+                  Committing job schedule
+V/FA: Using measurement service
+      Connection attempt already in progress
+D/JobProxy24: Schedule periodic jobInfo success, request{id=1, tag=rnbgtask}, interval 00:15:00, flex 00:07:30
+D/FA: Connected to remote service
+V/FA: Processing queued up service tasks: 2
+V/FA: Inactivity, disconnecting from the service
+D/PlatformJobService: Run job, request{id=1, tag=rnbgtask}, waited 00:09:13, interval 00:15:00, flex 00:07:30
+I/JobExecutor: Executing request{id=1, tag=rnbgtask}, context PlatformJobService
+D/BackgroundTask: Job is running
+D/BackgroundTask: Returning HeadlessJsTaskConfig, timeout=30 ms
+I/JobExecutor: Finished job{id=1, finished=true, result=SUCCESS, canceled=false, periodic=true, class=RNJob, tag=rnbgtask}
+D/logs: start
+D/logs: BleManager initialized
+D/PlatformJobService: Finished job, request{id=1, tag=rnbgtask} SUCCESS
+E/ReactNativeJS: { [TypeError: undefined is not a function (evaluating '_this.startScan()')]
+                   line: 73851,
+                   column: 24,
+                   sourceURL: 'http://localhost:8081/index.delta?platform=android&dev=true&minify=false' }
+E/unknown:ReactNative: undefined is not a function (evaluating '_this.startScan()'), stack:
+                       <unknown>@73851:24
+                       fn$@76554:21
+                       tryCatch@16472:23
+                       invoke@16645:32
+                       <unknown>@16515:30
+                       tryCatch@16472:23
+                       invoke@16548:30
+                       <unknown>@16576:19
+                       tryCallTwo@15810:9
+                       doResolve@15974:25
+                       Promise@15833:14
+                       callInvokeWithMethodAndArg@16575:29
+                       enqueue@16580:157
+                       <unknown>@16515:30
+                       async@16596:69
+                       fn@76550:40
+                       startHeadlessTask@58723:21
+                       __callFunction@4086:49
+                       <unknown>@3856:31
+                       __guardSafe@4048:13
+                       callFunctionReturnFlushedQueue@3855:21
+I/ReactNativeJS: Permission is OK
+I/zygote: Waiting for a blocking GC ProfileSaver
+I/zygote: WaitForGcToComplete blocked ProfileSaver on HeapTrim for 41.446ms
+V/FA: Using measurement service
+      Connecting to remote service
+V/FA: Activity resumed, time: 244215554
+D/BackgroundTask: Setting foreground true
+E/ReactNativeJS: undefined is not a function (evaluating 'handler(appStateData.app_state)')
+I/JobManager: Found pending job request{id=1, tag=rnbgtask}, canceling
+D/FA: Connected to remote service
+V/FA: Processing queued up service tasks: 1
+I/zygote: Do full code cache collection, code=249KB, data=210KB
+          After code cache collection, code=244KB, data=162KB
+I/zygote: Do partial code cache collection, code=247KB, data=171KB
+I/zygote: After code cache collection, code=247KB, data=171KB
+          Increasing code cache capacity to 1024KB
+V/FA: Inactivity, disconnecting from the service
+W/InputEventReceiver: Attempted to finish an input event but the input event receiver has already been disposed.
+V/FA: Recording user engagement, ms: 22676
+      Using measurement service
+      Connecting to remote service
+E/ReactNativeJS: undefined is not a function (evaluating 'handler(appStateData.app_state)')
+D/BackgroundTask: Setting foreground false
+                  Committing job schedule
+V/FA: Activity paused, time: 244238230
+D/FA: Logging event (FE): user_engagement(_e), Bundle[{firebase_event_origin(_o)=auto, engagement_time_msec(_et)=22676, firebase_screen_class(_sc)=MainActivity, firebase_screen_id(_si)=4371326344910270502}]
+E/AndroidRuntime: FATAL EXCEPTION: mqt_native_modules
+                  Process: com.nibva, PID: 20829
+                  com.facebook.react.common.JavascriptException: undefined is not a function (evaluating 'handler(appStateData.app_state)'), stack:
+                  <unknown>@21226:20
+                  emit@18657:42
+                  __callFunction@4086:49
+                  <unknown>@3856:31
+                  __guardSafe@4048:13
+                  callFunctionReturnFlushedQueue@3855:21
+
+                      at com.facebook.react.modules.core.ExceptionsManagerModule.showOrThrowError(ExceptionsManagerModule.java:56)
+                      at com.facebook.react.modules.core.ExceptionsManagerModule.reportFatalException(ExceptionsManagerModule.java:40)
+                      at java.lang.reflect.Method.invoke(Native Method)
+                      at com.facebook.react.bridge.JavaMethodWrapper.invoke(JavaMethodWrapper.java:374)
+                      at com.facebook.react.bridge.JavaModuleWrapper.invoke(JavaModuleWrapper.java:162)
+                      at com.facebook.react.bridge.queue.NativeRunnable.run(Native Method)
+                      at android.os.Handler.handleCallback(Handler.java:790)
+                      at android.os.Handler.dispatchMessage(Handler.java:99)
+                      at com.facebook.react.bridge.queue.MessageQueueThreadHandler.dispatchMessage(MessageQueueThreadHandler.java:31)
+                      at android.os.Looper.loop(Looper.java:164)
+                      at com.facebook.react.bridge.queue.MessageQueueThreadImpl$3.run(MessageQueueThreadImpl.java:194)
+                      at java.lang.Thread.run(Thread.java:764)
+V/FA: Using measurement service
+      Connection attempt already in progress
+D/JobProxy24: Schedule periodic jobInfo success, request{id=1, tag=rnbgtask}, interval 00:15:00, flex 00:07:30
+V/FA: onActivityCreated
+V/FA: Using measurement service
+      Connection attempt already in progress
+      Activity resumed, time: 244238299
+D/FA: Logging event (FE): screen_view(_vs), Bundle[{firebase_event_origin(_o)=auto, firebase_previous_class(_pc)=MainActivity, firebase_previous_id(_pi)=4371326344910270502, firebase_screen_class(_sc)=SignInHubActivity, firebase_screen_id(_si)=4371326344910270503}]
+V/FA: Using measurement service
+      Connection attempt already in progress
+D/FA: Connected to remote service
+V/FA: Processing queued up service tasks: 4
+V/FA: Screen exposed for less than 1000 ms. Event not sent. time: 36
+      Activity paused, time: 244238322
+Application terminated.

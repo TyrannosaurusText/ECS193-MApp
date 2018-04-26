@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-11.0.4_35b6ebf5496b04a921eb91bceefc6e3d80df1c27.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/NIBVA/react-native-ble-manager/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="259568cc39abcaa688d856da719d48681ec29ddb">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-ble-manager-unspecified_53b53d27dc3d444d34b497feec866212a31cfb7f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-11.0.4_a249b800430a85447b5f52d3d4705c4e56724096.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_994a3503e32d46e95565c203fda6e52f9e53353a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_cfc09e29f7128d5459cf8f97737bc7f9026eb662.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/support-annotations-25.2.0_57984021a6cb77a53101c4ff64fdd56a0b5f9fbe.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-impl-11.0.4_adfba084dd8cc5403923ed1d88df03c2c15ec333.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_64a6bf49b1b178a138c2453ada5faa4c3654fe62.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_4898b35533bcac5af64c263a9574406354e4942d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_067ed9709a5684bb444cbd8740aba96266a0fe4f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-iid-11.0.4_e0173284eb309fe65c276f27facba8fdff8ab4f6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_b8afcf023fc010780cd6146fe9ad54cd939ecad3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.2.0_607a5ec380fa181672ff3b7ba740478f0455d647.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_6f14ff9c8ff0b5765501fc8bee654d91ac51db96.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.2.0_f83d8e7fbd870df311ddfe32dd7eabfb7ca42739.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e5b429c146094a612134910688d169ec08deeefb">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-11.0.4_c836210da99290d277d0ed65386f8a2360175020.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.2.0_5f8dcae0c9320951e9738c3b4f7d54f7c104862e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="2430e711762a749feb00b3d64858ca4768251b9d">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-11.0.4_c68e2c204f92483096393f326b8f40083e8bf08d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_e88e27f3f7bd39dcfad003865de81f5d24667a61.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.2.0_7f72142b4a66f372b8cb71f36e82d74c8bc1d9d0.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-11.0.4_834fde09c90e1ec7024f2de81c3623fb67f1d8d3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-11.0.4_4213d0795e0ac6defa29bd65706bc7c62eae0166.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/NIBVA/react-native-google-signin/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ec7fecf4f0e922f726dd2ba697d41eabd44e75dc">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-google-signin-unspecified_79aa378fdc163ffa43d3cf6bb9352542da5ffd5d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.2.0_d31e8b540bc698e497209ec3c96cfbf61864004e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.evernote/android-job/1.1.11/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="978a742818fa8e1d6a014f26db191b7f72de2880">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.evernote-android-job-1.1.11_cc2f57098389230e39b1d6c52f596165abe69a67.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_653fb1fae9fc95efcec33942e03eba8d1b19bba5.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/net.vrallev.android/cat/1.0.5/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c61a0369f93fb7901fde1bdae68fc71de256244c">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/net.vrallev.android-cat-1.0.5_b8ab5f9a77c14014ec9db747c1cd129280dc6993.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_be4f4bb657914c1beceea63fc97956472180e0f8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_d831898a5d410b11b70cfa1e3038c243afb23421.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.2.0_c9757c18cb1b031bd48b341550b2731269dd96ef.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_7d544d21548144a1a9aea190c8f1f20ebd8fef4b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_e0c20c314798d0f66e1a14c8aa3811639b2b19a6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="112e6935caed6ca1c65d627777c76f0296f62867">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.54.2_347544720f968c0fe70041fe891b6eb1426d2cda.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_626ce2efee0ab671b5dadfb4d7b71781db729abd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/11.0.4/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-11.0.4_eee93f58db7fba47cbd7f707d08526578b7c7ed4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_80e8305a32ff17c119fd01e3d924040ba50de22f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/NIBVA/react-native-background-task/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="14ae3ea4f2cdc2f87293704fc5913ab8a636aab8">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-background-task-unspecified_ebe8d95fb2bf4c72641707efdb0f217f24ebfb32.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_2cb15f9074d44c8e47b55fbb4bb21e111e1f9837.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="/home/whenkek/NIBVA/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_effade9b569de7c7804ac2fe2215721a67bae1ac.jar" />
+    </item>
+
+</items>
