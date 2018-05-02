@@ -58,7 +58,7 @@ const Tabs = TabNavigator ({
     Bluetooth: {
         screen: BluetoothComponent,
         navigationOptions: {
-            title: 'Bluetooth Configuration',
+            title: 'Bluetooth',
             // tabBarVisible: false
         }
     },
@@ -115,13 +115,13 @@ const Tabs = TabNavigator ({
             justifyContent: 'center',
             alignSelf: 'center',
             // padding: 6,
-            marginBottom: 10,
+            marginBottom: 14,
         },
     },
     // showLabel: false,
     lazy: false,
     removeClippedSubviews: false,
-    swipeEnabled: false,
+    swipeEnabled: true,
     tabBarPosition: 'bottom',
     animationEnabled: true
 });

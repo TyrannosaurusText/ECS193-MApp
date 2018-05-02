@@ -440,8 +440,9 @@ class BLEManager extends Component
 
         return (
             <SafeAreaView style = {styles.container}>
+                {/*
                     <Text>Current Count: {this.state.count}</Text>
-
+                */}
                 <TouchableHighlight
                     style = {{
                         marginTop: 10,

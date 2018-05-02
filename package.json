@@ -11,6 +11,7 @@
     "react": "^16.3.2",
     "react-globally": "^1.1.0",
     "react-native": "0.54.2",
+    "react-native-background-fetch": "^2.0.8",
     "react-native-background-task": "^0.2.1",
     "react-native-ble-manager": "^6.2.8",
     "react-native-deprecated-custom-components": "^0.1.2",
