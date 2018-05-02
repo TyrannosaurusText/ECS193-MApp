@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "671445578517",
+    "project_id": "majestic-legend-193620"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:671445578517:android:0b964c4c7b87fa42",
+        "android_client_info": {
+          "package_name": "com.nibva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "671445578517-u6b7s0f47nordcuahu9e7peh3rdfek73.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nibva",
+            "certificate_hash": "c8448cbd0339230cadd905f3a5d25a84524b9cc5"
+          }
+        },
+        {
+          "client_id": "671445578517-ogrl80hb1pnq5ruirarvjsmvd8th2hjp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLEogB2907Y883iMmMfzzjQci50LnaW1s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
