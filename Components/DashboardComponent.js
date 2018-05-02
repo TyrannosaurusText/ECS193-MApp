@@ -50,15 +50,12 @@ class DashboardComponent extends Component
                 flexDirection: 'column',
                 justifyContent: 'center', 
                 alignItems: 'center'
-            }}>
+            }}> 
                 <Button
                     title = {signText}
                     onPress = {signFunc}
                 />
-                <Button
-                    title = 'Bluetooth Config'
-                    onPress = {() => this.props.navigation.navigate('Bluetooth')}
-                />
+ 
                 <Button
                     title = 'Debug Global State'
                     onPress = {this._showGlobalState}

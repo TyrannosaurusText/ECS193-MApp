@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { AppRegistry } from 'react-native';
+import { AppRegistry, Dimensions, StyleSheet, PixelRatio } from 'react-native';
 import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { Provider } from 'react-globally';
-// import { Navigator } from 'react-native-deprecated-custom-components';
 
 import DashboardComponent from './Components/DashboardComponent';
 import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
-// import MainNavigatorComponent from './Components/MainNavigatorComponent';
+import HistoryComponent from './Components/HistoryComponent';
 
 
 const DashboardStack = StackNavigator ({
@@ -16,14 +15,16 @@ const DashboardStack = StackNavigator ({
         // navigationOptions: {
         //     title: 'Dashboard'
         // }
-    },
+    }, 
     // Bluetooth: {
     //     screen: BluetoothComponent,
-    //     navigationOptions: {
-    //         title: 'Bluetooth Configuration',
-    //         tabBarVisible: false
-    //     }
+    //     // navigationOptions: {
+    //         // title: 'Bluetooth Configuration',
+    //         // tabBarVisible: false
+    //     // }
     // }
+}, {
+    headerMode: 'none'
 });
 
 /*
@@ -40,16 +41,35 @@ const MessagesStack = StackNavigator ({
 */
 
 const Tabs = TabNavigator ({
-    Dashboard: {screen: DashboardStack},
-    Test: {screen: TestComponent},
+    Dashboard: {
+        screen: DashboardStack,
+        navigationOptions: {
+            title: 'Dashboard',
+            // tabBarVisible: false
+        }
+    },
+    // Test: {
+    //     screen: TestComponent,
+    //     navigationOptions: {
+    //         title: 'Testing',
+    //         // tabBarVisible: false
+    //     }
+    // },
     Bluetooth: {
         screen: BluetoothComponent,
         navigationOptions: {
-            // title: 'Bluetooth Configuration',
+            title: 'Bluetooth Configuration',
             // tabBarVisible: false
         }
-    }
-    //History: {screen: HistoryStack},
+    },
+    History: {
+        // screen: HistoryStack
+        screen: HistoryComponent,
+        navigationOptions: {
+            title: 'History',
+            // tabBarVisible: false
+        }
+    },
     //Alerts: {screen: AlertsComponent},
     //Messages: {screen: MessagesStack}
 },
@@ -72,6 +92,33 @@ const Tabs = TabNavigator ({
     // }}}
     // />,
     tabBarComponent: TabBarBottom,
+    tabBarOptions: {
+        // style: {
+        // //     position: 'absolute',
+        // //                 left: (Dimensions.get('window').width * 6) / 25,
+        // //                 right: (Dimensions.get('window').width * 6) / 25,
+        // //                 bottom: (Dimensions.get('window').height * 2) / 67,
+        // //                 height: (Dimensions.get('window').height * 4) / 67,
+        //     justifyContent: 'center',
+        //     alignItems: 'center',
+        // },
+        // titleStyle: {
+        //                 justifyContent: 'center',
+        //                 alignItems: 'center',
+        //             },
+        labelStyle: {
+            fontSize : 13,
+            fontWeight: 'bold',
+            // color: '#fff',
+            // height: (deviceHeight * 4) / 67,
+            // position: 'relative',
+            justifyContent: 'center',
+            alignSelf: 'center',
+            // padding: 6,
+            marginBottom: 10,
+        },
+    },
+    // showLabel: false,
     lazy: false,
     removeClippedSubviews: false,
     swipeEnabled: false,
@@ -82,8 +129,6 @@ const Tabs = TabNavigator ({
 const App = StackNavigator ({
     Main: {screen: Tabs}
 });
-
-// const App = MainNavigatorComponent;
 
 // const App = 
 // <Navigator
@@ -111,8 +156,7 @@ const nibva = () => (
 AppRegistry.registerComponent('Dashboard', () => Dashboard);
 AppRegistry.registerComponent('BLEManager', () => BLEManager);
 AppRegistry.registerComponent('TestComponent', () => TestComponent);
-// AppRegistry.registerComponent('MainNavigatorComponent', () => MainNavigatorComponent);
-//AppRegistry.registerComponent('History', () => HistoryComponent);
+AppRegistry.registerComponent('History', () => HistoryComponent);
 //AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
 //AppRegistry.registerComponent('Alerts', () => AlertsComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);

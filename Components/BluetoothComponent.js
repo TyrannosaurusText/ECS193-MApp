@@ -445,7 +445,7 @@ class BLEManager extends Component
                 <TouchableHighlight
                     style = {{
                         marginTop: 10,
-                        marginRight: 50,
+                        // marginRight: 50,
                         margin: 20,
                         padding: 20,
                         backgroundColor:'#ccc'
