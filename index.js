@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { AppRegistry, Dimensions, StyleSheet, PixelRatio } from 'react-native';
+import { Button, AppRegistry, Dimensions, StyleSheet, PixelRatio } from 'react-native';
 import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation';
 import { Provider } from 'react-globally';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import DashboardComponent from './Components/DashboardComponent';
 import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
 import HistoryComponent from './Components/HistoryComponent';
+
 
 
 const DashboardStack = StackNavigator ({
@@ -44,16 +46,22 @@ const Tabs = TabNavigator ({
         screen: DashboardStack,
         navigationOptions: {
             title: 'Dashboard',
+            headerRight: (
+              <Icon 
+                    name="notifications" 
+                    size={30}
+                    onPress={() => alert('hello')}/>
+            ),
             // tabBarVisible: false
         }
     },
-    // Test: {
-    //     screen: TestComponent,
-    //     navigationOptions: {
-    //         title: 'Testing',
-    //         // tabBarVisible: false
-    //     }
-    // },
+    Test: {
+        screen: TestComponent,
+        navigationOptions: {
+            title: 'Testing',
+            // tabBarVisible: false
+        }
+    },
     Bluetooth: {
         screen: BluetoothComponent,
         navigationOptions: {

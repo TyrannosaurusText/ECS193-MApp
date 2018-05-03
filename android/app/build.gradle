@@ -76,6 +76,7 @@ project.ext.react = [
     entryFile: "index.js"
 ]
 
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -137,6 +138,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':react-native-background-task')
     compile (project(':react-native-google-signin')){
         exclude group: "com.google.android.gms"

@@ -148,6 +148,7 @@
     <orderEntry type="library" exported="" name="Gradle: com.facebook.fresco:imagepipeline-1.3.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: com.google.android.gms:play-services-tasks-11.0.4" level="project" />
     <orderEntry type="module" module-name="react-native-ble-manager" exported="" />
+    <orderEntry type="module" module-name="react-native-background-task" exported="" />
     <orderEntry type="module" module-name="react-native-google-signin" exported="" />
   </component>
 </module>

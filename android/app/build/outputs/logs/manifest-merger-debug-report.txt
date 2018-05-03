@@ -86,6 +86,7 @@ ADDED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml:23
 		ADDED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml:23:17-81
 uses-sdk
 INJECTED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [NIBVA:react-native-vector-icons:unspecified] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-vector-icons/unspecified/AndroidManifest.xml:7:5-9:41
 MERGED from [NIBVA:react-native-background-task:unspecified] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-background-task/unspecified/AndroidManifest.xml:7:5-9:41
 MERGED from [com.evernote:android-job:1.1.11] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.evernote/android-job/1.1.11/AndroidManifest.xml:8:5-10:41
 MERGED from [net.vrallev.android:cat:1.0.5] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/net.vrallev.android/cat/1.0.5/AndroidManifest.xml:7:5-9:41

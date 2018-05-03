@@ -5,6 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class TestComponent extends Component
 {
@@ -32,6 +33,7 @@ export default class TestComponent extends Component
         return (
             <SafeAreaView>
                 <Text>Current Count: {cnt}</Text>
+                <Icon name="notifications" size={30}/>
             </SafeAreaView>
         );
     }
