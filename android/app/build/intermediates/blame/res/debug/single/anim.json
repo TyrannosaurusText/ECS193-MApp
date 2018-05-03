@@ -12,12 +12,12 @@
         "source": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/res/anim/catalyst_push_up_out.xml"
     },
     {
-        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
-        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/anim/abc_shrink_fade_out_from_bottom.xml"
-    },
-    {
         "merged": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/res/merged/debug/anim/catalyst_fade_out.xml",
         "source": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/res/anim/catalyst_fade_out.xml"
+    },
+    {
+        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
         "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",

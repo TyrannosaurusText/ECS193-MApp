@@ -20,11 +20,10 @@ const DashboardStack = StackNavigator ({
     //     screen: BluetoothComponent,
     //     // navigationOptions: {
     //         // title: 'Bluetooth Configuration',
-    //         // tabBarVisible: false
     //     // }
     // }
 }, {
-    headerMode: 'none'
+    headerMode: 'none',
 });
 
 /*
@@ -91,6 +90,7 @@ const Tabs = TabNavigator ({
     //   state: {...navigation.state, routes: navigation.state.routes.filter(r => r.name !== 'Bluetooth'),
     // }}}
     // />,
+    headerMode: 'screen',
     tabBarComponent: TabBarBottom,
     tabBarOptions: {
         // style: {
@@ -121,7 +121,7 @@ const Tabs = TabNavigator ({
     // showLabel: false,
     lazy: false,
     removeClippedSubviews: false,
-    swipeEnabled: true,
+    swipeEnabled: false,
     tabBarPosition: 'bottom',
     animationEnabled: true
 });
@@ -149,7 +149,7 @@ const initialState = {
 
 const nibva = () => (
     <Provider globalState={initialState}>
-        <App />
+        <App/>
     </Provider>
 );
 

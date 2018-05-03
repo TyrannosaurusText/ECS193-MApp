@@ -20,12 +20,12 @@
         "source": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_screen_content_include.xml"
     },
     {
-        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
-        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_mode_bar.xml"
-    },
-    {
         "merged": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/res/merged/debug/layout/notification_template_big_media_narrow.xml",
         "source": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_big_media_narrow.xml"
+    },
+    {
+        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/layout/abc_action_mode_bar.xml",
+        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_action_mode_bar.xml"
     },
     {
         "merged": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/res/merged/debug/layout/abc_action_menu_item_layout.xml",
@@ -60,12 +60,12 @@
         "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_list_menu_item_icon.xml"
     },
     {
-        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_chronometer.xml"
-    },
-    {
         "merged": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/res/merged/debug/layout/abc_select_dialog_material.xml",
         "source": "/Users/felix/Documents/School/ECS/193/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/abc_select_dialog_material.xml"
+    },
+    {
+        "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/home/whenkek/NIBVA/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/home/whenkek/NIBVA/android/app/build/intermediates/res/merged/debug/layout/redbox_item_title.xml",
