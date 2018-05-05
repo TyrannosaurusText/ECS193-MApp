@@ -8,25 +8,29 @@ import DashboardComponent from './Components/DashboardComponent';
 import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
 import HistoryComponent from './Components/HistoryComponent';
+import AlertsComponent from './Components/AlertsComponent';
 
 
 
-const DashboardStack = StackNavigator ({
-    Dashboard: {
-        screen: DashboardComponent,
-        // navigationOptions: {
-        //     title: 'Dashboard'
-        // }
-    }, 
-    // Bluetooth: {
-    //     screen: BluetoothComponent,
-    //     // navigationOptions: {
-    //         // title: 'Bluetooth Configuration',
-    //     // }
-    // }
-}, {
-    headerMode: 'none',
-});
+// const DashboardStack = StackNavigator ({
+//     // Dashboard: {
+//     //     screen: DashboardComponent,
+//     //     // navigationOptions: {
+//     //     //     title: 'Dashboard'
+//     //     // }
+//     // },
+//     Alerts: {
+//         screen: AlertsComponent,
+//     },
+//     // Bluetooth: {
+//     //     screen: BluetoothComponent,
+//     //     // navigationOptions: {
+//     //         // title: 'Bluetooth Configuration',
+//     //     // }
+//     // }
+// }, {
+//     headerMode: 'none',
+// });
 
 /*
 const HistoryStack = StackNavigator ({
@@ -43,39 +47,46 @@ const MessagesStack = StackNavigator ({
 
 const Tabs = TabNavigator ({
     Dashboard: {
-        screen: DashboardStack,
-        navigationOptions: {
-            title: 'Dashboard',
-            headerRight: (
-              <Icon 
-                    name="notifications" 
-                    size={30}
-                    onPress={() => alert('hello')}/>
-            ),
-            // tabBarVisible: false
-        }
+        screen: DashboardComponent,
+        navigationOptions : ({ navigation }) => ({
+        //     title: 'Dashboard',
+
+            headerTitle: 'Dashboard',
+            headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
+        })
+        // navigationOptions: {
+            // title: 'Testing',
+        // }
     },
-    Test: {
-        screen: TestComponent,
-        navigationOptions: {
-            title: 'Testing',
-            // tabBarVisible: false
-        }
-    },
-    Bluetooth: {
-        screen: BluetoothComponent,
-        navigationOptions: {
-            title: 'Bluetooth',
-            // tabBarVisible: false
-        }
-    },
+    // Test: {
+    //     screen: TestComponent,
+    //     // navigationOptions: {
+    //     //     title: 'Testing',
+    //     //     // tabBarVisible: false
+    //     // }
+    // },
+    // Bluetooth: {
+    //     screen: BluetoothComponent,
+    //     navigationOptions: {
+    //         title: 'Bluetooth',
+    //         // tabBarVisible: false
+    //     }
+    // },
     History: {
         // screen: HistoryStack
         screen: HistoryComponent,
-        navigationOptions: {
-            title: 'History',
-            // tabBarVisible: false
-        }
+        navigationOptions : ({ navigation }) => ({
+        //     title: 'Dashboard',
+
+            headerTitle: 'History',
+            headerRight: (
+                <Icon 
+                    name="notifications"
+                    size={30} 
+                    onPress={() => navigation.navigate('Alerts')}
+                    />
+            )
+        })
     },
     //Alerts: {screen: AlertsComponent},
     //Messages: {screen: MessagesStack}
@@ -134,10 +145,6 @@ const Tabs = TabNavigator ({
     animationEnabled: true
 });
 
-const App = StackNavigator ({
-    Main: {screen: Tabs}
-});
-
 // const App = 
 // <Navigator
           //   initialRoute={{title: 'Awesome Scene', index: 0}}
@@ -145,6 +152,11 @@ const App = StackNavigator ({
           //   style={{padding: 100}}
           // />;
 
+
+const App = StackNavigator ({
+    Main: {screen: Tabs},
+    Alerts: {screen: AlertsComponent},
+});
 
 const initialState = {
     signInCapable: false,
@@ -161,12 +173,12 @@ const nibva = () => (
     </Provider>
 );
 
-AppRegistry.registerComponent('Dashboard', () => Dashboard);
+AppRegistry.registerComponent('Dashboard', () => DashboardComponent);
 AppRegistry.registerComponent('BLEManager', () => BLEManager);
 AppRegistry.registerComponent('TestComponent', () => TestComponent);
 AppRegistry.registerComponent('History', () => HistoryComponent);
+AppRegistry.registerComponent('Alerts', () => AlertsComponent);
 //AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
-//AppRegistry.registerComponent('Alerts', () => AlertsComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);
 //AppRegistry.registerComponent('Read', () => ReadComponent);
 //AppRegistry.registerComponent('Compose', () => ComposeComponent);

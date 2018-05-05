@@ -8,12 +8,19 @@ import {
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import { withGlobalState } from 'react-globally';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import BluetoothComponent from './BluetoothComponent';
+import AlertsComponent from './AlertsComponent';
 
 
 class DashboardComponent extends Component
 {
+    // static navigationOptions = ({ navigation }) => ({
+    //     headerTitle: 'Dashboard',
+    //     headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
+    // });
+
     constructor ()
     {
         super();
@@ -45,8 +52,9 @@ class DashboardComponent extends Component
     {
         let signFunc = this.props.globalState.email != '' ? this._signOut : this._signIn;
         let signText = this.props.globalState.email != '' ? 'Sign Out' : 'Sign In';
-
+        
         return (
+
             <SafeAreaView style = {{
                 flex: 1, 
                 flexDirection: 'column',

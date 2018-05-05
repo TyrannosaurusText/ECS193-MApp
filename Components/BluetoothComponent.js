@@ -20,6 +20,8 @@ import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTask from 'react-native-background-task';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -60,6 +62,11 @@ BackgroundTask.define(() => {
 
 class BLEManager extends Component 
 {
+    static navigationOptions = {
+        headerTitle: 'Bluetooth',
+        headerRight: (<Icon name="notifications" size={30} onPress={() => this.props.navigation.navigate('Alerts')}/>),
+    };
+
     constructor ()
     {
         super();

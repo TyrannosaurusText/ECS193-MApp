@@ -26,12 +26,12 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class HistoryComponent extends Component 
+export default class AlertComponent extends Component 
 {
-    // static navigationOptions = ({ navigation }) => ({
-    //     headerTitle: 'History',
-    //     headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
-    // });
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle: 'Notifications',
+        // headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
+    });
 
     constructor() 
     {
