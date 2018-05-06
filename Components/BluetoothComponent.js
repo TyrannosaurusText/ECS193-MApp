@@ -44,6 +44,8 @@ class BLEManager extends Component
             curReadings: newStore,
             readingsDone: 0,
             count: 0,
+            connectedToPatch: false,
+            myPatch: null,
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -59,61 +61,32 @@ class BLEManager extends Component
         }, 1000);
 
         BackgroundTask.define(() => {
-            AppState.addEventListener('change', this.handleAppStateChange);
         
-            BleManager.start({showAlert: false});
-        
-            this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
-            this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
-            this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
-            this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-        
-            if (Platform.OS === 'android' && Platform.Version >= 23) 
-            {
-                PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                    if (result)
-                        console.log("Permission is OK");
-                    else 
-                    {
-                        PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                            if (result)
-                                console.log("User accept");
-                            else
-                                console.log("User refuse");
-                        });
-                    }
-                });
-            }
-        
-            if(this.state.myPatch == undefined) {
-                console.log('in 1st if this.state.myPatch is: ', this.state.myPatch);
+            if(this.state.connectedToPatch == false) {
+                console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.startScan();
             } else {
-                if(this.isConnected(this.state.myPatch)) {
-                    console.log('BLE already connected to PatchSim: ', this.state.myPatch.id);
-                    this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-                } else {
-                    console.long('BLE is not connected to previously connected PatchSim: ', this.state.myPatch.id);
-                    this.test(this.state.myPatch.id);
-                }
-                
+                console.log('connectedToPatch: ', this.state.connectedToPatch);
+                this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
             }
             
             BackgroundTask.finish();
         });
     }
+        
 
     componentDidMount () 
     {
+        console.log('componentDidMount was called')
         AppState.addEventListener('change', this.handleAppStateChange);
-
+        
         BleManager.start({showAlert: false});
-    
+        
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
         this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
         this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-    
+        
         if (Platform.OS === 'android' && Platform.Version >= 23) 
         {
             PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
@@ -130,50 +103,18 @@ class BLEManager extends Component
                 }
             });
         }
-    
-        if(this.state.myPatch == undefined) {
-            console.log('in 1st if this.state.myPatch is: ', this.state.myPatch);
+        
+        BackgroundTask.schedule();
+        this.checkStatus();
+        
+
+        if(this.state.connectedToPatch == false) {
+            console.log('connectedToPatch: ', this.state.connectedToPatch);
             this.startScan();
         } else {
-            if(this.isConnected(this.state.myPatch)) {
-                console.log('BLE already connected to PatchSim: ', this.state.myPatch.id);
-                this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-            } else {
-                console.long('BLE is not connected to previously connected PatchSim: ', this.state.myPatch.id);
-                this.test(this.state.myPatch.id);
-            }
-            
+            console.log('connectedToPatch: ', this.state.connectedToPatch);
+            this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
         }
-        // BackgroundTask.schedule();
-        // this.checkStatus();
-
-        /*
-        AppState.addEventListener('change', this.handleAppStateChange);
-
-        BleManager.start({showAlert: false});
-
-        this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
-        this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
-        this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
-        this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-
-        if (Platform.OS === 'android' && Platform.Version >= 23) 
-        {
-            PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                if (result)
-                    console.log("Permission is OK");
-                else 
-                {
-                    PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                        if (result)
-                            console.log("User accept");
-                        else
-                            console.log("User refuse");
-                    });
-                }
-            });
-        }*/
-        
 
     }
 
@@ -200,22 +141,22 @@ class BLEManager extends Component
     }
     handleAppStateChange (nextAppState) 
     {
-        if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') 
-        {
-            console.log('App has come to the foreground!')
-            BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
-                console.log('Connected peripherals: ' + peripheralsArray.length);
-            });
-        }
+        // if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') 
+        // {
+        //     console.log('App has come to the foreground!')
+        //     BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
+        //         console.log('Connected peripherals: ' + peripheralsArray.length);
+        //     });
+        // }
         this.setState({appState: nextAppState});
     }
 
     componentWillUnmount () 
     {
-        this.handlerDiscover.remove();
-        this.handlerStop.remove();
-        this.handlerDisconnect.remove();
-        this.handlerUpdate.remove();
+        // this.handlerDiscover.remove();
+        // this.handlerStop.remove();
+        // this.handlerDisconnect.remove();
+        // this.handlerUpdate.remove();
     }
 
     handleDisconnectedPeripheral (data) 
@@ -279,13 +220,14 @@ class BLEManager extends Component
                     readings[id * 4 + 3] = temp.readFloatBE(12);
 
                     cnt++;
-                    console.log('cycle: ', cycle);
-                    if( (cnt % readChars.length) == 0 ) {
-                        cycle++;
-                        cnt = 0;
-                    }
+                    // console.log('cycle: ', cycle);
+                    // if( (cnt % readChars.length) == 0 ) {
+                    //     cycle++;
+                    //     cnt = 0;
+                    // }
                     console.log('cnt: ' + cnt);
-                    if (cycle < 10 && cnt != 0)
+                    // if (cycle < 10 && cnt != 0)
+                    if(cnt < 16)
                     {
                         console.log('continue');
                         readCharBound();
@@ -360,10 +302,10 @@ class BLEManager extends Component
                             this.setState({curReadings: newStore});
                         }
 
-                        if(cycle < 10) {
-                            console.log('continue')
-                            readCharBound();
-                        }
+                        // if(cycle < 10) {
+                        //     console.log('continue')
+                        //     readCharBound();
+                        // }
                     }
                 })
                 .catch((error) => {
@@ -421,7 +363,7 @@ class BLEManager extends Component
             this.setState({ peripherals })
             
             if (peripheral.name == "PatchSim") {
-                this.state.myPatch = this.state.myPatch || peripheral;
+                this.state.myPatch = peripheral;
                 this.test(peripheral);
             }
         }
@@ -432,7 +374,11 @@ class BLEManager extends Component
         if (peripheral)
         {
             if (peripheral.connected)
-                BleManager.disconnect(peripheral.id);
+                BleManager.disconnect(peripheral.id).then(() => {
+                    console.log("Disconnected")
+                    this.state.connectedToPatch = false;
+                    this.state.myPatch = null;
+                });
             else
             {
                 BleManager.connect(peripheral.id).then(() => {
@@ -445,8 +391,10 @@ class BLEManager extends Component
                         this.setState({peripherals});
                     }
                     console.log('Connected to ' + peripheral.id);
+                    if (peripheral.name == "PatchSim") {
+                        this.state.connectedToPatch = true;
+                    }
 
-                    //setTimeout(() => {
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
                             console.log(peripheralInfo);
@@ -454,18 +402,9 @@ class BLEManager extends Component
                             var service =    '72369D5C-94E1-41D7-ACAB-A88062C506A8';
                             var notifyChar = '222B99A0-37CC-4799-9152-7C35D5C5FE07';
                             
-                            // for(var i = 0; i < 10; i++)
                             this.handleUpdateValueForCharacteristic({peripheral: peripheral.id, value: [7]});
-                            /*
-                            BleManager.startNotification(peripheral.id, service, notifyChar).then(() => {
-                                console.log('Started notification on ' + peripheral.id);
-                            }).catch((err) => {
-                                console.log('Notification error', err);
-                            });
-                            */
                         });
 
-                    //}, 900);
                 }).catch((error) => {
                     console.log('Connection error', error);
                 });
@@ -576,3 +515,4 @@ const styles = StyleSheet.create({
 });
 
 export default withGlobalState(BLEManager);
+
