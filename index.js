@@ -9,6 +9,7 @@ import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
 import HistoryComponent from './Components/HistoryComponent';
 import AlertsComponent from './Components/AlertsComponent';
+import PushNotificationComponent from './Components/PushNotificationComponent';
 
 
 
@@ -65,13 +66,21 @@ const Tabs = TabNavigator ({
     //     //     // tabBarVisible: false
     //     // }
     // },
-    // Bluetooth: {
-    //     screen: BluetoothComponent,
-    //     navigationOptions: {
-    //         title: 'Bluetooth',
-    //         // tabBarVisible: false
-    //     }
-    // },
+    Bluetooth: {
+        screen: BluetoothComponent,
+        navigationOptions : ({ navigation }) => ({
+        //     title: 'Dashboard',
+
+            headerTitle: 'Bluetooth',
+            headerRight: (
+                <Icon 
+                    name="notifications"
+                    size={30} 
+                    onPress={() => navigation.navigate('Alerts')}
+                    />
+            )
+        })
+    },
     History: {
         // screen: HistoryStack
         screen: HistoryComponent,
@@ -178,6 +187,7 @@ AppRegistry.registerComponent('BLEManager', () => BLEManager);
 AppRegistry.registerComponent('TestComponent', () => TestComponent);
 AppRegistry.registerComponent('History', () => HistoryComponent);
 AppRegistry.registerComponent('Alerts', () => AlertsComponent);
+AppRegistry.registerComponent('PushNotification', () => PushNotificationComponent);
 //AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);
 //AppRegistry.registerComponent('Read', () => ReadComponent);

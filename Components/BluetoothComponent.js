@@ -19,9 +19,6 @@ import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
-import BackgroundTask from 'react-native-background-task';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -29,44 +26,8 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
 
-BackgroundTask.define(() => {
-    AppState.addEventListener('change', this.handleAppStateChange);
-
-    BleManager.start({showAlert: false});
-
-    this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
-    this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
-    this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
-    this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-
-    if (Platform.OS === 'android' && Platform.Version >= 23) 
-    {
-        PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-            if (result)
-                console.log("Permission is OK");
-            else 
-            {
-                PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-                    if (result)
-                        console.log("User accept");
-                    else
-                        console.log("User refuse");
-                });
-            }
-        });
-    }
-
-    this.startScan();
-    BackgroundTask.finish();
-})
-
 class BLEManager extends Component 
 {
-    static navigationOptions = {
-        headerTitle: 'Bluetooth',
-        headerRight: (<Icon name="notifications" size={30} onPress={() => this.props.navigation.navigate('Alerts')}/>),
-    };
-
     constructor ()
     {
         super();
@@ -79,8 +40,7 @@ class BLEManager extends Component
             peripherals: new Map(),
             appState: '',
             curReadings: newStore,
-            readingsDone: 0,
-            count: 0,
+            readingsDone: 0
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -88,47 +48,10 @@ class BLEManager extends Component
         this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
         this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
-
-        setInterval(() => {
-            this.setState((previousState) => {
-                return {count: previousState.count + 1}
-            });
-        }, 1000);
     }
 
     componentDidMount () 
     {
-        // AppState.addEventListener('change', this.handleAppStateChange);
-
-        // BleManager.start({showAlert: false});
-    
-        // this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
-        // this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
-        // this.handlerDisconnect = bleManagerEmitter.addListener('BleManagerDisconnectPeripheral', this.handleDisconnectedPeripheral );
-        // this.handlerUpdate = bleManagerEmitter.addListener('BleManagerDidUpdateValueForCharacteristic', this.handleUpdateValueForCharacteristic );
-    
-        // if (Platform.OS === 'android' && Platform.Version >= 23) 
-        // {
-        //     PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-        //         if (result)
-        //             console.log("Permission is OK");
-        //         else 
-        //         {
-        //             PermissionsAndroid.requestPermission(PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION).then((result) => {
-        //                 if (result)
-        //                     console.log("User accept");
-        //                 else
-        //                     console.log("User refuse");
-        //             });
-        //         }
-        //     });
-        // }
-    
-        // this.startScan();
-       BackgroundTask.schedule();
-       this.checkStatus();
-
-        /*
         AppState.addEventListener('change', this.handleAppStateChange);
 
         BleManager.start({showAlert: false});
@@ -154,24 +77,7 @@ class BLEManager extends Component
                 }
             });
         }
-        */
 
-    }
-
-    async checkStatus() {
-        const status = await BackgroundTask.statusAsync()
-        
-        if (status.available) {
-          // Everything's fine
-          return
-        }
-        
-        const reason = status.unavailableReason
-        if (reason === BackgroundTask.UNAVAILABLE_DENIED) {
-          Alert.alert('Denied', 'Please enable background "Background App Refresh" for this app')
-        } else if (reason === BackgroundTask.UNAVAILABLE_RESTRICTED) {
-          Alert.alert('Restricted', 'Background tasks are restricted on your device')
-        }
     }
 
     handleAppStateChange (nextAppState) 
@@ -238,9 +144,7 @@ class BLEManager extends Component
         var readings = [];
 
         var cnt = 0;
-        var cycle = 0;
         var readChar = () => {
-            console.log("Data peripheral: ", data.peripheral);
             BleManager.read(data.peripheral, service, readChars[cnt])
                 .then((readData) => {
                     console.log('----READ----');
@@ -255,9 +159,6 @@ class BLEManager extends Component
                     readings[id * 4 + 3] = temp.readFloatBE(12);
 
                     cnt++;
-                    if(cnt == 16) {
-                        cycle++;
-                    }
                     console.log('cnt: ' + cnt);
                     if (cnt != readChars.length)
                     {
@@ -340,10 +241,7 @@ class BLEManager extends Component
                 });
         }
         var readCharBound = readChar.bind(this);
-        // for(var i = 0; i < 10; i++) {
-
         readCharBound();
-    // }
     }
 
     handleStopScan () 
@@ -357,16 +255,16 @@ class BLEManager extends Component
         if (!this.state.scanning) 
         {
             this.setState({peripherals: new Map()});
-            return ( BleManager.scan([], 3, true).then((results) => {
+            BleManager.scan([], 3, true).then((results) => {
                 console.log('Scanning...');
                 this.setState({scanning:true});
-            }));
+            });
         }
     }
 
     retrieveConnected ()
     {
-        return (BleManager.getConnectedPeripherals([]).then((results) => {
+        BleManager.getConnectedPeripherals([]).then((results) => {
             console.log(results);
             var peripherals = this.state.peripherals;
             for (var i = 0; i < results.length; i++) 
@@ -376,7 +274,7 @@ class BLEManager extends Component
                 peripherals.set(peripheral.id, peripheral);
                 this.setState({ peripherals });
             }
-        }));
+        });
     }
 
     handleDiscoverPeripheral (peripheral)
@@ -384,13 +282,9 @@ class BLEManager extends Component
         var peripherals = this.state.peripherals;
         if (!peripherals.has(peripheral.id))
         {
-            console.log('Got ble peripheral');
+            console.log('Got ble peripheral', peripheral);
             peripherals.set(peripheral.id, peripheral);
             this.setState({ peripherals })
-            
-            if (peripheral.name == "PatchSim") {
-                this.test(peripheral);
-            }
         }
     }
 
@@ -420,16 +314,12 @@ class BLEManager extends Component
 
                             var service =    '72369D5C-94E1-41D7-ACAB-A88062C506A8';
                             var notifyChar = '222B99A0-37CC-4799-9152-7C35D5C5FE07';
-                            
-                            // for(var i = 0; i < 10; i++)
-                            this.handleUpdateValueForCharacteristic({peripheral: peripheral.id, value: [7]});
-                            /*
+
                             BleManager.startNotification(peripheral.id, service, notifyChar).then(() => {
                                 console.log('Started notification on ' + peripheral.id);
                             }).catch((err) => {
                                 console.log('Notification error', err);
                             });
-                            */
                         });
 
                     //}, 900);
@@ -447,9 +337,6 @@ class BLEManager extends Component
 
         return (
             <SafeAreaView style = {styles.container}>
-                {/*
-                    <Text>Current Count: {this.state.count}</Text>
-                */}
                 <TouchableHighlight
                     style = {{
                         marginTop: 10,

@@ -3,15 +3,18 @@ import {
     View,
     Text,
     StyleSheet,
-    Button
+    Button,
+    AppState
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import PushNotification from 'react-native-push-notification';
 
 import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
+import PushNotificationComponent from './PushNotificationComponent';
 
 
 class DashboardComponent extends Component
@@ -28,10 +31,14 @@ class DashboardComponent extends Component
         this._signIn = this._signIn.bind(this);
         this._signOut = this._signOut.bind(this);
         this._showGlobalState = this._showGlobalState.bind(this);
+        this.handleAppStateChange = this.handleAppStateChange.bind(this);
+        this.sendNotification = this.sendNotification.bind(this);
     }
 
     componentDidMount ()
     {
+        AppState.addEventListener('change', this.handleAppStateChange);
+
         //Sign in configuration
         GoogleSignin
             .hasPlayServices({ autoResolve: true }).then(() => {
@@ -47,6 +54,26 @@ class DashboardComponent extends Component
                 console.log("Play services error", err.code, err.message);
             });
     }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this.handleAppStateChange);
+    }
+
+    handleAppStateChange(appState) {
+        // if (appState === 'background') {
+        //   // Schedule a notification
+        //     PushNotification.localNotificationSchedule({
+        //         message: 'Scheduled delay notification message', // (required)
+        //         date: new Date(Date.now() + (3 * 1000)) // in 3 secs
+        //     });
+        // }
+    };
+
+    sendNotification() {
+        PushNotification.localNotification({
+            message: 'You pushed the notification button!'
+        });
+    };
 
     render ()
     {
@@ -66,6 +93,9 @@ class DashboardComponent extends Component
                     title = {signText}
                     onPress = {signFunc}
                 />
+                <Button title='Press here for a notification'
+                    onPress={this.sendNotification} />
+                <PushNotificationComponent />
  
                 <Button
                     title = 'Debug Global State'
