@@ -20,6 +20,7 @@ import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTask from 'react-native-background-task';
+import BackgroundTimer from 'react-native-background-timer';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -60,8 +61,7 @@ class BLEManager extends Component
             });
         }, 1000);
 
-        BackgroundTask.define(() => {
-        
+        BackgroundTimer.setInterval(() => {
             if(this.state.connectedToPatch == false) {
                 console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.startScan();
@@ -69,9 +69,20 @@ class BLEManager extends Component
                 console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
             }
+        }, 15000);
+
+        // BackgroundTask.define(() => {
+        
+        //     if(this.state.connectedToPatch == false) {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.startScan();
+        //     } else {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+        //     }
             
-            BackgroundTask.finish();
-        });
+        //     BackgroundTask.finish();
+        // });
     }
         
 
@@ -104,17 +115,9 @@ class BLEManager extends Component
             });
         }
         
-        BackgroundTask.schedule();
-        this.checkStatus();
+        // BackgroundTask.schedule();
+        // this.checkStatus();
         
-
-        if(this.state.connectedToPatch == false) {
-            console.log('connectedToPatch: ', this.state.connectedToPatch);
-            this.startScan();
-        } else {
-            console.log('connectedToPatch: ', this.state.connectedToPatch);
-            this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-        }
 
     }
 
