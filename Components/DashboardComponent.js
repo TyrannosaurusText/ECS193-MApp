@@ -74,8 +74,8 @@ class DashboardComponent extends Component
         GoogleSignin
             .signIn()
             .then((user) => {
-                //console.log('User:');
-                //console.log(user);
+                console.log('User:');
+                console.log(user);
 
                 //console.log('Checking Validity');
                 fetch('https://majestic-legend-193620.appspot.com/security/getAuth', {
