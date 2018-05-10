@@ -26,7 +26,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class AlertComponent extends Component 
+class AlertsComponent extends Component 
 {
     static navigationOptions = ({ navigation }) => ({
         headerTitle: 'Notifications',
@@ -42,23 +42,24 @@ export default class AlertComponent extends Component
     {
 
         // const list = Array.from(this.state.peripherals.values());
-        const list = [
-            {"time": 0, "reading": 1},
-            {"time": 1, "reading": 10},
-            {"time": 2, "reading": 8},
-            {"time": 3, "reading": 12},
-            {"time": 4, "reading": 14},
-            {"time": 5, "reading": 1},
-            {"time": 6, "reading": 10},
-            {"time": 7, "reading": 8},
-            {"time": 8, "reading": 12},
-            {"time": 9, "reading": 14},
-            {"time": 10, "reading": 1},
-            {"time": 11, "reading": 10},
-            {"time": 12, "reading": 8},
-            {"time": 13, "reading": 12},
-            {"time": 14, "reading": 14}
-        ];
+        const list = this.props.globalState.history;
+        // const list = [
+        //     {"time": 0, "reading": 1},
+        //     {"time": 1, "reading": 10},
+        //     {"time": 2, "reading": 8},
+        //     {"time": 3, "reading": 12},
+        //     {"time": 4, "reading": 14},
+        //     {"time": 5, "reading": 1},
+        //     {"time": 6, "reading": 10},
+        //     {"time": 7, "reading": 8},
+        //     {"time": 8, "reading": 12},
+        //     {"time": 9, "reading": 14},
+        //     {"time": 10, "reading": 1},
+        //     {"time": 11, "reading": 10},
+        //     {"time": 12, "reading": 8},
+        //     {"time": 13, "reading": 12},
+        //     {"time": 14, "reading": 14}
+        // ];
         const dataSource = ds.cloneWithRows(list);
         
     //     return (
@@ -102,7 +103,7 @@ export default class AlertComponent extends Component
                                         color: '#333333', 
                                         padding: 10,
                                     }}
-                                >Average reading: {item.reading}</Text>
+                                >Alert: {item.alert}</Text>
                             </View>
                         );
                     }}
@@ -132,4 +133,4 @@ const styles = StyleSheet.create({
 });
 
 
-// export default withGlobalState(HistoryComponent);
+export default withGlobalState(AlertsComponent);

@@ -70,9 +70,16 @@ class DashboardComponent extends Component
     };
 
     sendNotification() {
+        var notificationMsg = 'You pushed the notification button!';
         PushNotification.localNotification({
-            message: 'You pushed the notification button!'
+            message: notificationMsg
         });
+
+        newHistory = this.props.globalState.history;
+        newHistory.push({"time": Date.now(), "alert": notificationMsg});
+        this.props.setGlobalState({
+            history: newHistory
+        });        
     };
 
     render ()

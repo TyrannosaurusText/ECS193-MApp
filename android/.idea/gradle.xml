@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$/../node_modules/react-native-background-task/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-ble-manager/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-google-signin/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-push-notification/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
