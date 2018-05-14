@@ -103,7 +103,7 @@ class AlertsComponent extends Component
                                         color: '#333333', 
                                         padding: 10,
                                     }}
-                                >Alert: {item.alert}</Text>
+                                >Fullness: {item.alert}%</Text>
                             </View>
                         );
                     }}

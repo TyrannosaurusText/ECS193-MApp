@@ -4,7 +4,8 @@ import {
     Text,
     StyleSheet,
     Button,
-    AppState
+    AppState,
+    AsyncStorage,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
@@ -27,12 +28,13 @@ class DashboardComponent extends Component
     constructor ()
     {
         super();
-
         this._signIn = this._signIn.bind(this);
         this._signOut = this._signOut.bind(this);
         this._showGlobalState = this._showGlobalState.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
         this.sendNotification = this.sendNotification.bind(this);
+        this.retrieveItem = this.retrieveItem.bind(this);
+        this.storeItem = this.storeItem.bind(this);
     }
 
     componentDidMount ()
@@ -53,6 +55,60 @@ class DashboardComponent extends Component
             .catch((err) => {
                 console.log("Play services error", err.code, err.message);
             });
+
+        // this.retrieveItem("historyCount").then((listCount) => {
+        //     //this callback is executed when your Promise is resolved
+        //     console.log("Success reading listCount: " + listCount);
+        //     // var newHistory = this.props.globalState.history;
+        //     var newHistory = [];
+        //     // for(var i = 0; i < listCount; i++) {
+        //     //     newHistory.push({"time": '', "alert": ''});
+        //     // }
+        //     for(var i = 0; i < listCount; i++) {
+        //         var tmpTime = 1;
+        //         // newHistory.push({"time": '', "alert": ''});
+        //         // console.log("newHistory" + newHistory[0].time);
+        //         // this.retrieveItem("historyTime" + i).then((tmpTime) => {
+        //             // console.log("Success reading historyTime: " + tmpTime);
+        //             // time = tmpTime;
+        //             // newHistory[i].time = tmpTime;
+        //             this.retrieveItem("historyReading" + i).then((tmpReading) => {
+        //                 console.log("Success reading historyReading: " + tmpReading);
+        //             //     // reading = tmpReading;
+        //             //     // newHistoryItem.push(tmpReading);
+        //             //     // newHistory[i].alert = tmpReading;
+        //                 newHistory.push({"time": tmpTime, "alert": tmpReading});
+        //             // }).catch((error) => {
+        //             //     console.log('Promise is rejected with error: ' + error);
+        //             // });
+        //         }).catch((error) => {
+        //             console.log('Promise is rejected with error: ' + error);
+        //         });
+
+        //         // this.retrieveItem("historyReading" + i).then((tmpReading) => {
+        //         //     console.log("Success reading historyReading: " + newHistory[i]);
+        //         //     // reading = tmpReading;
+        //         //     // newHistoryItem.push(tmpReading);
+        //         //     newHistory[i].alert = tmpReading;
+        //         // }).catch((error) => {
+        //         //     console.log('Promise is rejected with error: ' + error);
+        //         // });
+        //         // newHistory.push({"time": time, "alert": reading});
+        //     }
+
+        //     console.log(newHistory);
+
+
+        //     this.props.setGlobalState({
+        //         history: newHistory
+        //     });
+
+        // }).catch((error) => {
+        //     //this callback is executed when your Promise is rejected
+        //     console.log('Promise is rejected with error: ' + error);
+        // });
+
+
     }
 
     componentWillUnmount() {
@@ -70,16 +126,66 @@ class DashboardComponent extends Component
     };
 
     sendNotification() {
-        var notificationMsg = 'You pushed the notification button!';
+        var fullNess = Math.floor(Math.random() * 100);
         PushNotification.localNotification({
-            message: notificationMsg
+            message: 'Fullness: ' + fullNess + '%'
         });
 
-        newHistory = this.props.globalState.history;
-        newHistory.push({"time": Date.now(), "alert": notificationMsg});
+        var newHistory = this.props.globalState.history;
+        if(newHistory.length == 10) {
+            newHistory.splice(0,1);
+        }
+        var da = new Date();
+        var y = da.getUTCFullYear();
+        var m = (da.getUTCMonth() + 1);
+        m = (m < 10 ? '0' : '') + m;
+        var d = da.getUTCDate();
+        d = (d < 10 ? '0' : '') + d;
+        var h = da.getUTCHours();
+        h = (h < 10 ? '0' : '') + h;
+        var mi = da.getUTCMinutes();
+        mi = (mi < 10 ? '0' : '') + mi;
+        var s = da.getUTCSeconds();
+        s = (s < 10 ? '0' : '') + s;
+        var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
+        newHistory.push({"time": utc.toString(), "alert": fullNess.toString()});
+        
         this.props.setGlobalState({
             history: newHistory
-        });        
+        });
+
+        // console.log("Stringify: " + newHistory[0]);
+        var historyRecord = newHistory.length.toString();
+        for(var i = 0; i < newHistory.length; i++) {
+            historyRecord = historyRecord + ',' + newHistory[i].time + ',' + newHistory[i].alert;
+        }
+
+        console.log("HistoryRecord: " + historyRecord);
+
+        this.storeItem("historyRecord", historyRecord).then((count) => {
+                //this callback is executed when your Promise is resolved
+                alert("Success writing");
+                }).catch((error) => {
+                //this callback is executed when your Promise is rejected
+                console.log('Promise is rejected with error: ' + error);
+        });
+
+        // for(var i = 0; i < newHistory.length; i++) {
+        //     // var key = "historyTime" + i;
+        //     // var val = newHistory[i].alert;
+        //     // console.log(typeof(val));
+        //     console.log("Key is: " + key + " Val is: " + val);
+        //     this.storeItem("historyTime" + i, newHistory[i].time).then((time) => { 
+        //         console.log("Success writing time");
+        //     }).catch((error) => {
+        //         console.log("Failded writing time " + error);
+        //     });
+        //     this.storeItem("historyReading" + i, newHistory[i].alert).then((reading) => {
+        //         console.log("Success writing alert");
+        //     }).catch((error) => {
+        //         console.log("Failded writing alert " + error);
+        //     });
+        // }
     };
 
     render ()
@@ -95,7 +201,6 @@ class DashboardComponent extends Component
                 justifyContent: 'center', 
                 alignItems: 'center'
             }}> 
-
                 <Button
                     title = {signText}
                     onPress = {signFunc}
@@ -210,6 +315,31 @@ class DashboardComponent extends Component
     {
         console.log(this.props.globalState);
     }
+
+    async storeItem(key, item) {
+        try {
+            //we want to wait for the Promise returned by AsyncStorage.setItem()
+            //to be resolved to the actual value before returning the value
+            // var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+            var jsonOfItem = await AsyncStorage.setItem(key, item);
+            return jsonOfItem;
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
+
+    //the functionality of the retrieveItem is shown below
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          // const item = JSON.parse(retrievedItem);
+          const item = retrievedItem;
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
+
 }
 
 export default withGlobalState(DashboardComponent);
