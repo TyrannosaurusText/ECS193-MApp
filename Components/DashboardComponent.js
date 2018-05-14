@@ -56,59 +56,23 @@ class DashboardComponent extends Component
                 console.log("Play services error", err.code, err.message);
             });
 
-        // this.retrieveItem("historyCount").then((listCount) => {
-        //     //this callback is executed when your Promise is resolved
-        //     console.log("Success reading listCount: " + listCount);
-        //     // var newHistory = this.props.globalState.history;
-        //     var newHistory = [];
-        //     // for(var i = 0; i < listCount; i++) {
-        //     //     newHistory.push({"time": '', "alert": ''});
-        //     // }
-        //     for(var i = 0; i < listCount; i++) {
-        //         var tmpTime = 1;
-        //         // newHistory.push({"time": '', "alert": ''});
-        //         // console.log("newHistory" + newHistory[0].time);
-        //         // this.retrieveItem("historyTime" + i).then((tmpTime) => {
-        //             // console.log("Success reading historyTime: " + tmpTime);
-        //             // time = tmpTime;
-        //             // newHistory[i].time = tmpTime;
-        //             this.retrieveItem("historyReading" + i).then((tmpReading) => {
-        //                 console.log("Success reading historyReading: " + tmpReading);
-        //             //     // reading = tmpReading;
-        //             //     // newHistoryItem.push(tmpReading);
-        //             //     // newHistory[i].alert = tmpReading;
-        //                 newHistory.push({"time": tmpTime, "alert": tmpReading});
-        //             // }).catch((error) => {
-        //             //     console.log('Promise is rejected with error: ' + error);
-        //             // });
-        //         }).catch((error) => {
-        //             console.log('Promise is rejected with error: ' + error);
-        //         });
+        var newHistory = [];
 
-        //         // this.retrieveItem("historyReading" + i).then((tmpReading) => {
-        //         //     console.log("Success reading historyReading: " + newHistory[i]);
-        //         //     // reading = tmpReading;
-        //         //     // newHistoryItem.push(tmpReading);
-        //         //     newHistory[i].alert = tmpReading;
-        //         // }).catch((error) => {
-        //         //     console.log('Promise is rejected with error: ' + error);
-        //         // });
-        //         // newHistory.push({"time": time, "alert": reading});
-        //     }
+        this.retrieveItem("historyRecord").then((historyRecord) => {
+            var historyArr = historyRecord.split(',');
+            var historyCount = historyArr[0];
 
-        //     console.log(newHistory);
+            for(var i = 1; i < 2 * historyCount;) {
+                newHistory.push({"time": historyArr[i], "alert": historyArr[i + 1]})
+                i = i + 2;
+            }
 
-
-        //     this.props.setGlobalState({
-        //         history: newHistory
-        //     });
-
-        // }).catch((error) => {
-        //     //this callback is executed when your Promise is rejected
-        //     console.log('Promise is rejected with error: ' + error);
-        // });
-
-
+            this.props.setGlobalState({
+                history: newHistory
+            });
+        }).catch((error) => {
+            console.log('Promise is rejected with error: ' + error);
+        });
     }
 
     componentWillUnmount() {
@@ -160,7 +124,7 @@ class DashboardComponent extends Component
             historyRecord = historyRecord + ',' + newHistory[i].time + ',' + newHistory[i].alert;
         }
 
-        console.log("HistoryRecord: " + historyRecord);
+        console.log("historyRecord: " + historyRecord);
 
         this.storeItem("historyRecord", historyRecord).then((count) => {
                 //this callback is executed when your Promise is resolved
@@ -169,23 +133,6 @@ class DashboardComponent extends Component
                 //this callback is executed when your Promise is rejected
                 console.log('Promise is rejected with error: ' + error);
         });
-
-        // for(var i = 0; i < newHistory.length; i++) {
-        //     // var key = "historyTime" + i;
-        //     // var val = newHistory[i].alert;
-        //     // console.log(typeof(val));
-        //     console.log("Key is: " + key + " Val is: " + val);
-        //     this.storeItem("historyTime" + i, newHistory[i].time).then((time) => { 
-        //         console.log("Success writing time");
-        //     }).catch((error) => {
-        //         console.log("Failded writing time " + error);
-        //     });
-        //     this.storeItem("historyReading" + i, newHistory[i].alert).then((reading) => {
-        //         console.log("Success writing alert");
-        //     }).catch((error) => {
-        //         console.log("Failded writing alert " + error);
-        //     });
-        // }
     };
 
     render ()
