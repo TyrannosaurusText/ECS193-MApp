@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
+// import { GoogleSignin, GoogleSigninButton } from 'react-native-community';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PushNotification from 'react-native-push-notification';
@@ -179,10 +180,11 @@ class DashboardComponent extends Component
             .signIn()
             .then((user) => {
                 //console.log('User:');
-                //console.log(user);
-
+                console.log(user);
+                console.log(user.accessToken);
                 //console.log('Checking Validity');
                 fetch('https://majestic-legend-193620.appspot.com/security/getAuth', {
+                // fetch('http://192.168.43.198:8080/security/getAuth', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'

@@ -68,13 +68,13 @@ class HistoryComponent extends Component
         var postObj = {
             authCode: this.props.globalState.authCode,
             id: this.props.globalState.id,
-            readings: newReading
+            readings: [newReading]
         };
         console.log(postObj);
         //if able to pos
         // fetch('https://majestic-legend-193620.appspot.com/mobile/readings', {
         fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-        // fetch('http://127.0.0.1:8080/insert/reading', {
+        // fetch('http://192.168.43.198:8080/mobile/readings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(postObj)
@@ -126,7 +126,17 @@ class HistoryComponent extends Component
 
         return (
             <SafeAreaView style = {styles.container}>
-            
+            <LineChart
+                style={ { height: 200 } }
+                data={ data }
+                contentInset={ { top: 20, bottom: 20 } }
+                svg={{
+                    strokeWidth: 2,
+                    stroke: 'url(#gradient)',
+                }}
+            >
+                <Grid/>
+            </LineChart>
 
             <Button
                 title = 'Fetch reading'
