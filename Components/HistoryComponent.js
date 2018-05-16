@@ -10,6 +10,7 @@ import {
     // NativeModules,
     // Platform,
     // PermissionsAndroid,
+    Button,
     ListView,
     ScrollView,
     // AppState,
@@ -20,13 +21,14 @@ import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import { LineChart, Grid } from 'react-native-svg-charts'
 
 // import BackgroundTask from 'react-native-background-task';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-export default class HistoryComponent extends Component 
+class HistoryComponent extends Component 
 {
     // static navigationOptions = ({ navigation }) => ({
     //     headerTitle: 'History',
@@ -36,6 +38,57 @@ export default class HistoryComponent extends Component
     constructor() 
     {
         super();
+        this.fetchReading = this.fetchReading.bind(this);
+    }
+
+    fetchReading() {
+        var da = new Date();
+        var y = da.getUTCFullYear();
+        var m = (da.getUTCMonth() + 1);
+        m = (m < 10 ? '0' : '') + m;
+        var d = da.getUTCDate();
+        d = (d < 10 ? '0' : '') + d;
+        var h = da.getUTCHours();
+        h = (h < 10 ? '0' : '') + h;
+        var mi = da.getUTCMinutes();
+        mi = (mi < 10 ? '0' : '') + mi;
+        var s = da.getUTCSeconds();
+        s = (s < 10 ? '0' : '') + s;
+        var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
+        console.log(utc);
+        var avg = new Array(64);
+        for (var j = 0; j < 64; j++) avg[j] = 0;
+        var newReading = {
+            timestamp: utc,
+            channels: avg
+        };
+
+        // var newStore = new Array(64);
+        // for (var j = 0; j < 64; j++) newStore[j] = {"timestamp": 0, "channels": j};
+        var postObj = {
+            authCode: this.props.globalState.authCode,
+            id: this.props.globalState.id,
+            readings: newReading
+        };
+        console.log(postObj);
+        //if able to pos
+        // fetch('https://majestic-legend-193620.appspot.com/mobile/readings', {
+        fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+        // fetch('http://127.0.0.1:8080/insert/reading', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postObj)
+
+        })
+        .then((result) => result.json())
+        .then((json) => {
+            console.log('Send done');
+            console.log(json);
+            // pendingReadings = [];
+            // this.props.setGlobalState({pendingReadings});
+        }).catch((error) => {
+            console.log("ERROR in send " + error);
+        });
     }
 
     render () 
@@ -69,9 +122,16 @@ export default class HistoryComponent extends Component
     // }
     //     const list = Array.from(this.state.peripherals.values());
     //     const dataSource = ds.cloneWithRows(list);
+        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
 
         return (
             <SafeAreaView style = {styles.container}>
+            
+
+            <Button
+                title = 'Fetch reading'
+                onPress = {this.fetchReading}
+            />
             <ScrollView style = {styles.scroll}>
                     {
                         (list.length == 0) &&
@@ -132,4 +192,4 @@ const styles = StyleSheet.create({
 });
 
 
-// export default withGlobalState(HistoryComponent);
+export default withGlobalState(HistoryComponent);
