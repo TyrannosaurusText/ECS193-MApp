@@ -19,6 +19,7 @@ import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
+import BackgroundTimer from 'react-native-background-timer';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -296,6 +297,11 @@ class BLEManager extends Component
                 BleManager.disconnect(peripheral.id);
             else
             {
+                BleManager.stopScan().then(() => {
+                    console.log('Stop scanning successful');
+                }, (err) => {
+                    console.log('Stop scanning failed: ' + err);
+                });
                 BleManager.connect(peripheral.id).then(() => {
                     let peripherals = this.state.peripherals;
                     let p = peripherals.get(peripheral.id);
@@ -306,7 +312,11 @@ class BLEManager extends Component
                         this.setState({peripherals});
                     }
                     console.log('Connected to ' + peripheral.id);
-
+                    BleManager.createBond(peripheral.id).then(() => {
+                        console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
+                    }, (bond_error) => {
+                        console.log('Failed to Bond: ' + bond_error);
+                    });
                     //setTimeout(() => {
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
