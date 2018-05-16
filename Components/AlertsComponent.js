@@ -42,24 +42,7 @@ class AlertsComponent extends Component
     {
 
         // const list = Array.from(this.state.peripherals.values());
-        const list = this.props.globalState.history;
-        // const list = [
-        //     {"time": 0, "reading": 1},
-        //     {"time": 1, "reading": 10},
-        //     {"time": 2, "reading": 8},
-        //     {"time": 3, "reading": 12},
-        //     {"time": 4, "reading": 14},
-        //     {"time": 5, "reading": 1},
-        //     {"time": 6, "reading": 10},
-        //     {"time": 7, "reading": 8},
-        //     {"time": 8, "reading": 12},
-        //     {"time": 9, "reading": 14},
-        //     {"time": 10, "reading": 1},
-        //     {"time": 11, "reading": 10},
-        //     {"time": 12, "reading": 8},
-        //     {"time": 13, "reading": 12},
-        //     {"time": 14, "reading": 14}
-        // ];
+        const list = this.props.globalState.history.reverse();
         const dataSource = ds.cloneWithRows(list);
         
     //     return (

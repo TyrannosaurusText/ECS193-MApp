@@ -16,7 +16,7 @@ import PushNotification from 'react-native-push-notification';
 import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
 import PushNotificationComponent from './PushNotificationComponent';
-
+import { ProgressCircle }  from 'react-native-svg-charts'
 
 class DashboardComponent extends Component
 {
@@ -100,16 +100,16 @@ class DashboardComponent extends Component
             newHistory.splice(0,1);
         }
         var da = new Date();
-        var y = da.getUTCFullYear();
-        var m = (da.getUTCMonth() + 1);
+        var y = da.getFullYear();
+        var m = (da.getMonth() + 1);
         m = (m < 10 ? '0' : '') + m;
-        var d = da.getUTCDate();
+        var d = da.getDate();
         d = (d < 10 ? '0' : '') + d;
-        var h = da.getUTCHours();
+        var h = da.getHours();
         h = (h < 10 ? '0' : '') + h;
-        var mi = da.getUTCMinutes();
+        var mi = da.getMinutes();
         mi = (mi < 10 ? '0' : '') + mi;
-        var s = da.getUTCSeconds();
+        var s = da.getSeconds();
         s = (s < 10 ? '0' : '') + s;
         var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
         newHistory.push({"time": utc.toString(), "alert": fullNess.toString()});
@@ -141,13 +141,20 @@ class DashboardComponent extends Component
         let signText = this.props.globalState.email != '' ? 'Sign Out' : 'Sign In';
         
         return (
-
             <SafeAreaView style = {{
                 flex: 1, 
                 flexDirection: 'column',
                 justifyContent: 'center', 
-                alignItems: 'center'
+                // alignItems: 'center'
             }}> 
+
+                <ProgressCircle
+                    style={ { height: 200 } }
+                    progress={ 0.7 }
+                    progressColor={'rgb(134, 65, 244)'}
+                    startAngle={ -Math.PI * 0.8 }
+                    endAngle={ Math.PI * 0.8 }
+                />
                 <Button
                     title = {signText}
                     onPress = {signFunc}
@@ -160,7 +167,7 @@ class DashboardComponent extends Component
                     title = 'Debug Global State'
                     onPress = {this._showGlobalState}
                 />
-            </SafeAreaView>
+                </SafeAreaView>
         );
     }
 
