@@ -95,6 +95,7 @@ class BLEManager extends Component
 
     componentWillUnmount () 
     {
+        console.log("componentWillUnmount()");
         this.handlerDiscover.remove();
         this.handlerStop.remove();
         this.handlerDisconnect.remove();
@@ -143,6 +144,7 @@ class BLEManager extends Component
             'C3151BB7-3E2C-4821-8EB9-4067A6585508'
         ];
         var readings = [];
+        var index = 0;
 
         var cnt = 0;
         var readChar = () => {
@@ -153,11 +155,12 @@ class BLEManager extends Component
                     var temp = new Buffer(17);
                     for (var j = 0; j < 17; j++)
                         temp.writeUInt8(readData[j], j);
-                    var id = temp.readInt8(16);
-                    readings[id * 4] = temp.readFloatBE(0);
-                    readings[id * 4 + 1] = temp.readFloatBE(4);
-                    readings[id * 4 + 2] = temp.readFloatBE(8);
-                    readings[id * 4 + 3] = temp.readFloatBE(12);
+                    //var id = temp.readInt8(16);
+                    readings[index * 4] = temp.readFloatBE(0);
+                    readings[index * 4 + 1] = temp.readFloatBE(4);
+                    readings[index * 4 + 2] = temp.readFloatBE(8);
+                    readings[index * 4 + 3] = temp.readFloatBE(12);
+                    index++;
 
                     cnt++;
                     console.log('cnt: ' + cnt);
@@ -177,7 +180,7 @@ class BLEManager extends Component
                             this.setState({curReadings: curr});
                         }
 
-                        if (data.value == 4)
+                        // if (data.value == 4)
                         {
                             console.log('Values read');
 
@@ -312,11 +315,11 @@ class BLEManager extends Component
                         this.setState({peripherals});
                     }
                     console.log('Connected to ' + peripheral.id);
-                    BleManager.createBond(peripheral.id).then(() => {
-                        console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
-                    }, (bond_error) => {
-                        console.log('Failed to Bond: ' + bond_error);
-                    });
+                    // BleManager.createBond(peripheral.id).then(() => {
+                    //     console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
+                    // }, (bond_error) => {
+                    //     console.log('Failed to Bond: ' + bond_error);
+                    // });
                     //setTimeout(() => {
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
