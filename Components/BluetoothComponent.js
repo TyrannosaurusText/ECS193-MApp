@@ -19,6 +19,7 @@ import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
+import BackgroundTimer from 'react-native-background-timer';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -39,8 +40,12 @@ class BLEManager extends Component
             scanning:false,
             peripherals: new Map(),
             appState: '',
+            reading: false,
             curReadings: newStore,
-            readingsDone: 0
+            readingsDone: 0,
+            charsRead: 0,
+            myPatch: null,
+            autoRead: false
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -88,16 +93,21 @@ class BLEManager extends Component
             BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
                 console.log('Connected peripherals: ' + peripheralsArray.length);
             });
-        }
+        } 
         this.setState({appState: nextAppState});
     }
 
     componentWillUnmount () 
     {
+        console.log("componentWillUnmount()");
         this.handlerDiscover.remove();
         this.handlerStop.remove();
         this.handlerDisconnect.remove();
         this.handlerUpdate.remove();
+
+        if (this.state.myPatch) {
+            BleManager.disconnect(this.state.myPatch.id);
+        }
     }
 
     handleDisconnectedPeripheral (data) 
@@ -115,6 +125,12 @@ class BLEManager extends Component
 
     handleUpdateValueForCharacteristic (data) 
     {
+        if (this.state.reading == true) {
+            return;
+        } else {
+            this.state.reading = true;
+        }
+
         //console.log('Received data from ' + data.peripheral);
         console.log('Value: ' + data.value);
         //console.log('peripheral: ' + data.peripheral);
@@ -142,6 +158,7 @@ class BLEManager extends Component
             'C3151BB7-3E2C-4821-8EB9-4067A6585508'
         ];
         var readings = [];
+        var index = 0;
 
         var cnt = 0;
         var readChar = () => {
@@ -152,22 +169,25 @@ class BLEManager extends Component
                     var temp = new Buffer(17);
                     for (var j = 0; j < 17; j++)
                         temp.writeUInt8(readData[j], j);
-                    var id = temp.readInt8(16);
-                    readings[id * 4] = temp.readFloatBE(0);
-                    readings[id * 4 + 1] = temp.readFloatBE(4);
-                    readings[id * 4 + 2] = temp.readFloatBE(8);
-                    readings[id * 4 + 3] = temp.readFloatBE(12);
+                    //var id = temp.readInt8(16);
+                    readings[index * 4] = temp.readFloatBE(0);
+                    readings[index * 4 + 1] = temp.readFloatBE(4);
+                    readings[index * 4 + 2] = temp.readFloatBE(8);
+                    readings[index * 4 + 3] = temp.readFloatBE(12);
+                    index++;
 
-                    cnt++;
-                    console.log('cnt: ' + cnt);
-                    if (cnt != readChars.length)
+                    cnt = (cnt + 1) % 16;
+                    this.state.charsRead = (this.state.charsRead + 1) % 160;
+
+                    console.log('cnt: ' + cnt + ', charsRead: ' + this.state.charsRead);
+                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 10 - 1))
                     {
                         console.log('continue');
                         readCharBound();
                     }
                     else
                     {
-                        //console.log('STATE:');
+                        console.log('STATE:');
                         //console.log(this.state);
                         var curr = this.state.curReadings;
                         for (var j = 0; j < 64; j++)
@@ -176,13 +196,15 @@ class BLEManager extends Component
                             this.setState({curReadings: curr});
                         }
 
-                        if (data.value == 4)
+                        // if (data.value == 4)
+                        if (this.state.charsRead == 159)
                         {
+                            this.state.reading = false;
                             console.log('Values read');
 
                             var avg = this.state.curReadings;
                             for (var j = 0; j < 64; j++)
-                                avg[j] /= 5;
+                                avg[j] /= 10;
                             var pendingReadings = this.props.globalState.pendingReadings;
 
                             var da = new Date();
@@ -212,6 +234,7 @@ class BLEManager extends Component
                                 readings: pendingReadings
                             };
 
+
                             console.log('SEND HERE');
                             console.log(postObj);
 
@@ -238,6 +261,10 @@ class BLEManager extends Component
                 .catch((error) => {
                     console.log('READ ERROR');
                     console.log(error);
+                    // cnt--;
+                    // index--;
+                    // this.state.charsRead = this.state.charsRead - 1;
+                    
                 });
         }
         var readCharBound = readChar.bind(this);
@@ -285,6 +312,9 @@ class BLEManager extends Component
             console.log('Got ble peripheral', peripheral);
             peripherals.set(peripheral.id, peripheral);
             this.setState({ peripherals })
+            if(peripheral.id == "PatchSim") {
+                this.state.myPatch = peripheral;
+            }
         }
     }
 
@@ -296,6 +326,11 @@ class BLEManager extends Component
                 BleManager.disconnect(peripheral.id);
             else
             {
+                BleManager.stopScan().then(() => {
+                    console.log('Stop scanning successful');
+                }, (err) => {
+                    console.log('Stop scanning failed: ' + err);
+                });
                 BleManager.connect(peripheral.id).then(() => {
                     let peripherals = this.state.peripherals;
                     let p = peripherals.get(peripheral.id);
@@ -307,6 +342,11 @@ class BLEManager extends Component
                     }
                     console.log('Connected to ' + peripheral.id);
 
+                    // BleManager.createBond(peripheral.id).then(() => {
+                    //     console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
+                    // }, (bond_error) => {
+                    //     console.log('Failed to Bond: ' + bond_error);
+                    // });
                     //setTimeout(() => {
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
@@ -334,6 +374,7 @@ class BLEManager extends Component
     {
         const list = Array.from(this.state.peripherals.values());
         const dataSource = ds.cloneWithRows(list);
+        let autoColor = '#ccc';
 
         return (
             <SafeAreaView style = {styles.container}>
@@ -370,6 +411,25 @@ class BLEManager extends Component
                     onPress = {() => this.retrieveConnected() }
                 >
                     <Text>Retrieve connected peripherals</Text>
+                </TouchableHighlight>
+                <TouchableHighlight
+                    onPress = {() => {
+                        if (this.state.autoRead == false) {
+                            this.state.autoRead = true;
+                            autoColor = 'green';
+                        } else {
+                            this.state.autoRead = false;
+                            autoColor = '#ccc';
+                        }
+                    }} 
+                    style = {{
+                        marginTop: 0,
+                        margin: 20, 
+                        padding:20, 
+                        backgroundColor:'#ccc'
+                    }}
+                >
+                    <Text>AutoScan ({this.state.autoRead})</Text>
                 </TouchableHighlight>
                 <ScrollView style = {styles.scroll}>
                     {
