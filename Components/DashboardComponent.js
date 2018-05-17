@@ -6,6 +6,7 @@ import {
     Button,
     AppState,
     AsyncStorage,
+    Dimensions,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
@@ -18,6 +19,9 @@ import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
 import PushNotificationComponent from './PushNotificationComponent';
 import { ProgressCircle }  from 'react-native-svg-charts'
+import PercentageCircle from 'react-native-percentage-circle';
+
+const window = Dimensions.get('window');
 
 class DashboardComponent extends Component
 {
@@ -148,27 +152,22 @@ class DashboardComponent extends Component
                 justifyContent: 'center', 
                 // alignItems: 'center'
             }}> 
-
-                <ProgressCircle
-                    style={ { height: 200 } }
-                    progress={ 0.7 }
-                    progressColor={'rgb(134, 65, 244)'}
-                    startAngle={ -Math.PI * 0.8 }
-                    endAngle={ Math.PI * 0.8 }
-                />
+                <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                    <PercentageCircle 
+                        radius={window.width/3} 
+                        percent={50} 
+                        color={"#66ff66"} 
+                        borderWidth={30}
+                        children={<Text>50%</Text>}>
+                    </PercentageCircle>  
+                </View>
+                <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
                 <Button
                     title = {signText}
                     onPress = {signFunc}
                 />
-                <Button title='Press here for a notification'
-                    onPress={this.sendNotification} />
-                <PushNotificationComponent />
- 
-                <Button
-                    title = 'Debug Global State'
-                    onPress = {this._showGlobalState}
-                />
-                </SafeAreaView>
+                </View>
+            </SafeAreaView>
         );
     }
 
@@ -295,7 +294,6 @@ class DashboardComponent extends Component
           console.log(error.message);
         }
     }
-
 }
 
 export default withGlobalState(DashboardComponent);

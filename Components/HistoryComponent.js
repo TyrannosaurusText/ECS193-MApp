@@ -68,12 +68,12 @@ class HistoryComponent extends Component
         var postObj = {
             authCode: this.props.globalState.authCode,
             id: this.props.globalState.id,
-            readings: [newReading]
+            // readings: [newReading]
         };
         console.log(postObj);
         //if able to pos
-        // fetch('https://majestic-legend-193620.appspot.com/mobile/readings', {
-        fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+        fetch('https://majestic-legend-193620.appspot.com/mobile/readings', {
+        // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
         // fetch('http://192.168.43.198:8080/mobile/readings', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -84,8 +84,19 @@ class HistoryComponent extends Component
         .then((json) => {
             console.log('Send done');
             console.log(json);
+            // var jsonArr = json.split(",");
+
+            // var numEntries = jsonArr.length / 65;
+            // console.log("There should be " + numEntries + " entries");
+            // for(var )
+            //     console.log("Timestampe should be: " + jsonArr[0]);
+
+            // csvParse(json,csv, function(err, output)){
+                // console.log(output);
+            // }
             // pendingReadings = [];
             // this.props.setGlobalState({pendingReadings});
+
         }).catch((error) => {
             console.log("ERROR in send " + error);
         });
@@ -137,11 +148,13 @@ class HistoryComponent extends Component
             >
                 <Grid/>
             </LineChart>
-
+            <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
             <Button
-                title = 'Fetch reading'
+                title = 'Refresh'
                 onPress = {this.fetchReading}
             />
+            </View>
+
             <ScrollView style = {styles.scroll}>
                     {
                         (list.length == 0) &&
