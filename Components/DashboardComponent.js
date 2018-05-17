@@ -150,23 +150,25 @@ class DashboardComponent extends Component
                 flex: 1, 
                 flexDirection: 'column',
                 justifyContent: 'center', 
-                // alignItems: 'center'
+                alignItems: 'center'
             }}> 
-                <View style={{justifyContent: 'center', alignItems: 'center'}}>
-                    <PercentageCircle 
-                        radius={window.width/3} 
-                        percent={50} 
-                        color={"#66ff66"} 
-                        borderWidth={30}
-                        children={<Text>50%</Text>}>
-                    </PercentageCircle>  
-                </View>
-                <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
+                <PercentageCircle 
+                    radius={window.width/3} 
+                    percent={50} 
+                    color={"#66ff66"} 
+                    borderWidth={30}
+                    children={<Text style={{fontSize: window.width/7}}>50%</Text>}>
+                </PercentageCircle>  
+                <View style={{marginTop:window.width*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25, margin: 10}} >
                 <Button
                     title = {signText}
                     onPress = {signFunc}
                 />
+                <Button title='Press here for a notification'
+                    onPress={this.sendNotification}/>
+                <PushNotificationComponent />
                 </View>
+
             </SafeAreaView>
         );
     }
