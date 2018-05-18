@@ -10,7 +10,6 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
-// import { GoogleSignin, GoogleSigninButton } from 'react-native-community';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import PushNotification from 'react-native-push-notification';
@@ -20,6 +19,7 @@ import AlertsComponent from './AlertsComponent';
 import PushNotificationComponent from './PushNotificationComponent';
 import { ProgressCircle }  from 'react-native-svg-charts'
 import PercentageCircle from 'react-native-percentage-circle';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');
 
@@ -33,6 +33,9 @@ class DashboardComponent extends Component
     constructor ()
     {
         super();
+        this.state = {
+            percentage: 10
+        };
         this._signIn = this._signIn.bind(this);
         this._signOut = this._signOut.bind(this);
         this._showGlobalState = this._showGlobalState.bind(this);
@@ -152,21 +155,33 @@ class DashboardComponent extends Component
                 justifyContent: 'center', 
                 alignItems: 'center'
             }}> 
-                <PercentageCircle 
-                    radius={window.width/3} 
-                    percent={50} 
-                    color={"#66ff66"} 
-                    borderWidth={30}
-                    children={<Text style={{fontSize: window.width/7}}>50%</Text>}>
-                </PercentageCircle>  
+                <AnimatedCircularProgress
+                    size={200}
+                    width={20}
+                    fill={this.state.percentage}
+                    tintColor="#43cdcf"
+                    backgroundColor="#eaeaea"
+                    arcSweepAngle={360}>
+                    {
+                        (fill) => (
+                            <Text>{this.state.percentage}%</Text>
+                        )
+                    }
+                </AnimatedCircularProgress> 
                 <View style={{marginTop:window.width*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25, margin: 10}} >
                 <Button
                     title = {signText}
                     onPress = {signFunc}
                 />
-                <Button title='Press here for a notification'
+                <Button 
+                    title='Press here for a notification'
                     onPress={this.sendNotification}/>
                 <PushNotificationComponent />
+                <Button 
+                    title='Update circle'
+                    onPress={() => {
+                        this.setState({percentage: this.state.percentage + 10});
+                    }}/>
                 </View>
 
             </SafeAreaView>

@@ -10,6 +10,7 @@ import TestComponent from './Components/TestComponent';
 import HistoryComponent from './Components/HistoryComponent';
 import AlertsComponent from './Components/AlertsComponent';
 import PushNotificationComponent from './Components/PushNotificationComponent';
+import FeedbackComponent from './Components/FeedbackComponent';
 
 
 
@@ -154,18 +155,21 @@ const Tabs = TabNavigator ({
     animationEnabled: true
 });
 
-// const App = 
-// <Navigator
-          //   initialRoute={{title: 'Awesome Scene', index: 0}}
-          //   renderScene={(route, navigator) => <Text>Hello {route.title}!</Text>}
-          //   style={{padding: 100}}
-          // />;
-
 
 const App = StackNavigator ({
     Main: {screen: Tabs},
-    Alerts: {screen: AlertsComponent},
-});
+    Alerts: {screen: AlertsComponent,
+        navigationOptions : {
+            headerTitle: 'Alerts'
+        }
+    },
+    Feedback: {screen: FeedbackComponent,
+        navigationOptions : {
+            headerTitle: 'Feedback'
+        }
+    }
+}
+);
 
 const initialState = {
     signInCapable: false,
@@ -188,7 +192,7 @@ AppRegistry.registerComponent('TestComponent', () => TestComponent);
 AppRegistry.registerComponent('History', () => HistoryComponent);
 AppRegistry.registerComponent('Alerts', () => AlertsComponent);
 AppRegistry.registerComponent('PushNotification', () => PushNotificationComponent);
-//AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
+AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);
 //AppRegistry.registerComponent('Read', () => ReadComponent);
 //AppRegistry.registerComponent('Compose', () => ComposeComponent);

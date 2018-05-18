@@ -11,6 +11,7 @@ import {
     // Platform,
     // PermissionsAndroid,
     Button,
+    Spacer,
     ListView,
     ScrollView,
     AppState,
@@ -22,6 +23,8 @@ import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LineChart, Grid } from 'react-native-svg-charts'
+import FeedbackComponent from './FeedbackComponent';
+import { withNavigation } from 'react-navigation';
 
 // import BackgroundTask from 'react-native-background-task';
 
@@ -136,7 +139,7 @@ class HistoryComponent extends Component
     //     const list = Array.from(this.state.peripherals.values());
     //     const dataSource = ds.cloneWithRows(list);
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
-
+        const {navigate} = this.props.navigation;
         return (
             <SafeAreaView style = {styles.container}>
             <LineChart
@@ -150,20 +153,49 @@ class HistoryComponent extends Component
             >
                 <Grid/>
             </LineChart>
-            <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
-            <Button
-                title = 'Refresh'
-                onPress = {this.fetchReading}
-            />
+            <View 
+                style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }} >
+                <View style={{
+                    flex: 1,
+                    marginLeft: window.width*0.1,
+                    marginRight: window.width*0.1,
+                }}>
+                <Button
+                    title = 'Refresh'
+                    onPress = {this.fetchReading}
+                />
+                </View>
+                <View style={{
+                    flex: 1,
+                    marginRight: window.width*0.1,
+                    marginLeft: window.width*0.1
+                }}>
+                <Button 
+                    title = 'Submit Event'
+                    onPress = {() => {
+                            if(this.props.globalState.email != '') {
+                                navigate('Feedback');
+                            }
+                            else {
+                                alert("Please sign in first");
+                            }
+                        }
+                    }
+                />
+                </View>
             </View>
 
             <ScrollView style = {styles.scroll}>
-                    {
-                        (list.length == 0) &&
-                        <View style = {{ flex:1, margin: 20 }}>
-                            <Text style = {{ textAlign: 'center' }}>No history available</Text>
-                        </View>
-                    }
+            {
+                (list.length == 0) &&
+                <View style = {{ flex:1, margin: 20 }}>
+                    <Text style = {{ textAlign: 'center' }}>No history available</Text>
+                </View>
+            }
                 <ListView
                     enableEmptySections = {true}
                     dataSource = {dataSource}
@@ -204,7 +236,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         width: window.width,
-        height: window.height
+        height: window.height,
     },
     scroll: {
         flex: 1,
