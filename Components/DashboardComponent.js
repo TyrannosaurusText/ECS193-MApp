@@ -16,12 +16,12 @@ import PushNotification from 'react-native-push-notification';
 
 import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
-import PushNotificationComponent from './PushNotificationComponent';
 import { ProgressCircle }  from 'react-native-svg-charts'
 import PercentageCircle from 'react-native-percentage-circle';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');
+const maxVolume = 100;
 
 class DashboardComponent extends Component
 {
@@ -33,9 +33,9 @@ class DashboardComponent extends Component
     constructor ()
     {
         super();
-        this.state = {
-            percentage: 10
-        };
+        // this.state = {
+        //     percentage: 10
+        // };
         this._signIn = this._signIn.bind(this);
         this._signOut = this._signOut.bind(this);
         this._showGlobalState = this._showGlobalState.bind(this);
@@ -43,10 +43,18 @@ class DashboardComponent extends Component
         this.sendNotification = this.sendNotification.bind(this);
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
+        this.checkAlarm = this.checkAlarm.bind(this);
     }
 
     componentDidMount ()
     {
+        PushNotification.configure({
+            onNotification: function(notification) {
+                console.log('NOTIFICATION: ', notification);
+            },
+            popInitialNotification: true,
+        });
+
         AppState.addEventListener('change', this.handleAppStateChange);
 
         //Sign in configuration
@@ -77,6 +85,25 @@ class DashboardComponent extends Component
 
             this.props.setGlobalState({
                 history: newHistory
+            });
+        }).catch((error) => {
+            console.log('Promise is rejected with error: ' + error);
+        });
+
+
+        var newAlarmList = [];
+
+        this.retrieveItem("alarmRecord").then((alarmRecord) => {
+            var alarmArr = alarmRecord.split(',');
+            var alarmCount = alarmArr[0];
+
+            for(var i = 1; i < 2 * alarmCount;) {
+                newAlarmList.push({"threshold": alarmArr[i], "on": alarmArr[i + 1]})
+                i = i + 2;
+            }
+
+            this.props.setGlobalState({
+                alarmList: newAlarmList
             });
         }).catch((error) => {
             console.log('Promise is rejected with error: ' + error);
@@ -134,7 +161,7 @@ class DashboardComponent extends Component
 
         console.log("historyRecord: " + historyRecord);
 
-        this.storeItem("historyRecord", historyRecord).then((count) => {
+        this.storeItem("historyRecord", historyRecord).then((stored) => {
                 //this callback is executed when your Promise is resolved
                 alert("Success writing");
                 }).catch((error) => {
@@ -158,13 +185,13 @@ class DashboardComponent extends Component
                 <AnimatedCircularProgress
                     size={200}
                     width={20}
-                    fill={this.state.percentage}
+                    fill={this.props.globalState.currentVolume}
                     tintColor="#43cdcf"
                     backgroundColor="#eaeaea"
                     arcSweepAngle={360}>
                     {
                         (fill) => (
-                            <Text>{this.state.percentage}%</Text>
+                            <Text>{this.props.globalState.currentVolume / maxVolume}%</Text>
                         )
                     }
                 </AnimatedCircularProgress> 
@@ -176,11 +203,13 @@ class DashboardComponent extends Component
                 <Button 
                     title='Press here for a notification'
                     onPress={this.sendNotification}/>
-                <PushNotificationComponent />
                 <Button 
                     title='Update circle'
                     onPress={() => {
-                        this.setState({percentage: this.state.percentage + 10});
+                        // this.setState({percentage: this.state.percentage + 10});
+                        this.props.setGlobalState({currentVolume: this.props.globalState.currentVolume + 10});
+                        console.log(this.props.globalState.currentVolume);
+                        this.checkAlarm();
                     }}/>
                 </View>
 
@@ -280,6 +309,39 @@ class DashboardComponent extends Component
         .catch((err) => {
             console.log('ERR');
             console.log(err);
+        });
+    }
+
+    checkAlarm() {
+        var newAlarmList = this.props.globalState.alarmList;
+        for(var i = 0; i < newAlarmList.length; i++) {
+            if(parseFloat(newAlarmList[i].threshold) <= this.props.globalState.currentVolume && newAlarmList[i].on == "true") {
+                // sendNotification();
+                newAlarmList[i].on = "false";
+                PushNotification.localNotification({
+                    message: 'Threshold volume reached',
+                    ongoing: true,
+                    autoCancel: false,
+                    vibration: 30000
+                });
+            }
+        }
+
+        this.props.setGlobalState({alarmList: newAlarmList});
+
+        var alarmRecord = newAlarmList.length.toString();
+        for(var i = 0; i < newAlarmList.length; i++) {
+            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+        }
+
+        console.log("alarmRecord: " + alarmRecord);
+
+        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+                //this callback is executed when your Promise is resolved
+                alert("Success writing");
+                }).catch((error) => {
+                //this callback is executed when your Promise is rejected
+                console.log('Promise is rejected with error: ' + error);
         });
     }
 

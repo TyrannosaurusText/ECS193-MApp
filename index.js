@@ -9,8 +9,9 @@ import BluetoothComponent from './Components/BluetoothComponent';
 import TestComponent from './Components/TestComponent';
 import HistoryComponent from './Components/HistoryComponent';
 import AlertsComponent from './Components/AlertsComponent';
-import PushNotificationComponent from './Components/PushNotificationComponent';
 import FeedbackComponent from './Components/FeedbackComponent';
+import AlarmComponent from './Components/AlarmComponent';
+import AddAlarmComponent from './Components/AddAlarmComponent';
 
 
 
@@ -159,15 +160,41 @@ const Tabs = TabNavigator ({
 const App = StackNavigator ({
     Main: {screen: Tabs},
     Alerts: {screen: AlertsComponent,
-        navigationOptions : {
-            headerTitle: 'Alerts'
-        }
+        navigationOptions : ({ navigation }) => ({
+        //     title: 'Dashboard',
+
+            headerTitle: 'Notifications',
+            headerRight: (
+                <Icon 
+                    name="access-alarm"
+                    size={30} 
+                    onPress={() => navigation.navigate('Alarm')}
+                    />
+            )
+        })
     },
     Feedback: {screen: FeedbackComponent,
         navigationOptions : {
             headerTitle: 'Feedback'
         }
-    }
+    },
+    Alarm: {screen: AlarmComponent,
+        navigationOptions : ({ navigation }) => ({
+            headerTitle: 'Alarms',
+            headerRight: (
+                <Icon 
+                    name="add-alarm"
+                    size={30} 
+                    onPress={() => navigation.navigate('AddAlarm')}
+                    />
+            )
+        })
+    },
+    AddAlarm: {screen: AddAlarmComponent,
+        navigationOptions : ({ navigation }) => ({
+            headerTitle: 'Add new alarm',
+        })
+    },
 }
 );
 
@@ -177,7 +204,9 @@ const initialState = {
     email: '',
     id: -1,
     history: [],
-    pendingReadings: []
+    alarmList: [],
+    pendingReadings: [],
+    currentVolume: 0
 };
 
 const nibva = () => (
@@ -191,7 +220,8 @@ AppRegistry.registerComponent('BLEManager', () => BLEManager);
 AppRegistry.registerComponent('TestComponent', () => TestComponent);
 AppRegistry.registerComponent('History', () => HistoryComponent);
 AppRegistry.registerComponent('Alerts', () => AlertsComponent);
-AppRegistry.registerComponent('PushNotification', () => PushNotificationComponent);
+AppRegistry.registerComponent('Alarm', () => AlarmComponent);
+AppRegistry.registerComponent('AddAlarm', () => AddAlarmComponent);
 AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);
 //AppRegistry.registerComponent('Read', () => ReadComponent);

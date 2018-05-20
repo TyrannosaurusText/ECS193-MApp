@@ -15,13 +15,10 @@ import {
     // AppState,
     Dimensions,
 } from 'react-native';
-// import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-
-// import BackgroundTask from 'react-native-background-task';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
