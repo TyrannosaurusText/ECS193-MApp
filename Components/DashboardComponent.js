@@ -191,10 +191,10 @@ class DashboardComponent extends Component
                     arcSweepAngle={360}>
                     {
                         (fill) => (
-                            <Text>{this.props.globalState.currentVolume / maxVolume}%</Text>
+                            <Text>{this.props.globalState.currentVolume / maxVolume * 100}%</Text>
                         )
                     }
-                </AnimatedCircularProgress> 
+                </AnimatedCircularProgress>
                 <View style={{marginTop:window.width*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25, margin: 10}} >
                 <Button
                     title = {signText}
@@ -207,9 +207,12 @@ class DashboardComponent extends Component
                     title='Update circle'
                     onPress={() => {
                         // this.setState({percentage: this.state.percentage + 10});
-                        this.props.setGlobalState({currentVolume: this.props.globalState.currentVolume + 10});
+                        var newCurrentVolume = this.props.globalState.currentVolume + 10;
+                        this.props.setGlobalState({currentVolume: newCurrentVolume});
+                        console.log("Update circle: " + this.props.globalState.currentVolume);
+
                         console.log(this.props.globalState.currentVolume);
-                        this.checkAlarm();
+                        this.checkAlarm(newCurrentVolume);
                     }}/>
                 </View>
 
@@ -312,16 +315,17 @@ class DashboardComponent extends Component
         });
     }
 
-    checkAlarm() {
+    checkAlarm(volume) {
         var newAlarmList = this.props.globalState.alarmList;
+        console.log("Check alarm: " + volume);
         for(var i = 0; i < newAlarmList.length; i++) {
-            if(parseFloat(newAlarmList[i].threshold) <= this.props.globalState.currentVolume && newAlarmList[i].on == "true") {
+            if(parseFloat(newAlarmList[i].threshold) <= volume && newAlarmList[i].on == "true") {
                 // sendNotification();
                 newAlarmList[i].on = "false";
                 PushNotification.localNotification({
-                    message: 'Threshold volume reached',
-                    ongoing: true,
-                    autoCancel: false,
+                    message: 'Threshold volume reached, current volume is ' + volume,
+                    // ongoing: true,
+                    // autoCancel: false,
                     vibration: 30000
                 });
             }

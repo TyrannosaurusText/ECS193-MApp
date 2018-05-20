@@ -123,7 +123,7 @@ class FeedbackComponent extends Component {
         .then((json) => {
             console.log('Send done');
             console.log(json);
-            if(json.statue == 200) {
+            if(json.status == 200) {
                 // this.setState({result: "Success!"});
                 alert("Success!");
             }

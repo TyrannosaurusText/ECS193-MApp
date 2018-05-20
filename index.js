@@ -99,7 +99,18 @@ const Tabs = TabNavigator ({
             )
         })
     },
-    //Alerts: {screen: AlertsComponent},
+    Alarm: {screen: AlarmComponent,
+        navigationOptions : ({ navigation }) => ({
+            headerTitle: 'Alarms',
+            headerRight: (
+                <Icon 
+                    name="add-alarm"
+                    size={30} 
+                    onPress={() => navigation.navigate('AddAlarm')}
+                    />
+            )
+        })
+    },
     //Messages: {screen: MessagesStack}
 },
 {
@@ -164,31 +175,19 @@ const App = StackNavigator ({
         //     title: 'Dashboard',
 
             headerTitle: 'Notifications',
-            headerRight: (
-                <Icon 
-                    name="access-alarm"
-                    size={30} 
-                    onPress={() => navigation.navigate('Alarm')}
-                    />
-            )
+            // headerRight: (
+            //     <Icon 
+            //         name="access-alarm"
+            //         size={30} 
+            //         onPress={() => navigation.navigate('Alarm')}
+            //         />
+            // )
         })
     },
     Feedback: {screen: FeedbackComponent,
         navigationOptions : {
             headerTitle: 'Feedback'
         }
-    },
-    Alarm: {screen: AlarmComponent,
-        navigationOptions : ({ navigation }) => ({
-            headerTitle: 'Alarms',
-            headerRight: (
-                <Icon 
-                    name="add-alarm"
-                    size={30} 
-                    onPress={() => navigation.navigate('AddAlarm')}
-                    />
-            )
-        })
     },
     AddAlarm: {screen: AddAlarmComponent,
         navigationOptions : ({ navigation }) => ({

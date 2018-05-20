@@ -89,26 +89,45 @@ class AddAlarmComponent extends Component {
 		var newAlarmList = this.props.globalState.alarmList;
 		var formValues = this.formGenerator.getValues();
 
-		newAlarmList.push({"threshold": formValues.amount.toString(), "on": "true"});
+		if(newAlarmList.length == 10) {
+			alert("There can be a maximum of 10 alarms set at once");
+			return;
+		}
 
-		this.props.setGlobalState({alarmList: newAlarmList});
+		for(var i in newAlarmList) {
+			console.log(newAlarmList[i].threshold);
+			console.log(formValues.amount);
+			if(parseFloat(newAlarmList[i].threshold) == formValues.amount) {
+				alert("There is already an alarm set for this threshold value");
+				return;
+			}
+		}
 
-		var alarmRecord = newAlarmList.length.toString();
-        for(var i = 0; i < newAlarmList.length; i++) {
-            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
-        }
+		if(parseFloat(formValues.amount) <= this.props.globalState.currentVolume) {
+			alert("Please set a threshold volume higher than current volume");
+		}
+		else {
+			newAlarmList.push({"threshold": formValues.amount.toString(), "on": "true"});
+		
+			this.props.setGlobalState({alarmList: newAlarmList});
 
-        console.log("alarmRecord: " + alarmRecord);
+			var alarmRecord = newAlarmList.length.toString();
+	        for(var i = 0; i < newAlarmList.length; i++) {
+	            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+	        }
 
-        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
-                //this callback is executed when your Promise is resolved
-                alert("Success writing");
-                }).catch((error) => {
-                //this callback is executed when your Promise is rejected
-                console.log('Promise is rejected with error: ' + error);
-        });
+	        console.log("alarmRecord: " + alarmRecord);
 
-		this.props.navigation.pop();
+	        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+	                //this callback is executed when your Promise is resolved
+	                alert("Success writing");
+	                }).catch((error) => {
+	                //this callback is executed when your Promise is rejected
+	                console.log('Promise is rejected with error: ' + error);
+	        });
+
+			this.props.navigation.pop();
+		}
 
 
 		// this.setState({result: "Submitting..."});

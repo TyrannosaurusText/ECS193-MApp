@@ -11,6 +11,7 @@ import {
     // NativeModules,
     // Platform,
     // PermissionsAndroid,
+    Alert,
     Button,
     Spacer,
     ListView,
@@ -49,8 +50,61 @@ class AlarmComponent extends Component
             isVisible: false,
         };
 
-        // this.fetchReading = this.fetchReading.bind(this);
+        this.editAlarmList = this.editAlarmList.bind(this);
         // this.convertUTCDateToLocalDate = this.convertUTCDateToLocalDate.bind(this);
+    }
+
+    editAlarmList(item) {
+        console.log(typeof(item.on));
+        Alert.alert(
+            'Edit Alarm',
+            // 'Threshold value: ' + item.threshold + ' State: ' + item.on == "true" ? 'on' : 'off',
+            item.on == "true" ? "on" : "off",
+            [
+                {text: 'Delete', onPress: () => this.removeAlarm(item)},
+                {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                {text: 'Toggle', onPress: () => this.toggleAlarm(item)},
+            ],
+            // { cancelable: false }
+        )
+    }
+
+
+    removeAlarm(item) {
+        const list = this.props.globalState.alarmList;
+        newList = [];
+        for(var i in list) {
+            if(item.threshold != list[i].threshold) {
+                newList.push(list[i]);
+            }
+            else {
+                console.log(item);
+            }
+        }
+
+        console.log(newList);
+
+        this.props.setGlobalState({alarmList: newList});
+    }
+
+    toggleAlarm(item) {
+        const list = this.props.globalState.alarmList;
+        newList = [];
+        for(var i in list) {
+            if(item.threshold == list[i].threshold) {
+                if(this.props.globalState.currentVolume < item.threshold) {
+                    item.on = item.on != "true" ? "true" : "false";
+                }
+                else {
+                    alert("The current volume is higher than this alarm threshold volume");
+                }
+            }
+            newList.push(item);
+        }
+
+        console.log(newList);
+
+        this.props.setGlobalState({alarmList: newList});
     }
 
     // convertUTCDateToLocalDate(date) {
@@ -131,17 +185,18 @@ class AlarmComponent extends Component
                     renderRow = {(item) => {
                     // const color = item.connected ? 'green' : '#fff';
                         return (
-                            // <TouchableHighlight onPress={() => this.test(item) }>
-                            <View style= {[ styles.row, { backgroundColor: 'white'} ]}>
-                                <Text 
-                                    style = {{
-                                        fontSize: 14, 
-                                        textAlign: 'center', 
-                                        color: '#333333', 
-                                        padding: 10,
-                                    }}
-                                >Alarm at threshold value: {item.threshold}</Text>
-                            </View>
+                            <TouchableHighlight onPress={() => this.editAlarmList(item) }>
+                                <View style= {[ styles.row, { backgroundColor: 'white'} ]}>
+                                    <Text 
+                                        style = {{
+                                            fontSize: 14, 
+                                            textAlign: 'center', 
+                                            color: '#333333', 
+                                            padding: 10,
+                                        }}
+                                    >Alarm at threshold value: {item.threshold}</Text>
+                                </View>
+                            </TouchableHighlight>
                         );
                     }}
                 />
