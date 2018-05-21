@@ -196,7 +196,12 @@ class AlarmComponent extends Component
                                             padding: 10,
                                         }}
                                     >Alarm at threshold value: {item.threshold}</Text>
-                                    <Switch style={{position: 'absolute', right: 0}}>
+                                    <Switch 
+                                        style={{
+                                            position: 'absolute', 
+                                            right: 0,
+                                            justifyContent: 'center',
+                                        }}>
                                     </Switch>
                                 </View>
                             </TouchableHighlight>

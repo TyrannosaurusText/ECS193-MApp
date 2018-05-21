@@ -286,7 +286,7 @@ class BLEManager extends Component
 
                             var newStore = new Array(64);
                             for (var j = 0; j < 64; j++) newStore[j] = 0;
-                            this.setState({curReadings: newStore});
+                                this.setState({curReadings: newStore});
                         }
                     }
                 })

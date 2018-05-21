@@ -22,7 +22,7 @@ import { SafeAreaView } from 'react-navigation';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { LineChart, Grid } from 'react-native-svg-charts'
+import { LineChart, Grid, YAxis } from 'react-native-svg-charts'
 import FeedbackComponent from './FeedbackComponent';
 import { withNavigation } from 'react-navigation';
 
@@ -110,84 +110,59 @@ class HistoryComponent extends Component
     render () 
     {
         const list = this.state.historyList;
-        // const list = Array.from(this.state.peripherals.values());
-        // const list = [
-        //     {"time": 0, "reading": 1},
-        //     {"time": 1, "reading": 10},
-        //     {"time": 2, "reading": 8},
-        //     {"time": 3, "reading": 12},
-        //     {"time": 4, "reading": 14},
-        //     {"time": 5, "reading": 1},
-        //     {"time": 6, "reading": 10},
-        //     {"time": 7, "reading": 8},
-        //     {"time": 8, "reading": 12},
-        //     {"time": 9, "reading": 14},
-        //     {"time": 10, "reading": 1},
-        //     {"time": 11, "reading": 10},
-        //     {"time": 12, "reading": 8},
-        //     {"time": 13, "reading": 12},
-        //     {"time": 14, "reading": 14}
-        // ];
         const dataSource = ds.cloneWithRows(list);
-        
-    //     return (
-    //         <SafeAreaView>
-    //             <Text>Hi</Text>
-    //         </SafeAreaView>
-    //     );
-    // }
-    //     const list = Array.from(this.state.peripherals.values());
-    //     const dataSource = ds.cloneWithRows(list);
-        const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
+        const data = this.state.historyList;
         const {navigate} = this.props.navigation;
+
         return (
-            <SafeAreaView style = {styles.container}>
-            <LineChart
-                style={ { height: 200 } }
-                data={ data }
-                contentInset={ { top: 20, bottom: 20 } }
-                svg={{
-                    strokeWidth: 2,
-                    stroke: 'url(#gradient)',
-                }}
-            >
-                <Grid/>
-            </LineChart>
-            <View 
-                style={{
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }} >
-                <View style={{
-                    flex: 1,
-                    marginLeft: window.width*0.1,
-                    marginRight: window.width*0.1,
-                }}>
-                <Button
-                    title = 'Refresh'
-                    onPress = {this.fetchReading}
-                />
-                </View>
-                <View style={{
-                    flex: 1,
-                    marginRight: window.width*0.1,
-                    marginLeft: window.width*0.1
-                }}>
-                <Button 
-                    title = 'Submit Event'
-                    onPress = {() => {
-                            if(this.props.globalState.email != '') {
-                                navigate('Feedback');
-                            }
-                            else {
-                                alert("Please sign in first");
+            <View style = {styles.container}>
+                <LineChart
+                    style={ { height: 200 } }
+                    data={ data }
+                    yAccessor={ ({ item }) => item.reading }
+                    contentInset={ { top: 20, bottom: 20 } }
+                    svg={{
+                        strokeWidth: 2,
+                        stroke: 'rgb(134, 65, 244)',
+                    }}
+                >
+                    <Grid/>
+                </LineChart>
+                <View 
+                    style={{
+                        flexDirection: 'row',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }} >
+                    <View style={{
+                        flex: 1,
+                        marginLeft: window.width*0.1,
+                        marginRight: window.width*0.1,
+                    }}>
+                    <Button
+                        title = 'Refresh'
+                        onPress = {this.fetchReading}
+                    />
+                    </View>
+                    <View style={{
+                        flex: 1,
+                        marginRight: window.width*0.1,
+                        marginLeft: window.width*0.1
+                    }}>
+                    <Button 
+                        title = 'Submit Event'
+                        onPress = {() => {
+                                if(this.props.globalState.email != '') {
+                                    navigate('Feedback');
+                                }
+                                else {
+                                    alert("Please sign in first");
+                                }
                             }
                         }
-                    }
-                />
+                    />
+                    </View>
                 </View>
-            </View>
 
             <ScrollView style = {styles.scroll}>
             {
@@ -225,7 +200,7 @@ class HistoryComponent extends Component
                     }}
                 />
             </ScrollView>
-        </SafeAreaView>
+        </View>
         );
     }
 }
