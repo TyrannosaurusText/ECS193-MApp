@@ -42,7 +42,6 @@ class BLEManager extends Component
             appState: '',
             reading: false,
             curReadings: newStore,
-            readingsDone: 0,
             charsRead: 0,
             myPatch: null,
             autoRead: false
@@ -53,6 +52,17 @@ class BLEManager extends Component
         this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
         this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
+        this.resetReadings = this.resetReadings.bind(this);
+    }
+
+    resetReadings () {
+        console.log('resetReadings() before, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        this.state.reading = false;
+        this.state.charsRead = 0;
+        var newStore = new Array(64);
+        for (var j = 0; j < 64; j++) newStore[j] = 0;
+        this.setState({curReadings: newStore});
+        console.log('resetReadings() after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
     }
 
     componentDidMount () 
@@ -121,6 +131,7 @@ class BLEManager extends Component
             this.setState({peripherals});
         }
         console.log('Disconnected from ' + data.peripheral);
+        this.resetReadings();
     }
 
     handleUpdateValueForCharacteristic (data) 
@@ -135,7 +146,6 @@ class BLEManager extends Component
         console.log('Value: ' + data.value);
         //console.log('peripheral: ' + data.peripheral);
 
-        this.setState({readingsDone: 0});
 
         var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
         console.log('Service: ' + service);
@@ -261,6 +271,7 @@ class BLEManager extends Component
                 .catch((error) => {
                     console.log('READ ERROR');
                     console.log(error);
+                    this.resetReadings();
                     // cnt--;
                     // index--;
                     // this.state.charsRead = this.state.charsRead - 1;
@@ -322,9 +333,16 @@ class BLEManager extends Component
     {
         if (peripheral)
         {
-            if (peripheral.connected)
+            if (peripheral.connected) {
                 BleManager.disconnect(peripheral.id);
-            else
+                this.resetReadings();
+                // BleManager.disconnect(peripheral.id).then(() => {
+                //     console.log('Disconnected successfully from: ' + peripheral.id  + ', ' + peripheral.name);
+                //     this.state.reading = false;
+                // }, (err) => {
+                //     console.log('Disconnected failure from: ' + peripheral.id  + ', ' + peripheral.name + ', error: ' + err);
+                // })
+            } else
             {
                 BleManager.stopScan().then(() => {
                     console.log('Stop scanning successful');
@@ -416,10 +434,12 @@ class BLEManager extends Component
                     onPress = {() => {
                         if (this.state.autoRead == false) {
                             this.state.autoRead = true;
+                            console.log('autoRead: ' + this.state.autoRead);
                             autoColor = 'green';
                         } else {
                             this.state.autoRead = false;
                             autoColor = '#ccc';
+                            console.log('autoRead: ' + this.state.autoRead);
                         }
                     }} 
                     style = {{
