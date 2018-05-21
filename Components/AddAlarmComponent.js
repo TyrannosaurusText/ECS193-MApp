@@ -66,10 +66,11 @@ class AddAlarmComponent extends Component {
 		var formValues = this.formGenerator.getValues();
 		// console.log(formValues.event);
 		console.log(fields[0]);
+		console.log(parseFloat(formValues.amount));
 		// if(formValues.event == 'Void') {
 		//     fields[0].hidden = false;
 		//     console.log(formValues.amount);
-			if(formValues.amount != '') {
+			if(formValues.amount != '' && parseFloat(formValues.amount) > 0) {
 				this.setState({invalid: false});
 			}
 			else {

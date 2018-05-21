@@ -201,9 +201,6 @@ class DashboardComponent extends Component
                     onPress = {signFunc}
                 />
                 <Button 
-                    title='Press here for a notification'
-                    onPress={this.sendNotification}/>
-                <Button 
                     title='Update circle'
                     onPress={() => {
                         // this.setState({percentage: this.state.percentage + 10});
@@ -342,7 +339,7 @@ class DashboardComponent extends Component
 
         this.storeItem("alarmRecord", alarmRecord).then((stored) => {
                 //this callback is executed when your Promise is resolved
-                alert("Success writing");
+                // alert("Success writing");
                 }).catch((error) => {
                 //this callback is executed when your Promise is rejected
                 console.log('Promise is rejected with error: ' + error);

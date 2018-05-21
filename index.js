@@ -12,6 +12,8 @@ import AlertsComponent from './Components/AlertsComponent';
 import FeedbackComponent from './Components/FeedbackComponent';
 import AlarmComponent from './Components/AlarmComponent';
 import AddAlarmComponent from './Components/AddAlarmComponent';
+import ProfileComponent from './Components/ProfileComponent';
+import RequestDoctorChangeComponent from './Components/RequestDoctorChangeComponent';
 
 
 
@@ -55,7 +57,7 @@ const Tabs = TabNavigator ({
         //     title: 'Dashboard',
 
             headerTitle: 'Dashboard',
-            headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
+            // headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
         })
         // navigationOptions: {
             // title: 'Testing',
@@ -74,13 +76,13 @@ const Tabs = TabNavigator ({
         //     title: 'Dashboard',
 
             headerTitle: 'Bluetooth',
-            headerRight: (
-                <Icon 
-                    name="notifications"
-                    size={30} 
-                    onPress={() => navigation.navigate('Alerts')}
-                    />
-            )
+            // headerRight: (
+            //     <Icon 
+            //         name="notifications"
+            //         size={30} 
+            //         onPress={() => navigation.navigate('Alerts')}
+            //         />
+            // )
         })
     },
     History: {
@@ -90,13 +92,13 @@ const Tabs = TabNavigator ({
         //     title: 'Dashboard',
 
             headerTitle: 'History',
-            headerRight: (
-                <Icon 
-                    name="notifications"
-                    size={30} 
-                    onPress={() => navigation.navigate('Alerts')}
-                    />
-            )
+            // headerRight: (
+            //     <Icon 
+            //         name="notifications"
+            //         size={30} 
+            //         onPress={() => navigation.navigate('Alerts')}
+            //         />
+            // )
         })
     },
     Alarm: {screen: AlarmComponent,
@@ -111,6 +113,12 @@ const Tabs = TabNavigator ({
             )
         })
     },
+    Profile: {
+        screen: ProfileComponent,
+        navigationOptions: ({navigation}) => ({
+            headerTitle: 'Profile',
+        })
+    }
     //Messages: {screen: MessagesStack}
 },
 {
@@ -194,6 +202,12 @@ const App = StackNavigator ({
             headerTitle: 'Add new alarm',
         })
     },
+    RequestDoctorChange: {
+        screen: RequestDoctorChangeComponent,
+        navigationOptions : ({ navigation }) => ({
+            headerTitle: 'Request Doctor Change',
+        })
+    }
 }
 );
 
@@ -222,6 +236,8 @@ AppRegistry.registerComponent('Alerts', () => AlertsComponent);
 AppRegistry.registerComponent('Alarm', () => AlarmComponent);
 AppRegistry.registerComponent('AddAlarm', () => AddAlarmComponent);
 AppRegistry.registerComponent('Feedback', () => FeedbackComponent);
+AppRegistry.registerComponent('Profile', () => ProfileComponent);
+AppRegistry.registerComponent('RequestDoctorChange', () => RequestDoctorChangeComponent);
 //AppRegistry.registerComponent('Messages', () => MessagesComponent);
 //AppRegistry.registerComponent('Read', () => ReadComponent);
 //AppRegistry.registerComponent('Compose', () => ComposeComponent);

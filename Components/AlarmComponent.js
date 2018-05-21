@@ -12,6 +12,7 @@ import {
     // Platform,
     // PermissionsAndroid,
     Alert,
+    Switch,
     Button,
     Spacer,
     ListView,
@@ -186,7 +187,7 @@ class AlarmComponent extends Component
                     // const color = item.connected ? 'green' : '#fff';
                         return (
                             <TouchableHighlight onPress={() => this.editAlarmList(item) }>
-                                <View style= {[ styles.row, { backgroundColor: 'white'} ]}>
+                                <View style= {[ styles.row, { flexDirection: 'row', backgroundColor: 'white'} ]}>
                                     <Text 
                                         style = {{
                                             fontSize: 14, 
@@ -195,6 +196,8 @@ class AlarmComponent extends Component
                                             padding: 10,
                                         }}
                                     >Alarm at threshold value: {item.threshold}</Text>
+                                    <Switch style={{position: 'absolute', right: 0}}>
+                                    </Switch>
                                 </View>
                             </TouchableHighlight>
                         );

@@ -80,7 +80,7 @@ class FeedbackComponent extends Component {
             this.setState({invalid: false});
 
         }
-        this.setState({ state: this.state });
+        // this.setState({ state: this.state });
         this.setState({result: ""});
     }
 
