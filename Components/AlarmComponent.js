@@ -49,6 +49,7 @@ class AlarmComponent extends Component
         this.state = {
             // alarmList: [],
             isVisible: false,
+            toggle: false
         };
 
         this.editAlarmList = this.editAlarmList.bind(this);
@@ -184,6 +185,8 @@ class AlarmComponent extends Component
                     enableEmptySections = {true}
                     dataSource = {dataSource}
                     renderRow = {(item) => {
+                        var alarmValue = item.on == "true" ? true : false;
+                        console.log(alarmValue);
                     // const color = item.connected ? 'green' : '#fff';
                         return (
                             <TouchableHighlight onPress={() => this.editAlarmList(item) }>
@@ -196,13 +199,15 @@ class AlarmComponent extends Component
                                             padding: 10,
                                         }}
                                     >Alarm at threshold value: {item.threshold}</Text>
-                                    <Switch 
+                                    <Switch
+                                        value={alarmValue}
+                                        onValueChange={() => {console.log("Toggle pressed"); this.toggleAlarm(item)}} 
                                         style={{
                                             position: 'absolute', 
                                             right: 0,
                                             justifyContent: 'center',
-                                        }}>
-                                    </Switch>
+                                        }}
+                                    />
                                 </View>
                             </TouchableHighlight>
                         );
