@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
+import PushNotification from 'react-native-push-notification';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTimer from 'react-native-background-timer';
@@ -42,7 +43,6 @@ class BLEManager extends Component
             appState: '',
             reading: false,
             curReadings: newStore,
-            readingsDone: 0,
             charsRead: 0,
             myPatch: null,
             autoRead: false
@@ -53,6 +53,27 @@ class BLEManager extends Component
         this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
         this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
+        this.resetReadings = this.resetReadings.bind(this);
+        this.checkAlarm = this.checkAlarm.bind(this);
+    }
+
+    resetReadings () {
+        console.log('resetReadings() before, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        this.state.reading = false;
+        this.state.charsRead = 0;
+        var newStore = new Array(64);
+        for (var j = 0; j < 64; j++) newStore[j] = 0;
+        this.setState({curReadings: newStore});
+        console.log('resetReadings() after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+    }
+
+    processData (floats_64) {
+        dataValue = 0;
+        for (var i = 0; i < 64; i++) dataValue += floats_64[i];
+        dataValue = dataValue / 64;
+
+        console.log('processData(): ' + dataValue);
+        return dataValue;
     }
 
     componentDidMount () 
@@ -60,6 +81,13 @@ class BLEManager extends Component
         AppState.addEventListener('change', this.handleAppStateChange);
 
         BleManager.start({showAlert: false});
+
+        PushNotification.configure({
+            onNotification: function(notification) {
+                console.log('NOTIFICATION: ', notification);
+            },
+            popInitialNotification: true,
+        });
 
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
@@ -121,6 +149,7 @@ class BLEManager extends Component
             this.setState({peripherals});
         }
         console.log('Disconnected from ' + data.peripheral);
+        this.resetReadings();
     }
 
     handleUpdateValueForCharacteristic (data) 
@@ -135,7 +164,6 @@ class BLEManager extends Component
         console.log('Value: ' + data.value);
         //console.log('peripheral: ' + data.peripheral);
 
-        this.setState({readingsDone: 0});
 
         var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
         console.log('Service: ' + service);
@@ -233,7 +261,7 @@ class BLEManager extends Component
                                 id: this.props.globalState.id,
                                 readings: pendingReadings
                             };
-
+                            
 
                             console.log('SEND HERE');
                             console.log(postObj);
@@ -252,6 +280,10 @@ class BLEManager extends Component
                                 this.props.setGlobalState({pendingReadings});
                             });
 
+                            var newCurrentVolume = this.processData(avg);
+                            this.props.setGlobalState({currentVolume: newCurrentVolume});
+                            this.checkAlarm(newCurrentVolume);
+
                             var newStore = new Array(64);
                             for (var j = 0; j < 64; j++) newStore[j] = 0;
                             this.setState({curReadings: newStore});
@@ -261,6 +293,7 @@ class BLEManager extends Component
                 .catch((error) => {
                     console.log('READ ERROR');
                     console.log(error);
+                    this.resetReadings();
                     // cnt--;
                     // index--;
                     // this.state.charsRead = this.state.charsRead - 1;
@@ -322,9 +355,16 @@ class BLEManager extends Component
     {
         if (peripheral)
         {
-            if (peripheral.connected)
+            if (peripheral.connected) {
                 BleManager.disconnect(peripheral.id);
-            else
+                this.resetReadings();
+                // BleManager.disconnect(peripheral.id).then(() => {
+                //     console.log('Disconnected successfully from: ' + peripheral.id  + ', ' + peripheral.name);
+                //     this.state.reading = false;
+                // }, (err) => {
+                //     console.log('Disconnected failure from: ' + peripheral.id  + ', ' + peripheral.name + ', error: ' + err);
+                // })
+            } else
             {
                 BleManager.stopScan().then(() => {
                     console.log('Stop scanning successful');
@@ -416,10 +456,12 @@ class BLEManager extends Component
                     onPress = {() => {
                         if (this.state.autoRead == false) {
                             this.state.autoRead = true;
+                            console.log('autoRead: ' + this.state.autoRead);
                             autoColor = 'green';
                         } else {
                             this.state.autoRead = false;
                             autoColor = '#ccc';
+                            console.log('autoRead: ' + this.state.autoRead);
                         }
                     }} 
                     style = {{
@@ -471,7 +513,45 @@ class BLEManager extends Component
             </SafeAreaView>
         );
     }
+
+    checkAlarm(volume) {
+        var newAlarmList = this.props.globalState.alarmList;
+        console.log("Check alarm: " + volume);
+        for(var i = 0; i < newAlarmList.length; i++) {
+            console.log('storedAlarm: ' + typeof(parseFloat(newAlarmList[i].threshold)) + ' <= nextVolume: ' + typeof(volume) + 'on? ' + newAlarmList[i].on);
+            if(parseFloat(newAlarmList[i].threshold) <= volume && newAlarmList[i].on == "true") {
+                // sendNotification();
+                newAlarmList[i].on = "false";
+                console.log('Trying to send notification');
+                PushNotification.localNotification({
+                    message: 'Threshold volume reached, current volume is ' + volume,
+                    // ongoing: true,
+                    // autoCancel: false,
+                    vibration: 30000
+                });
+                console.log('Tried to send notification');
+            }
+        }
+    
+        this.props.setGlobalState({alarmList: newAlarmList});
+    
+        var alarmRecord = newAlarmList.length.toString();
+        for(var i = 0; i < newAlarmList.length; i++) {
+            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+        }
+    
+        console.log("alarmRecord: " + alarmRecord);
+    
+        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+                //this callback is executed when your Promise is resolved
+                alert("Success writing");
+                }).catch((error) => {
+                //this callback is executed when your Promise is rejected
+                console.log('Promise is rejected with error: ' + error);
+        });
+    }
 }
+
 
 const styles = StyleSheet.create({
     container: {
