@@ -11,9 +11,10 @@ import {
     // Platform,
     // PermissionsAndroid,
     Button,
+    Spacer,
     ListView,
     ScrollView,
-    // AppState,
+    AppState,
     Dimensions,
 } from 'react-native';
 // import BleManager from 'react-native-ble-manager';
@@ -22,6 +23,8 @@ import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LineChart, Grid } from 'react-native-svg-charts'
+import FeedbackComponent from './FeedbackComponent';
+import { withNavigation } from 'react-navigation';
 
 // import BackgroundTask from 'react-native-background-task';
 
@@ -38,37 +41,30 @@ class HistoryComponent extends Component
     constructor() 
     {
         super();
+
+        this.state = {
+            historyList: []
+        }
+
         this.fetchReading = this.fetchReading.bind(this);
+        this.convertUTCDateToLocalDate = this.convertUTCDateToLocalDate.bind(this);
+    }
+
+    convertUTCDateToLocalDate(date) {
+        var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+
+        var offset = date.getTimezoneOffset() / 60;
+        var hours = date.getHours();
+
+        newDate.setHours(hours - offset);
+
+        return newDate;   
     }
 
     fetchReading() {
-        var da = new Date();
-        var y = da.getUTCFullYear();
-        var m = (da.getUTCMonth() + 1);
-        m = (m < 10 ? '0' : '') + m;
-        var d = da.getUTCDate();
-        d = (d < 10 ? '0' : '') + d;
-        var h = da.getUTCHours();
-        h = (h < 10 ? '0' : '') + h;
-        var mi = da.getUTCMinutes();
-        mi = (mi < 10 ? '0' : '') + mi;
-        var s = da.getUTCSeconds();
-        s = (s < 10 ? '0' : '') + s;
-        var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
-        console.log(utc);
-        var avg = new Array(64);
-        for (var j = 0; j < 64; j++) avg[j] = 0;
-        var newReading = {
-            timestamp: utc,
-            channels: avg
-        };
-
-        // var newStore = new Array(64);
-        // for (var j = 0; j < 64; j++) newStore[j] = {"timestamp": 0, "channels": j};
         var postObj = {
             authCode: this.props.globalState.authCode,
             id: this.props.globalState.id,
-            // readings: [newReading]
         };
         console.log(postObj);
         //if able to pos
@@ -84,19 +80,28 @@ class HistoryComponent extends Component
         .then((json) => {
             console.log('Send done');
             console.log(json);
-            // var jsonArr = json.split(",");
 
-            // var numEntries = jsonArr.length / 65;
-            // console.log("There should be " + numEntries + " entries");
-            // for(var )
-            //     console.log("Timestampe should be: " + jsonArr[0]);
+            var csvArr = json.csv.split(/,|\n/);
+            csvArr.pop();
+            var numEntries = csvArr.length/65;
 
-            // csvParse(json,csv, function(err, output)){
-                // console.log(output);
-            // }
-            // pendingReadings = [];
-            // this.props.setGlobalState({pendingReadings});
+            var newList = [];
+            for(var i = 0, j = 0; i < numEntries; i++) {
+                var time = csvArr[i * 65];
+                var newTime = this.convertUTCDateToLocalDate(new Date(time));
+                console.log("Time is: " + newTime);
+                var sum = 0;
+                for(j = 1; j < 65; j++) {
+                    sum += parseInt(csvArr[i * 65 + j]);
+                }
+                var avg = sum / 64;
+                newList.push({"time": newTime.toString(), "reading": avg});
+                console.log("Reading is: " + avg);
+            }
 
+            console.log(newList);
+
+            this.setState({historyList: newList});
         }).catch((error) => {
             console.log("ERROR in send " + error);
         });
@@ -104,25 +109,25 @@ class HistoryComponent extends Component
 
     render () 
     {
-
+        const list = this.state.historyList;
         // const list = Array.from(this.state.peripherals.values());
-        const list = [
-            {"time": 0, "reading": 1},
-            {"time": 1, "reading": 10},
-            {"time": 2, "reading": 8},
-            {"time": 3, "reading": 12},
-            {"time": 4, "reading": 14},
-            {"time": 5, "reading": 1},
-            {"time": 6, "reading": 10},
-            {"time": 7, "reading": 8},
-            {"time": 8, "reading": 12},
-            {"time": 9, "reading": 14},
-            {"time": 10, "reading": 1},
-            {"time": 11, "reading": 10},
-            {"time": 12, "reading": 8},
-            {"time": 13, "reading": 12},
-            {"time": 14, "reading": 14}
-        ];
+        // const list = [
+        //     {"time": 0, "reading": 1},
+        //     {"time": 1, "reading": 10},
+        //     {"time": 2, "reading": 8},
+        //     {"time": 3, "reading": 12},
+        //     {"time": 4, "reading": 14},
+        //     {"time": 5, "reading": 1},
+        //     {"time": 6, "reading": 10},
+        //     {"time": 7, "reading": 8},
+        //     {"time": 8, "reading": 12},
+        //     {"time": 9, "reading": 14},
+        //     {"time": 10, "reading": 1},
+        //     {"time": 11, "reading": 10},
+        //     {"time": 12, "reading": 8},
+        //     {"time": 13, "reading": 12},
+        //     {"time": 14, "reading": 14}
+        // ];
         const dataSource = ds.cloneWithRows(list);
         
     //     return (
@@ -134,7 +139,7 @@ class HistoryComponent extends Component
     //     const list = Array.from(this.state.peripherals.values());
     //     const dataSource = ds.cloneWithRows(list);
         const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
-
+        const {navigate} = this.props.navigation;
         return (
             <SafeAreaView style = {styles.container}>
             <LineChart
@@ -148,20 +153,49 @@ class HistoryComponent extends Component
             >
                 <Grid/>
             </LineChart>
-            <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
-            <Button
-                title = 'Refresh'
-                onPress = {this.fetchReading}
-            />
+            <View 
+                style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }} >
+                <View style={{
+                    flex: 1,
+                    marginLeft: window.width*0.1,
+                    marginRight: window.width*0.1,
+                }}>
+                <Button
+                    title = 'Refresh'
+                    onPress = {this.fetchReading}
+                />
+                </View>
+                <View style={{
+                    flex: 1,
+                    marginRight: window.width*0.1,
+                    marginLeft: window.width*0.1
+                }}>
+                <Button 
+                    title = 'Submit Event'
+                    onPress = {() => {
+                            if(this.props.globalState.email != '') {
+                                navigate('Feedback');
+                            }
+                            else {
+                                alert("Please sign in first");
+                            }
+                        }
+                    }
+                />
+                </View>
             </View>
 
             <ScrollView style = {styles.scroll}>
-                    {
-                        (list.length == 0) &&
-                        <View style = {{ flex:1, margin: 20 }}>
-                            <Text style = {{ textAlign: 'center' }}>No history available</Text>
-                        </View>
-                    }
+            {
+                (list.length == 0) &&
+                <View style = {{ flex:1, margin: 20 }}>
+                    <Text style = {{ textAlign: 'center' }}>No history available</Text>
+                </View>
+            }
                 <ListView
                     enableEmptySections = {true}
                     dataSource = {dataSource}
@@ -202,7 +236,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#FFF',
         width: window.width,
-        height: window.height
+        height: window.height,
     },
     scroll: {
         flex: 1,
