@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
+import PushNotification from 'react-native-push-notification';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTimer from 'react-native-background-timer';
@@ -53,6 +54,7 @@ class BLEManager extends Component
         this.handleDisconnectedPeripheral = this.handleDisconnectedPeripheral.bind(this);
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
         this.resetReadings = this.resetReadings.bind(this);
+        this.checkAlarm = this.checkAlarm.bind(this);
     }
 
     resetReadings () {
@@ -65,11 +67,27 @@ class BLEManager extends Component
         console.log('resetReadings() after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
     }
 
+    processData (floats_64) {
+        dataValue = 0;
+        for (var i = 0; i < 64; i++) dataValue += floats_64[i];
+        dataValue = dataValue / 64;
+
+        console.log('processData(): ' + dataValue);
+        return dataValue;
+    }
+
     componentDidMount () 
     {
         AppState.addEventListener('change', this.handleAppStateChange);
 
         BleManager.start({showAlert: false});
+
+        PushNotification.configure({
+            onNotification: function(notification) {
+                console.log('NOTIFICATION: ', notification);
+            },
+            popInitialNotification: true,
+        });
 
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
@@ -243,7 +261,7 @@ class BLEManager extends Component
                                 id: this.props.globalState.id,
                                 readings: pendingReadings
                             };
-
+                            
 
                             console.log('SEND HERE');
                             console.log(postObj);
@@ -261,6 +279,10 @@ class BLEManager extends Component
                                 pendingReadings = [];
                                 this.props.setGlobalState({pendingReadings});
                             });
+
+                            var newCurrentVolume = this.processData(avg);
+                            this.props.setGlobalState({currentVolume: newCurrentVolume});
+                            this.checkAlarm(newCurrentVolume);
 
                             var newStore = new Array(64);
                             for (var j = 0; j < 64; j++) newStore[j] = 0;
@@ -491,7 +513,45 @@ class BLEManager extends Component
             </SafeAreaView>
         );
     }
+
+    checkAlarm(volume) {
+        var newAlarmList = this.props.globalState.alarmList;
+        console.log("Check alarm: " + volume);
+        for(var i = 0; i < newAlarmList.length; i++) {
+            console.log('storedAlarm: ' + typeof(parseFloat(newAlarmList[i].threshold)) + ' <= nextVolume: ' + typeof(volume) + 'on? ' + newAlarmList[i].on);
+            if(parseFloat(newAlarmList[i].threshold) <= volume && newAlarmList[i].on == "true") {
+                // sendNotification();
+                newAlarmList[i].on = "false";
+                console.log('Trying to send notification');
+                PushNotification.localNotification({
+                    message: 'Threshold volume reached, current volume is ' + volume,
+                    // ongoing: true,
+                    // autoCancel: false,
+                    vibration: 30000
+                });
+                console.log('Tried to send notification');
+            }
+        }
+    
+        this.props.setGlobalState({alarmList: newAlarmList});
+    
+        var alarmRecord = newAlarmList.length.toString();
+        for(var i = 0; i < newAlarmList.length; i++) {
+            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+        }
+    
+        console.log("alarmRecord: " + alarmRecord);
+    
+        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+                //this callback is executed when your Promise is resolved
+                alert("Success writing");
+                }).catch((error) => {
+                //this callback is executed when your Promise is rejected
+                console.log('Promise is rejected with error: ' + error);
+        });
+    }
 }
+
 
 const styles = StyleSheet.create({
     container: {
