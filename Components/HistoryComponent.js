@@ -116,18 +116,41 @@ class HistoryComponent extends Component
 
         return (
             <View style = {styles.container}>
-                <LineChart
-                    style={ { height: 200 } }
-                    data={ data }
-                    yAccessor={ ({ item }) => item.reading }
-                    contentInset={ { top: 20, bottom: 20 } }
-                    svg={{
-                        strokeWidth: 2,
-                        stroke: 'rgb(134, 65, 244)',
-                    }}
-                >
-                    <Grid/>
-                </LineChart>
+                <View style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <View style={{
+                        flex: 1,
+                        width: window.width*0.1
+                    }}>
+                        <YAxis
+                            data={data}
+                            contentInset={{ top: 20, bottom: 20 }}
+                            style={ { height: window.height * 0.4 } }
+                            svg={{ fontSize: 10, fill: 'grey' }}
+                            yAccessor={ ({ item }) => item.reading }
+                        />
+                    </View>
+                    <View style={{
+                        flex: 1,
+                        width: window.width*0.9
+                    }}>
+                        <LineChart
+                            style={ { height: window.height * 0.4 } }
+                            data={ data }
+                            yAccessor={ ({ item }) => item.reading }
+                            contentInset={ { top: 20, bottom: 20 } }
+                            svg={{
+                                strokeWidth: 2,
+                                stroke: 'rgb(134, 65, 244)',
+                            }}
+                        >
+                            <Grid/>
+                        </LineChart>
+                    </View>
+                </View>
                 <View 
                     style={{
                         flexDirection: 'row',

@@ -14,6 +14,7 @@ import {
     ScrollView,
     AppState,
     Dimensions,
+    AsyncStorage
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
@@ -55,6 +56,8 @@ class BLEManager extends Component
         this.handleAppStateChange = this.handleAppStateChange.bind(this);
         this.resetReadings = this.resetReadings.bind(this);
         this.checkAlarm = this.checkAlarm.bind(this);
+        this.retrieveItem = this.retrieveItem.bind(this);
+        this.storeItem = this.storeItem.bind(this);
     }
 
     resetReadings () {
@@ -267,18 +270,30 @@ class BLEManager extends Component
                             console.log(postObj);
 
                             //if able to post
-                            fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-                                method: 'POST',
-                                headers: { 'Content-Type': 'application/json' },
-                                body: JSON.stringify(postObj)
-                            })
-                            .then((result) => result.json())
-                            .then((json) => {
-                                console.log('Send done');
-                                console.log(json);
-                                pendingReadings = [];
-                                this.props.setGlobalState({pendingReadings});
-                            });
+                            if(this.props.globalState.email != '') {
+                                fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify(postObj)
+                                })
+                                .then((result) => result.json())
+                                .then((json) => {
+                                    console.log('Send done');
+                                    console.log(json);
+                                    pendingReadings = [];
+                                    this.props.setGlobalState({pendingReadings});
+                                });
+                            }
+                            // Local storage
+                            // else {
+                            //     var newReadingList = [];
+                            //     this.retrievedItem("offlineReadings").then((offlineReadings) => {
+                            //         // Need to parse offlineReadings
+                            //         // newReadingList = offlineReadings;
+                            //         var offlineEntry;
+                            //         newReadingList.push({offlineEntry});
+                            //     });
+                            // }
 
                             var newCurrentVolume = this.processData(avg);
                             this.props.setGlobalState({currentVolume: newCurrentVolume});
@@ -512,6 +527,30 @@ class BLEManager extends Component
                 </ScrollView>
             </SafeAreaView>
         );
+    }
+
+    async storeItem(key, item) {
+        try {
+            //we want to wait for the Promise returned by AsyncStorage.setItem()
+            //to be resolved to the actual value before returning the value
+            // var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+            var jsonOfItem = await AsyncStorage.setItem(key, item);
+            return jsonOfItem;
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
+
+    //the functionality of the retrieveItem is shown below
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          // const item = JSON.parse(retrievedItem);
+          const item = retrievedItem;
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
     }
 
     checkAlarm(volume) {

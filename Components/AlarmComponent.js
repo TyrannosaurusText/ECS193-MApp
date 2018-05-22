@@ -61,11 +61,10 @@ class AlarmComponent extends Component
         Alert.alert(
             'Edit Alarm',
             // 'Threshold value: ' + item.threshold + ' State: ' + item.on == "true" ? 'on' : 'off',
-            item.on == "true" ? "on" : "off",
+            '',
             [
                 {text: 'Delete', onPress: () => this.removeAlarm(item)},
                 {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
-                {text: 'Toggle', onPress: () => this.toggleAlarm(item)},
             ],
             // { cancelable: false }
         )
