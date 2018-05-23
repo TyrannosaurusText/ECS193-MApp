@@ -387,11 +387,11 @@ class BLEManager extends Component
                         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
                     }).catch(err)
                     {
-                    };
-                }
+                };
             }
         }
     }
+    
 
     test (peripheral) 
     {
@@ -421,7 +421,7 @@ class BLEManager extends Component
                     {
                         p.connected = true;
                         peripherals.set(peripheral.id, p);
-                        this.setState({peripherals, myPatch = peripheral.id});
+                        this.setState({peripherals, myPatch: peripheral.id});
                     }
                     console.log('Connected to ' + peripheral.id);
 
