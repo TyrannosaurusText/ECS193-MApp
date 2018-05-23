@@ -6,12 +6,12 @@ __tests__/
 
 # Xcode
 #
-ios/
+#ios/
 
 # Android/IntelliJ
 #
 
-android/
+#android/
 
 # node.js
 #
