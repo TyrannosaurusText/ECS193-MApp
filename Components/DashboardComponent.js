@@ -16,8 +16,6 @@ import PushNotification from 'react-native-push-notification';
 
 import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
-import { ProgressCircle }  from 'react-native-svg-charts'
-import PercentageCircle from 'react-native-percentage-circle';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');

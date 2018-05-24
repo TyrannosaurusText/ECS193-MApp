@@ -28,7 +28,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LineChart, Grid } from 'react-native-svg-charts'
 import FeedbackComponent from './FeedbackComponent';
 import { withNavigation } from 'react-navigation';
-import Overlay from 'react-native-elements';
 
 // import BackgroundTask from 'react-native-background-task';
 
