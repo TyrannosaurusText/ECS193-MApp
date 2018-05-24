@@ -7,7 +7,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="3eeebdaa2eb6fa6a914fa757ec9c23e4569825f0">
+        sha1="11f2eeb169305a2cca473351b544a6bc34ff06de">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-background-task-unspecified_a953fbff9bb78ce92c8108a158ef0c1c7becd4c1.jar" />
     </item>
     <item
@@ -88,7 +88,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="fd6b4737e3f28aee2adef0039a536a409fd2445d">
+        sha1="8efe0f04c709cd1062a0217b8b0f74a8c26f8eaf">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-ble-manager-unspecified_aff251a85303a3126d55b1192fb07926b9ccac84.jar" />
     </item>
     <item
@@ -304,7 +304,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="d9df3cab8cddcdd0c94dbdf31f9e176eb0495d17">
+        sha1="36f134e0be729bde56c3776a6c06b6fba7164241">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-google-signin-unspecified_8655a23c7db78cbda4ec8f5f5d91dc2f6e3a37b2.jar" />
     </item>
     <item
@@ -331,7 +331,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        sha1="8065a43b1a868d17519e67d7651e13a99862d3ce">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-vector-icons-unspecified_748cf112b49c99de2601d94e36cdf9955cc6247d.jar" />
     </item>
     <item
@@ -349,7 +349,7 @@
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="3e4f60b98cadc3209acdaff70a1ba1231bb925ef">
+        sha1="0631ab387e59518f69b498cdb3a9af085d926f97">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-push-notification-unspecified_9759b95b4eb954799e48de5d01c91eb1e9e35449.jar" />
     </item>
     <item
@@ -360,6 +360,15 @@
         revision="23.0.1"
         sha1="d8942ee348aaa9341f08f7e2437063893fe27542">
         <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gcm-11.0.4_da7ec2ea85bb22325e7cf343a108409aaef69f52.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-svg/unspecified/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="7f8b66d83879557890ac6f0e1473a31d5f0b5dc9">
+        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-svg-unspecified_7f08388752f3ad5f531c681d51be36ece50a1b0a.jar" />
     </item>
     <item
         is-multidex="false"

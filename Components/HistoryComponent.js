@@ -118,27 +118,32 @@ class HistoryComponent extends Component
             <View style = {styles.container}>
                 <View style={{
                     flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    height: window.height * 0.4,
+                    width: window.width
+                    // alignItems: 'center',
+                    // justifyContent: 'center',
                 }}>
-                    <View style={{
-                        flex: 1,
-                        width: window.width*0.1
-                    }}>
+                    
                         <YAxis
                             data={data}
                             contentInset={{ top: 20, bottom: 20 }}
-                            style={ { height: window.height * 0.4 } }
+                            style={ { 
+                                height: window.height * 0.4,
+                                width: window.width*0.1 
+                            } }
                             svg={{ fontSize: 10, fill: 'grey' }}
                             yAccessor={ ({ item }) => item.reading }
                         />
-                    </View>
                     <View style={{
                         flex: 1,
                         width: window.width*0.9
+                        // marginLeft: 10
                     }}>
                         <LineChart
-                            style={ { height: window.height * 0.4 } }
+                            style={ { 
+                                height: window.height * 0.4,
+                                width: window.width*0.9 
+                                 } }
                             data={ data }
                             yAccessor={ ({ item }) => item.reading }
                             contentInset={ { top: 20, bottom: 20 } }

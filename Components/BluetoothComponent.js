@@ -86,15 +86,15 @@ class BLEManager extends Component
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
 
-        BackgroundTimer.setInterval(() => {
-            if(this.state.myPatch != null) {
-                console.log('connectedToPatch: ', this.state.connectedToPatch);
-                this.startScan();
-            } else {
-                console.log('connectedToPatch: ', this.state.connectedToPatch);
-                this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-            }
-        }, 600000);
+        // BackgroundTimer.setInterval(() => {
+        //     if(this.state.myPatch != null) {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.startScan();
+        //     } else {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+        //     }
+        // }, 600000);
     }
 
     resetReadings () {
@@ -215,11 +215,11 @@ class BLEManager extends Component
             readings+= temp.readFloatBE(12);
     
             this.setState({curReading: readings, cnt: this.state.cnt+1%16, readfailcount:0}) //state wont change is something bad happens.
-            console.log('cnt: ' + cnt + ', charsRead: ' + this.state.charsRead);
-            if (/*cnt != readChars.length && */readings.length() < 159) // not finished reading 
+            console.log('cnt: ' + this.state.cnt + ', charsRead: ' + this.state.charsRead);
+            if (/*cnt != readChars.length && */readings.length < 159) // not finished reading 
             {
                 console.log('continue');
-                BLEReadREQ();
+                this.BLEReadREQ(data);
             }
             else if (this.state.charsRead == 159)
             {
@@ -229,7 +229,7 @@ class BLEManager extends Component
                 for (var j = 0; j < 64; j++)
                     avg[j] /= 10;
                 var pendingReadings = this.props.globalState.pendingReadings;
-                resetReadings();
+                this.resetReadings();
                 this.setState({reading: false}); //no longer will need readings.
 
                 var da = new Date();
@@ -295,7 +295,7 @@ class BLEManager extends Component
             }
             else{
                 //somehow more readings obtained than should be expected reset readings completely.
-                resetReadings()
+                this.resetReadings()
                 this.setState({cnt:0, reading:false});
             }
             
@@ -307,7 +307,7 @@ class BLEManager extends Component
             this.setState({readERRFlag: true,  readfailcount: this.readfailcount+1});
             if(this.state.readfailcount == 4) //give up if read fails 3x
             {
-                resetReadings();
+                this.resetReadings();
                 this.setState({cnt:0, reading:false});
                 readfailcount = 0;
             }
@@ -326,7 +326,7 @@ class BLEManager extends Component
         if (this.state.reading == true) {
             if(this.state.readERRFlag == true) { //reading ended unexpectedly, retry
                 this.setState({readERRFlag: false});
-                BLEReadREQ(data);
+                this.BLEReadREQ(data);
             }
             return;
         } else {
@@ -336,7 +336,7 @@ class BLEManager extends Component
         //console.log('Received data from ' + data.peripheral);
         console.log('Value: ' + data.value);
         //console.log('peripheral: ' + data.peripheral);
-        BLEReadREQ(data);
+        this.BLEReadREQ(data);
     }
 
     handleStopScan () 

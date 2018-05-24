@@ -90,6 +90,7 @@ ADDED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml:23
 		ADDED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml:23:17-81
 uses-sdk
 INJECTED from /home/whenkek/ECS193-MApp/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [NIBVA:react-native-svg:unspecified] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-svg/unspecified/AndroidManifest.xml:7:5-9:41
 MERGED from [NIBVA:react-native-push-notification:unspecified] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-push-notification/unspecified/AndroidManifest.xml:7:5-9:41
 MERGED from [com.google.android.gms:play-services-gcm:11.0.4] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/11.0.4/AndroidManifest.xml:17:5-43
 MERGED from [com.google.android.gms:play-services-iid:11.0.4] /home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-iid/11.0.4/AndroidManifest.xml:17:5-43
