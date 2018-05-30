@@ -47,6 +47,23 @@ class DashboardComponent extends Component
         //     popInitialNotification: true,
         // });
 
+        this.retrieveItem("signInRecord").then((signInRecord) => {
+            var signInArr = signInRecord.split(',');
+            console.log(signInArr);
+
+            // authCode: '',
+            //     email: '',
+            //     id: -1,
+
+            this.props.setGlobalState({
+                authCode: signInArr[0],
+                email: signInArr[1],
+                id: parseInt(signInArr[2])
+            });
+        }).catch((error) => {
+            console.log('Promise is rejected with error: ' + error);
+        });
+
         AppState.addEventListener('change', this.handleAppStateChange);
 
         //Sign in configuration
@@ -243,6 +260,16 @@ class DashboardComponent extends Component
                             id: json.id,
                             authCode: json.authCode
                         });
+
+                        var signInRecord = json.authCode + ',' + json.email + ',' + json.id;
+
+                        this.storeItem("signInRecord", signInRecord).then((stored) => {
+                        //this callback is executed when your Promise is resolved
+                        alert("Success writing");
+                        }).catch((error) => {
+                        //this callback is executed when your Promise is rejected
+                        console.log('Promise is rejected with error: ' + error);
+                        });
                     }
                 })
                 .catch((err) => {
@@ -287,6 +314,15 @@ class DashboardComponent extends Component
                     email: '',
                     id: -1,
                     authCode: ''
+                });
+                var signInRecord = ',,-1';
+                    
+                this.storeItem("signInRecord", signInRecord).then((stored) => {
+                //this callback is executed when your Promise is resolved
+                alert("Success writing");
+                }).catch((error) => {
+                //this callback is executed when your Promise is rejected
+                console.log('Promise is rejected with error: ' + error);
                 });
                 GoogleSignin.revokeAccess()
                     .then(() => {})

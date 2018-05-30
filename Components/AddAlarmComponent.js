@@ -33,6 +33,7 @@ class AddAlarmComponent extends Component {
 
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.onValueChange = this.onValueChange.bind(this);
+		this.storeItem = this.storeItem.bind(this);
 	}
 
 	async storeItem(key, item) {
@@ -42,18 +43,6 @@ class AddAlarmComponent extends Component {
 			// var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
 			var jsonOfItem = await AsyncStorage.setItem(key, item);
 			return jsonOfItem;
-		} catch (error) {
-		  console.log(error.message);
-		}
-	}
-
-	//the functionality of the retrieveItem is shown below
-	async retrieveItem(key) {
-		try {
-		  const retrievedItem =  await AsyncStorage.getItem(key);
-		  // const item = JSON.parse(retrievedItem);
-		  const item = retrievedItem;
-		  return item;
 		} catch (error) {
 		  console.log(error.message);
 		}
@@ -120,60 +109,6 @@ class AddAlarmComponent extends Component {
 
 			this.props.navigation.pop();
 		}
-
-
-		// this.setState({result: "Submitting..."});
-		// var da = new Date();
-		// var y = da.getUTCFullYear();
-		// var m = (da.getUTCMonth() + 1);
-		// m = (m < 10 ? '0' : '') + m;
-		// var d = da.getUTCDate();
-		// d = (d < 10 ? '0' : '') + d;
-		// var h = da.getUTCHours();
-		// h = (h < 10 ? '0' : '') + h;
-		// var mi = da.getUTCMinutes();
-		// mi = (mi < 10 ? '0' : '') + mi;
-		// var s = da.getUTCSeconds();
-		// s = (s < 10 ? '0' : '') + s;
-		// var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
-
-		// var postObj = {
-		//     authCode: this.props.globalState.authCode,
-		//     timestamp: utc,
-		// };
-
-		// var formValues = this.formGenerator.getValues();
-		// if(formValues.event == 'Void') {
-		//     postObj["amount"] = formValues.amount;
-		// }
-
-		// console.log(postObj);
-
-		// fetch('https://majestic-legend-193620.appspot.com/mobile/feedback', {
-		// // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-		// // fetch('http://192.168.43.198:8080/mobile/readings', {
-		//     method: 'POST',
-		//     headers: { 'Content-Type': 'application/json' },
-		//     body: JSON.stringify(postObj)
-
-		// })
-		// .then((json) => {
-		//     console.log('Send done');
-		//     console.log(json);
-		//     if(json.statue == 200) {
-		//         // this.setState({result: "Success!"});
-		//         alert("Success!");
-		//     }
-		//     else {
-		//         // this.setState({result: "Failure: " + json.status});
-		//         alert("Failure: " + json.status);
-		//     }
-
-		// }).catch((error) => {
-		//     console.log("ERROR in send " + error);
-		//     // this.setState({result: "Failure: " + error});
-		//     alert("Failure: " + error);
-		// });
 	}
 
 	render () {
@@ -184,7 +119,6 @@ class AddAlarmComponent extends Component {
 						ref={(c) => {
 							this.formGenerator = c;
 						}}
-						// fields={this.state.fields}
 						fields={fields}
 						onValueChange={this.onValueChange}
 					/>
