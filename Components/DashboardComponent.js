@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-navigation';
 import { GoogleSignin, GoogleSigninButton } from 'react-native-google-signin';
 import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import PushNotification from 'react-native-push-notification';
+// import PushNotification from 'react-native-push-notification';
 
 import BluetoothComponent from './BluetoothComponent';
 import AlertsComponent from './AlertsComponent';
@@ -46,12 +46,12 @@ class DashboardComponent extends Component
 
     componentDidMount ()
     {
-        PushNotification.configure({
-            onNotification: function(notification) {
-                console.log('NOTIFICATION: ', notification);
-            },
-            popInitialNotification: true,
-        });
+        // PushNotification.configure({
+        //     onNotification: function(notification) {
+        //         console.log('NOTIFICATION: ', notification);
+        //     },
+        //     popInitialNotification: true,
+        // });
 
         AppState.addEventListener('change', this.handleAppStateChange);
 
@@ -124,9 +124,9 @@ class DashboardComponent extends Component
 
     sendNotification() {
         var fullNess = Math.floor(Math.random() * 100);
-        PushNotification.localNotification({
-            message: 'Fullness: ' + fullNess + '%'
-        });
+        // PushNotification.localNotification({
+        //     message: 'Fullness: ' + fullNess + '%'
+        // });
 
         var newHistory = this.props.globalState.history;
         if(newHistory.length == 10) {
@@ -317,12 +317,12 @@ class DashboardComponent extends Component
             if(parseFloat(newAlarmList[i].threshold) <= volume && newAlarmList[i].on == "true") {
                 // sendNotification();
                 newAlarmList[i].on = "false";
-                PushNotification.localNotification({
-                    message: 'Threshold volume reached, current volume is ' + volume,
-                    // ongoing: true,
-                    // autoCancel: false,
-                    vibration: 30000
-                });
+                // PushNotification.localNotification({
+                //     message: 'Threshold volume reached, current volume is ' + volume,
+                //     // ongoing: true,
+                //     // autoCancel: false,
+                //     vibration: 30000
+                // });
             }
         }
 

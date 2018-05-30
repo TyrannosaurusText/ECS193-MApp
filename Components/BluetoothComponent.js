@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
-import PushNotification from 'react-native-push-notification';
+// import PushNotification from 'react-native-push-notification';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTimer from 'react-native-background-timer';
@@ -85,12 +85,12 @@ class BLEManager extends Component
 
         BleManager.start({showAlert: false});
 
-        PushNotification.configure({
-            onNotification: function(notification) {
-                console.log('NOTIFICATION: ', notification);
-            },
-            popInitialNotification: true,
-        });
+        // PushNotification.configure({
+        //     onNotification: function(notification) {
+        //         console.log('NOTIFICATION: ', notification);
+        //     },
+        //     popInitialNotification: true,
+        // });
 
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
@@ -562,12 +562,12 @@ class BLEManager extends Component
                 // sendNotification();
                 newAlarmList[i].on = "false";
                 console.log('Trying to send notification');
-                PushNotification.localNotification({
-                    message: 'Threshold volume reached, current volume is ' + volume,
-                    // ongoing: true,
-                    // autoCancel: false,
-                    vibration: 30000
-                });
+                // PushNotification.localNotification({
+                //     message: 'Threshold volume reached, current volume is ' + volume,
+                //     // ongoing: true,
+                //     // autoCancel: false,
+                //     vibration: 30000
+                // });
                 console.log('Tried to send notification');
             }
         }
