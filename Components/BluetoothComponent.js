@@ -18,7 +18,7 @@ import {
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
-// import PushNotification from 'react-native-push-notification';
+import PushNotification from 'react-native-push-notification';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTimer from 'react-native-background-timer';
@@ -28,15 +28,40 @@ const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 const BleManagerModule = NativeModules.BleManager;
 const bleManagerEmitter = new NativeEventEmitter(BleManagerModule);
+const BLUETOOTH_DEVICE_NAME = "PatchSim";
 
+var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
+console.log('Service: ' + service);
+var readChars = [
+    '056B0F3D-57D7-4842-A4F1-3177FD883A97',
+    '36142750-2A5A-450A-BA69-9C072DB93079',
+    '156B0F3D-57D7-4842-A4F1-3177FD883A97',
+    'ED887B10-87E3-43D8-8595-7F8C0394A9AE',
+    '38330731-44AC-462C-93A3-054F93A9A35A',
+    '09EC3E8F-4390-439D-BBDF-2B79370ABA51',
+    '7AC8C0E7-EBC7-4A44-9EE1-EEEA9FA2218D',
+    '0EBC4973-F784-4849-8891-7D759FB1E3B7',
+    '638E8CBF-BC8B-4B24-A719-D9F0DFE24784',
+    'DE76C062-35DD-44ED-B8C2-CB28B98CDEF4',
+    '90F1A21F-5D34-4B94-9797-E3873C66FA78',
+    'C3C8B0A0-A540-486D-A94E-405F2F3D1334',
+    '59A8A2B1-7E54-419A-A37F-F59D01D80CAE',
+    '3ACB209A-3B54-4B2D-8981-C5D8E2B85DB7',
+    '3D2A633F-5EEA-4346-A073-CBDD002040D1',
+    'C3151BB7-3E2C-4821-8EB9-4067A6585508'
+];
+
+var readings;
 class BLEManager extends Component 
 {
+
+
+
     constructor ()
     {
         super();
 
-        var newStore = new Array(64);
-        for (var j = 0; j < 64; j++) newStore[j] = 0;
+        var newStore = new Array(64).fill(0);
         
         this.state = {
             scanning:false,
@@ -46,9 +71,11 @@ class BLEManager extends Component
             curReadings: newStore,
             charsRead: 0,
             myPatch: null,
-            autoRead: false
+            autoRead: false,
+            cnt: 0,
+            readERRFlag:false,
+            readfailcount:0
         }
-
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
         this.handleStopScan = this.handleStopScan.bind(this);
         this.handleUpdateValueForCharacteristic = this.handleUpdateValueForCharacteristic.bind(this);
@@ -58,16 +85,23 @@ class BLEManager extends Component
         this.checkAlarm = this.checkAlarm.bind(this);
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
+
+        // BackgroundTimer.setInterval(() => {
+        //     if(this.state.myPatch != null) {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.startScan();
+        //     } else {
+        //         console.log('connectedToPatch: ', this.state.connectedToPatch);
+        //         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+        //     }
+        // }, 600000);
     }
 
     resetReadings () {
-        console.log('resetReadings() before, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
-        this.state.reading = false;
-        this.state.charsRead = 0;
-        var newStore = new Array(64);
-        for (var j = 0; j < 64; j++) newStore[j] = 0;
-        this.setState({curReadings: newStore});
-        console.log('resetReadings() after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        console.log('resetting readings; before reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        var newStore = new Array(64).fill(0);
+        this.setState({curReadings: newStore, charsRead: 0, reading: false});
+        console.log('resetting readings; after reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
     }
 
     processData (floats_64) {
@@ -85,12 +119,12 @@ class BLEManager extends Component
 
         BleManager.start({showAlert: false});
 
-        // PushNotification.configure({
-        //     onNotification: function(notification) {
-        //         console.log('NOTIFICATION: ', notification);
-        //     },
-        //     popInitialNotification: true,
-        // });
+        PushNotification.configure({
+            onNotification: function(notification) {
+                console.log('NOTIFICATION: ', notification);
+            },
+            popInitialNotification: true,
+        });
 
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
@@ -138,26 +172,162 @@ class BLEManager extends Component
 
         if (this.state.myPatch) {
             BleManager.disconnect(this.state.myPatch.id);
+            this.setState({myPatch: null});
         }
     }
 
     handleDisconnectedPeripheral (data) 
     {
-        let peripherals = this.state.peripherals;
-        let peripheral = peripherals.get(data.peripheral);
-        if (peripheral) 
+        if(this.state.appState.match(/inactive|background/))
         {
-            peripheral.connected = false;
-            peripherals.set(peripheral.id, peripheral);
-            this.setState({peripherals});
+            this.setState({myPatch:null});
+            this.startScan();
         }
-        console.log('Disconnected from ' + data.peripheral);
+        else{
+            let peripherals = this.state.peripherals;
+            let peripheral = peripherals.get(data.peripheral);
+            if (peripheral) 
+            {
+                peripheral.connected = false;
+                peripherals.set(peripheral.id, peripheral);
+                this.setState({peripherals, myPatch:null});
+                
+            }
+            console.log('Disconnected from ' + data.peripheral);
+        }
         this.resetReadings();
     }
+
+    BLEReadREQ(data)
+    {
+        reading = this.state.curReadings;
+        BleManager.read(data.peripheral, service, readChars[this.state.cnt])
+        .then((readData) => {
+            console.log('----READ----');
+    
+            var temp = new Buffer(17);
+            for (var j = 0; j < 17; j++) //puts data from BLE into Buffer to be read by float.
+                temp.writeUInt8(readData[j], j);
+            //var id = temp.readInt8(16);
+            readings+= temp.readFloatBE(0);
+            readings+= temp.readFloatBE(4);
+            readings+= temp.readFloatBE(8);
+            readings+= temp.readFloatBE(12);
+    
+            this.setState({curReading: readings, cnt: this.state.cnt+1%16, readfailcount:0}) //state wont change is something bad happens.
+            console.log('cnt: ' + this.state.cnt + ', charsRead: ' + this.state.charsRead);
+            if (/*cnt != readChars.length && */readings.length < 159) // not finished reading 
+            {
+                console.log('continue');
+                this.BLEReadREQ(data);
+            }
+            else if (this.state.charsRead == 159)
+            {
+                console.log('Values read');
+
+                var avg = this.state.curReadings;
+                for (var j = 0; j < 64; j++)
+                    avg[j] /= 10;
+                var pendingReadings = this.props.globalState.pendingReadings;
+                this.resetReadings();
+                this.setState({reading: false}); //no longer will need readings.
+
+                var da = new Date();
+                var y = da.getUTCFullYear();
+                var m = (da.getUTCMonth() + 1);
+                m = (m < 10 ? '0' : '') + m;
+                var d = da.getUTCDate();
+                d = (d < 10 ? '0' : '') + d;
+                var h = da.getUTCHours();
+                h = (h < 10 ? '0' : '') + h;
+                var mi = da.getUTCMinutes();
+                mi = (mi < 10 ? '0' : '') + mi;
+                var s = da.getUTCSeconds();
+                s = (s < 10 ? '0' : '') + s;
+                var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
+                console.log(utc);
+
+                var newReading = {
+                    timestamp: utc,
+                    channels: avg
+                };
+                pendingReadings.push(newReading);
+                this.props.setGlobalState({pendingReadings});
+                var postObj = {
+                    authCode: this.props.globalState.authCode,
+                    id: this.props.globalState.id,
+                    readings: pendingReadings
+                };
+                
+
+                console.log('SEND HERE');
+                console.log(postObj);
+
+                //if able to post
+                if(this.props.globalState.email != '') {
+                    fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(postObj)
+                    })
+                    .then((result) => result.json())
+                    .then((json) => {
+                        console.log('Send done');
+                        console.log(json);
+                        pendingReadings = [];
+                        this.props.setGlobalState({pendingReadings});
+                    });
+                }
+                // Local storage
+                // else {
+                //     var newReadingList = [];
+                //     this.retrievedItem("offlineReadings").then((offlineReadings) => {
+                //         // Need to parse offlineReadings
+                //         // newReadingList = offlineReadings;
+                //         var offlineEntry;
+                //         newReadingList.push({offlineEntry});
+                //     });  
+                // }
+
+                var newCurrentVolume = this.processData(avg);
+                this.props.setGlobalState({currentVolume: newCurrentVolume});
+                this.checkAlarm(newCurrentVolume);
+            }
+            else{
+                //somehow more readings obtained than should be expected reset readings completely.
+                this.resetReadings()
+                this.setState({cnt:0, reading:false});
+            }
+            
+    }).catch((error) => {
+            console.log('READ ERROR');
+            console.log(error);
+
+
+            this.setState({readERRFlag: true,  readfailcount: this.readfailcount+1});
+            if(this.state.readfailcount == 4) //give up if read fails 3x
+            {
+                this.resetReadings();
+                this.setState({cnt:0, reading:false});
+                readfailcount = 0;
+            }
+            //this.resetReadings();
+            
+            // cnt--;
+            // index--;
+            // this.state.charsRead = this.state.charsRead - 1;
+            
+        });
+    }
+    
 
     handleUpdateValueForCharacteristic (data) 
     {
         if (this.state.reading == true) {
+            if(this.state.readERRFlag == true) { //reading ended unexpectedly, retry
+                this.setState({readERRFlag: false});
+                this.BLEReadREQ(data);
+            }
             return;
         } else {
             this.state.reading = true;
@@ -166,157 +336,7 @@ class BLEManager extends Component
         //console.log('Received data from ' + data.peripheral);
         console.log('Value: ' + data.value);
         //console.log('peripheral: ' + data.peripheral);
-
-
-        var service = '72369D5C-94E1-41D7-ACAB-A88062C506A8';
-        console.log('Service: ' + service);
-        var readChars = [
-            '056B0F3D-57D7-4842-A4F1-3177FD883A97',
-            '36142750-2A5A-450A-BA69-9C072DB93079',
-            '156B0F3D-57D7-4842-A4F1-3177FD883A97',
-            'ED887B10-87E3-43D8-8595-7F8C0394A9AE',
-            '38330731-44AC-462C-93A3-054F93A9A35A',
-            '09EC3E8F-4390-439D-BBDF-2B79370ABA51',
-            '7AC8C0E7-EBC7-4A44-9EE1-EEEA9FA2218D',
-            '0EBC4973-F784-4849-8891-7D759FB1E3B7',
-            '638E8CBF-BC8B-4B24-A719-D9F0DFE24784',
-            'DE76C062-35DD-44ED-B8C2-CB28B98CDEF4',
-            '90F1A21F-5D34-4B94-9797-E3873C66FA78',
-            'C3C8B0A0-A540-486D-A94E-405F2F3D1334',
-            '59A8A2B1-7E54-419A-A37F-F59D01D80CAE',
-            '3ACB209A-3B54-4B2D-8981-C5D8E2B85DB7',
-            '3D2A633F-5EEA-4346-A073-CBDD002040D1',
-            'C3151BB7-3E2C-4821-8EB9-4067A6585508'
-        ];
-        var readings = [];
-        var index = 0;
-
-        var cnt = 0;
-        var readChar = () => {
-            BleManager.read(data.peripheral, service, readChars[cnt])
-                .then((readData) => {
-                    console.log('----READ----');
-
-                    var temp = new Buffer(17);
-                    for (var j = 0; j < 17; j++)
-                        temp.writeUInt8(readData[j], j);
-                    //var id = temp.readInt8(16);
-                    readings[index * 4] = temp.readFloatBE(0);
-                    readings[index * 4 + 1] = temp.readFloatBE(4);
-                    readings[index * 4 + 2] = temp.readFloatBE(8);
-                    readings[index * 4 + 3] = temp.readFloatBE(12);
-                    index++;
-
-                    cnt = (cnt + 1) % 16;
-                    this.state.charsRead = (this.state.charsRead + 1) % 160;
-
-                    console.log('cnt: ' + cnt + ', charsRead: ' + this.state.charsRead);
-                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 10 - 1))
-                    {
-                        console.log('continue');
-                        readCharBound();
-                    }
-                    else
-                    {
-                        console.log('STATE:');
-                        //console.log(this.state);
-                        var curr = this.state.curReadings;
-                        for (var j = 0; j < 64; j++)
-                        {
-                            curr[j] += readings[j];
-                            this.setState({curReadings: curr});
-                        }
-
-                        // if (data.value == 4)
-                        if (this.state.charsRead == 159)
-                        {
-                            this.state.reading = false;
-                            console.log('Values read');
-
-                            var avg = this.state.curReadings;
-                            for (var j = 0; j < 64; j++)
-                                avg[j] /= 10;
-                            var pendingReadings = this.props.globalState.pendingReadings;
-
-                            var da = new Date();
-                            var y = da.getUTCFullYear();
-                            var m = (da.getUTCMonth() + 1);
-                            m = (m < 10 ? '0' : '') + m;
-                            var d = da.getUTCDate();
-                            d = (d < 10 ? '0' : '') + d;
-                            var h = da.getUTCHours();
-                            h = (h < 10 ? '0' : '') + h;
-                            var mi = da.getUTCMinutes();
-                            mi = (mi < 10 ? '0' : '') + mi;
-                            var s = da.getUTCSeconds();
-                            s = (s < 10 ? '0' : '') + s;
-                            var utc = y + '-' + m + '-' + d + ' ' + h + ':' + mi + ':' + s;
-                            console.log(utc);
-
-                            var newReading = {
-                                timestamp: utc,
-                                channels: avg
-                            };
-                            pendingReadings.push(newReading);
-                            this.props.setGlobalState({pendingReadings});
-                            var postObj = {
-                                authCode: this.props.globalState.authCode,
-                                id: this.props.globalState.id,
-                                readings: pendingReadings
-                            };
-                            
-
-                            console.log('SEND HERE');
-                            console.log(postObj);
-
-                            //if able to post
-                            if(this.props.globalState.email != '') {
-                                fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(postObj)
-                                })
-                                .then((result) => result.json())
-                                .then((json) => {
-                                    console.log('Send done');
-                                    console.log(json);
-                                    pendingReadings = [];
-                                    this.props.setGlobalState({pendingReadings});
-                                });
-                            }
-                            // Local storage
-                            // else {
-                            //     var newReadingList = [];
-                            //     this.retrievedItem("offlineReadings").then((offlineReadings) => {
-                            //         // Need to parse offlineReadings
-                            //         // newReadingList = offlineReadings;
-                            //         var offlineEntry;
-                            //         newReadingList.push({offlineEntry});
-                            //     });
-                            // }
-
-                            var newCurrentVolume = this.processData(avg);
-                            this.props.setGlobalState({currentVolume: newCurrentVolume});
-                            this.checkAlarm(newCurrentVolume);
-
-                            var newStore = new Array(64);
-                            for (var j = 0; j < 64; j++) newStore[j] = 0;
-                                this.setState({curReadings: newStore});
-                        }
-                    }
-                })
-                .catch((error) => {
-                    console.log('READ ERROR');
-                    console.log(error);
-                    this.resetReadings();
-                    // cnt--;
-                    // index--;
-                    // this.state.charsRead = this.state.charsRead - 1;
-                    
-                });
-        }
-        var readCharBound = readChar.bind(this);
-        readCharBound();
+        this.BLEReadREQ(data);
     }
 
     handleStopScan () 
@@ -360,11 +380,18 @@ class BLEManager extends Component
             console.log('Got ble peripheral', peripheral);
             peripherals.set(peripheral.id, peripheral);
             this.setState({ peripherals })
-            if(peripheral.id == "PatchSim") {
-                this.state.myPatch = peripheral;
+            if(peripheral.id == BLUETOOTH_DEVICE_NAME && this.state.appState.match(/inactive|background/) )
+                {
+                    BleManager.connect(peripheral.id).then(()=>{
+                        this.state.myPatch = peripheral;
+                        this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+                    }).catch(err)
+                    {
+                };
             }
         }
     }
+    
 
     test (peripheral) 
     {
@@ -372,6 +399,7 @@ class BLEManager extends Component
         {
             if (peripheral.connected) {
                 BleManager.disconnect(peripheral.id);
+                this.setState({myPatch: null});
                 this.resetReadings();
                 // BleManager.disconnect(peripheral.id).then(() => {
                 //     console.log('Disconnected successfully from: ' + peripheral.id  + ', ' + peripheral.name);
@@ -393,7 +421,7 @@ class BLEManager extends Component
                     {
                         p.connected = true;
                         peripherals.set(peripheral.id, p);
-                        this.setState({peripherals});
+                        this.setState({peripherals, myPatch: peripheral.id});
                     }
                     console.log('Connected to ' + peripheral.id);
 
@@ -562,12 +590,12 @@ class BLEManager extends Component
                 // sendNotification();
                 newAlarmList[i].on = "false";
                 console.log('Trying to send notification');
-                // PushNotification.localNotification({
-                //     message: 'Threshold volume reached, current volume is ' + volume,
-                //     // ongoing: true,
-                //     // autoCancel: false,
-                //     vibration: 30000
-                // });
+                PushNotification.localNotification({
+                    message: 'Threshold volume reached, current volume is ' + volume,
+                    // ongoing: true,
+                    // autoCancel: false,
+                    vibration: 30000
+                });
                 console.log('Tried to send notification');
             }
         }
