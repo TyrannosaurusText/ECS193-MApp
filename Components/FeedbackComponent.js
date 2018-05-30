@@ -55,6 +55,9 @@ class FeedbackComponent extends Component {
             result: ''
         }
 
+        // The default event is void, make sure the value field is always visible
+        fields[0].hidden = false;
+
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onValueChange = this.onValueChange.bind(this);
     }
@@ -81,7 +84,7 @@ class FeedbackComponent extends Component {
 
         }
         // this.setState({ state: this.state });
-        this.setState({result: ""});
+        // this.setState({result: ""});
     }
 
     handleSubmit() {

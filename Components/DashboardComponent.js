@@ -189,7 +189,7 @@ class DashboardComponent extends Component
                     arcSweepAngle={360}>
                     {
                         (fill) => (
-                            <Text>{this.props.globalState.currentVolume / maxVolume * 100}%</Text>
+                            <Text>{Math.floor(this.props.globalState.currentVolume / maxVolume * 100)}%</Text>
                         )
                     }
                 </AnimatedCircularProgress>
