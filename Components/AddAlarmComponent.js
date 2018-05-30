@@ -17,7 +17,6 @@ var fields = [
 		type: 'number',
 		name: 'amount',
 		required: true,
-		// icon: 'ios-person',
 		label: 'Threshold Amount',
 		hidden: false,
 	}
@@ -61,28 +60,20 @@ class AddAlarmComponent extends Component {
 	}
 
 	onValueChange() {
-
-		console.log("Change");
 		var formValues = this.formGenerator.getValues();
-		// console.log(formValues.event);
-		console.log(fields[0]);
-		console.log(parseFloat(formValues.amount));
-		// if(formValues.event == 'Void') {
-		//     fields[0].hidden = false;
-		//     console.log(formValues.amount);
-			if(formValues.amount != '' && parseFloat(formValues.amount) > 0) {
-				this.setState({invalid: false});
-			}
-			else {
-				this.setState({invalid: true});
-			}
-		// }
-		// else {
-		//     fields[0].hidden = true;
-		//     this.setState({invalid: false});
 
-		// }
-		this.setState({ state: this.state });
+		if(formValues.amount != '' && 
+			parseFloat(formValues.amount) > 0 && 
+			formValues.amount.indexOf(',') < 0 && 
+			formValues.amount.indexOf('.') != formValues.amount.length - 1 && 
+			formValues.amount.indexOf('.') == formValues.amount.lastIndexOf('.')) {
+			this.setState({invalid: false});
+		}
+		else {
+			this.setState({invalid: true});
+		}
+		
+		// this.setState({ state: this.state });
 		this.setState({result: ""});
 	}
 
