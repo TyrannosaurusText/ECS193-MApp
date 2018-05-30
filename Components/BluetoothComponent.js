@@ -43,9 +43,11 @@ class BLEManager extends Component
             peripherals: new Map(),
             appState: '',
             reading: false,
+            readingsCompleted: 0,
             curReadings: newStore,
             charsRead: 0,
             myPatch: null,
+            connectedToPatch: false,
             autoRead: false
         }
 
@@ -58,6 +60,7 @@ class BLEManager extends Component
         this.checkAlarm = this.checkAlarm.bind(this);
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
+        this.isConnected = this.isConnected.bind(this);
     }
 
     resetReadings () {
@@ -81,6 +84,18 @@ class BLEManager extends Component
 
     componentDidMount () 
     {
+        console.log('componentDidMount(): ');
+        const intervalId = BackgroundTimer.setInterval(() => {
+            console.log('BackgroundTimer.setInterval(); connectedToPatch: ' + this.state.connectedToPatch);
+            if(this.state.connectedToPatch == false) {
+                console.log('connectedToPatch: ', this.state.connectedToPatch);
+                this.startScan();
+            } else {
+                console.log('connectedToPatch: ', this.state.connectedToPatch);
+                this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+            }
+        }, 30000);
+
         AppState.addEventListener('change', this.handleAppStateChange);
 
         BleManager.start({showAlert: false});
@@ -116,6 +131,10 @@ class BLEManager extends Component
 
     }
 
+    isConnected(peripheral) {
+        this.retrieveConnected();
+        return this.state.peripherals.has(peripheral.id);
+    }
     handleAppStateChange (nextAppState) 
     {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') 
@@ -208,10 +227,10 @@ class BLEManager extends Component
                     index++;
 
                     cnt = (cnt + 1) % 16;
-                    this.state.charsRead = (this.state.charsRead + 1) % 160;
+                    this.state.charsRead = (this.state.charsRead + 1) % 48;
 
                     console.log('cnt: ' + cnt + ', charsRead: ' + this.state.charsRead);
-                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 10 - 1))
+                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 3 - 1))
                     {
                         console.log('continue');
                         readCharBound();
@@ -228,7 +247,7 @@ class BLEManager extends Component
                         }
 
                         // if (data.value == 4)
-                        if (this.state.charsRead == 159)
+                        if (this.state.charsRead == 47)
                         {
                             this.state.reading = false;
                             console.log('Values read');
@@ -294,14 +313,32 @@ class BLEManager extends Component
                             //         newReadingList.push({offlineEntry});
                             //     });
                             // }
-
                             var newCurrentVolume = this.processData(avg);
                             this.props.setGlobalState({currentVolume: newCurrentVolume});
+
+
+                            var currentData = '';
+                            console.log('about to retreiveItem()');
+                            this.retrieveItem('VolumeData').then((dataRecord) => {
+                                currentData = dataRecord + ', ' + newCurrentVolume;
+                            }).catch((error) => {
+                                console.log('Bluetooth retreive data promise is rejected with error: ' + error);
+                                currentData += newCurrentVolume;
+                            });
+
+                            console.log('Current local data: ' + currentData);
+                            this.storeItem('VolumeData', currentData).then(() => {
+                                console.log('Data stored in Ble successful');
+                            }).catch((error) => {
+                                console.log('Data failed to be stored in Ble');
+                            })
+
                             this.checkAlarm(newCurrentVolume);
 
-                            var newStore = new Array(64);
-                            for (var j = 0; j < 64; j++) newStore[j] = 0;
-                                this.setState({curReadings: newStore});
+                            // var newStore = new Array(64);
+                            // for (var j = 0; j < 64; j++) newStore[j] = 0;
+                            //     this.setState({curReadings: newStore});
+                            this.resetReadings();
                         }
                     }
                 })
@@ -360,8 +397,10 @@ class BLEManager extends Component
             console.log('Got ble peripheral', peripheral);
             peripherals.set(peripheral.id, peripheral);
             this.setState({ peripherals })
-            if(peripheral.id == "PatchSim") {
+            if(peripheral.name == "PatchSim") {
+                console.log('handleDiscoverPeripheral(); Calling test on peripheral');
                 this.state.myPatch = peripheral;
+                this.test(peripheral);
             }
         }
     }
@@ -371,7 +410,11 @@ class BLEManager extends Component
         if (peripheral)
         {
             if (peripheral.connected) {
-                BleManager.disconnect(peripheral.id);
+                console.log('Trying to disconnect from peripheral');
+                BleManager.disconnect(peripheral.id).then(() => {
+                    this.state.connectedToPatch = false;
+                    //this.state.myPatch = null;
+                })
                 this.resetReadings();
                 // BleManager.disconnect(peripheral.id).then(() => {
                 //     console.log('Disconnected successfully from: ' + peripheral.id  + ', ' + peripheral.name);
@@ -381,6 +424,7 @@ class BLEManager extends Component
                 // })
             } else
             {
+                console.log('test(); trying to connect to peripheral');
                 BleManager.stopScan().then(() => {
                     console.log('Stop scanning successful');
                 }, (err) => {
@@ -403,6 +447,10 @@ class BLEManager extends Component
                     //     console.log('Failed to Bond: ' + bond_error);
                     // });
                     //setTimeout(() => {
+                        if (peripheral.name == "PatchSim") {
+                            this.state.connectedToPatch = true;
+                        }
+
                         BleManager.retrieveServices(peripheral.id).then((peripheralInfo) => {
                             console.log('Peripheral Info');
                             console.log(peripheralInfo);
@@ -410,11 +458,13 @@ class BLEManager extends Component
                             var service =    '72369D5C-94E1-41D7-ACAB-A88062C506A8';
                             var notifyChar = '222B99A0-37CC-4799-9152-7C35D5C5FE07';
 
-                            BleManager.startNotification(peripheral.id, service, notifyChar).then(() => {
-                                console.log('Started notification on ' + peripheral.id);
-                            }).catch((err) => {
-                                console.log('Notification error', err);
-                            });
+                            // BleManager.startNotification(peripheral.id, service, notifyChar).then(() => {
+                            //     console.log('Started notification on ' + peripheral.id);
+                            // }).catch((err) => {
+                            //     console.log('Notification error', err);
+                            // });
+                            this.handleUpdateValueForCharacteristic({peripheral: peripheral.id, value: [7]});
+
                         });
 
                     //}, 900);
@@ -467,7 +517,7 @@ class BLEManager extends Component
                 >
                     <Text>Retrieve connected peripherals</Text>
                 </TouchableHighlight>
-                <TouchableHighlight
+                {/* <TouchableHighlight
                     onPress = {() => {
                         if (this.state.autoRead == false) {
                             this.state.autoRead = true;
@@ -487,7 +537,7 @@ class BLEManager extends Component
                     }}
                 >
                     <Text>AutoScan ({this.state.autoRead})</Text>
-                </TouchableHighlight>
+                </TouchableHighlight> */}
                 <ScrollView style = {styles.scroll}>
                     {
                         (list.length == 0) &&
@@ -530,6 +580,7 @@ class BLEManager extends Component
     }
 
     async storeItem(key, item) {
+        console.log('storeItem() was called');
         try {
             //we want to wait for the Promise returned by AsyncStorage.setItem()
             //to be resolved to the actual value before returning the value
@@ -537,19 +588,21 @@ class BLEManager extends Component
             var jsonOfItem = await AsyncStorage.setItem(key, item);
             return jsonOfItem;
         } catch (error) {
-          console.log(error.message);
+          console.log('storeItem(): ' + error.message);
         }
     }
 
     //the functionality of the retrieveItem is shown below
     async retrieveItem(key) {
+        console.log('retreiveItem() was called');
         try {
           const retrievedItem =  await AsyncStorage.getItem(key);
           // const item = JSON.parse(retrievedItem);
           const item = retrievedItem;
           return item;
         } catch (error) {
-          console.log(error.message);
+          return storeItem(key, '0');
+          console.log('retrieveItem(): ' + error.message);
         }
     }
 
