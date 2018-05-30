@@ -23,17 +23,11 @@ const maxVolume = 100;
 
 class DashboardComponent extends Component
 {
-    // static navigationOptions = ({ navigation }) => ({
-    //     headerTitle: 'Dashboard',
-    //     headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
-    // });
 
     constructor ()
     {
         super();
-        // this.state = {
-        //     percentage: 10
-        // };
+
         this._signIn = this._signIn.bind(this);
         this._signOut = this._signOut.bind(this);
         this._showGlobalState = this._showGlobalState.bind(this);
@@ -58,7 +52,7 @@ class DashboardComponent extends Component
         //Sign in configuration
         GoogleSignin
             .hasPlayServices({ autoResolve: true }).then(() => {
-                this.props.setGlobalState({signInCapable: true});
+                // this.props.setGlobalState({signInCapable: true});
                 GoogleSignin
                     .configure({
                         iosClientId: '671445578517-8heborte0ukh0f5bt3tee02ttk9m3f3a.apps.googleusercontent.com',
@@ -222,12 +216,8 @@ class DashboardComponent extends Component
         GoogleSignin
             .signIn()
             .then((user) => {
-                //console.log('User:');
-                console.log(user);
                 console.log(user.accessToken);
-                //console.log('Checking Validity');
                 fetch('https://majestic-legend-193620.appspot.com/security/getAuth', {
-                // fetch('http://192.168.43.198:8080/security/getAuth', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -293,7 +283,6 @@ class DashboardComponent extends Component
         .then((json) => {
             if (!json.hasOwnProperty('err'))
             {
-                //console.log('Signed Out');
                 this.props.setGlobalState({
                     email: '',
                     id: -1,
