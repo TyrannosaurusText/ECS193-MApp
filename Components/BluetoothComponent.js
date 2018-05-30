@@ -227,10 +227,10 @@ class BLEManager extends Component
                     index++;
 
                     cnt = (cnt + 1) % 16;
-                    this.state.charsRead = (this.state.charsRead + 1) % 48;
+                    this.state.charsRead = (this.state.charsRead + 1) % 32;
 
                     console.log('cnt: ' + cnt + ', charsRead: ' + this.state.charsRead);
-                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 3 - 1))
+                    if (/*cnt != readChars.length && */this.state.charsRead != (readChars.length * 2 - 1))
                     {
                         console.log('continue');
                         readCharBound();
@@ -247,7 +247,7 @@ class BLEManager extends Component
                         }
 
                         // if (data.value == 4)
-                        if (this.state.charsRead == 47)
+                        if (this.state.charsRead == 31)
                         {
                             this.state.reading = false;
                             console.log('Values read');
@@ -320,18 +320,28 @@ class BLEManager extends Component
                             var currentData = '';
                             console.log('about to retreiveItem()');
                             this.retrieveItem('VolumeData').then((dataRecord) => {
+                                console.log('dataRecord: '+ dataRecord + ', newCurrentVol: ' + newCurrentVolume);
                                 currentData = dataRecord + ', ' + newCurrentVolume;
+                                console.log('currentData: ' + currentData);
+
+                                console.log('Current local data: ' + currentData);
+                                this.storeItem('VolumeData', currentData).then(() => {
+                                    console.log('Data stored in Ble successful: ' + currentData);
+                                }).catch((error) => {
+                                    console.log('Data failed to be stored in Ble');
+                                })
+
                             }).catch((error) => {
                                 console.log('Bluetooth retreive data promise is rejected with error: ' + error);
                                 currentData += newCurrentVolume;
                             });
 
-                            console.log('Current local data: ' + currentData);
-                            this.storeItem('VolumeData', currentData).then(() => {
-                                console.log('Data stored in Ble successful');
-                            }).catch((error) => {
-                                console.log('Data failed to be stored in Ble');
-                            })
+                            // console.log('Current local data: ' + currentData);
+                            // this.storeItem('VolumeData', currentData).then(() => {
+                            //     console.log('Data stored in Ble successful: ' + currentData);
+                            // }).catch((error) => {
+                            //     console.log('Data failed to be stored in Ble');
+                            // })
 
                             this.checkAlarm(newCurrentVolume);
 
@@ -580,12 +590,12 @@ class BLEManager extends Component
     }
 
     async storeItem(key, item) {
-        console.log('storeItem() was called');
+        console.log('storeItem() was called; key: ' + key + ', item: ' + item);
         try {
             //we want to wait for the Promise returned by AsyncStorage.setItem()
             //to be resolved to the actual value before returning the value
             // var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
-            var jsonOfItem = await AsyncStorage.setItem(key, item);
+            var jsonOfItem = await AsyncStorage.setItem(key, item).then;
             return jsonOfItem;
         } catch (error) {
           console.log('storeItem(): ' + error.message);
@@ -594,15 +604,31 @@ class BLEManager extends Component
 
     //the functionality of the retrieveItem is shown below
     async retrieveItem(key) {
-        console.log('retreiveItem() was called');
+        console.log('retreiveItem() was called; key: ' + key);
         try {
-          const retrievedItem =  await AsyncStorage.getItem(key);
+            var currentItem = '';
+          var retrievedItem =  await AsyncStorage.getItem(key).then((patchData) => {
+            console.log('retrieveItem(): got ' + patchData);
+            currentItem = patchData;
+          }, (error) => {
+              console.log('retreiveItem() error: ' + error);
+          });
+
+          if (retrievedItem == undefined) {
+              console.log('retriveItem() storing in try');
+              this.storeItem(key, '1');
+          }
+        
+          retrievedItem = await AsyncStorage.getItem(key);
           // const item = JSON.parse(retrievedItem);
+          console.log('retrieveItem(); retrievedItem: ' + retrievedItem);
           const item = retrievedItem;
-          return item;
+          return currentItem;
         } catch (error) {
-          return storeItem(key, '0');
+          this.storeItem(key, '2');
+          const retrievedItem = await AsyncStorage.getItem(key);
           console.log('retrieveItem(): ' + error.message);
+          return retrievedItem;
         }
     }
 
