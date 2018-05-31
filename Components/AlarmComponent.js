@@ -19,6 +19,7 @@ import {
     ScrollView,
     AppState,
     Dimensions,
+    AsyncStorage
 } from 'react-native';
 // import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
@@ -29,37 +30,57 @@ import { LineChart, Grid } from 'react-native-svg-charts'
 import FeedbackComponent from './FeedbackComponent';
 import { withNavigation } from 'react-navigation';
 
-// import BackgroundTask from 'react-native-background-task';
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 class AlarmComponent extends Component 
 {
-    // static navigationOptions = ({ navigation }) => ({
-    //     headerTitle: 'History',
-    //     headerRight: (<Icon name="notifications" size={30} onPress={() => navigation.navigate('Alerts')}/>),
-    // });
-
     constructor() 
     {
         super();
 
         this.state = {
-            // alarmList: [],
             isVisible: false,
             toggle: false
         };
 
         this.editAlarmList = this.editAlarmList.bind(this);
-        // this.convertUTCDateToLocalDate = this.convertUTCDateToLocalDate.bind(this);
+        this.removeAlarm = this.removeAlarm.bind(this);
+        this.toggleAlarm = this.toggleAlarm.bind(this);
+        this.storeItem = this.storeItem.bind(this);
+        this.retrieveItem = this.retrieveItem.bind(this);
+    }
+
+
+    async storeItem(key, item) {
+        try {
+            //we want to wait for the Promise returned by AsyncStorage.setItem()
+            //to be resolved to the actual value before returning the value
+            // var jsonOfItem = await AsyncStorage.setItem(key, JSON.stringify(item));
+            var jsonOfItem = await AsyncStorage.setItem(key, item);
+            return jsonOfItem;
+        } catch (error) {
+          console.log(error.message);
+        }
+    }
+
+    //the functionality of the retrieveItem is shown below
+    async retrieveItem(key) {
+        try {
+          const retrievedItem =  await AsyncStorage.getItem(key);
+          // const item = JSON.parse(retrievedItem);
+          const item = retrievedItem;
+          return item;
+        } catch (error) {
+          console.log(error.message);
+        }
     }
 
     editAlarmList(item) {
         console.log(typeof(item.on));
         Alert.alert(
             'Edit Alarm',
-            // 'Threshold value: ' + item.threshold + ' State: ' + item.on == "true" ? 'on' : 'off',
             '',
             [
                 {text: 'Delete', onPress: () => this.removeAlarm(item)},
@@ -72,24 +93,39 @@ class AlarmComponent extends Component
 
     removeAlarm(item) {
         const list = this.props.globalState.alarmList;
-        newList = [];
+        newAlarmList = [];
         for(var i in list) {
             if(item.threshold != list[i].threshold) {
-                newList.push(list[i]);
+                newAlarmList.push(list[i]);
             }
             else {
                 console.log(item);
             }
         }
 
-        console.log(newList);
+        console.log(newAlarmList);
 
-        this.props.setGlobalState({alarmList: newList});
+        this.props.setGlobalState({alarmList: newAlarmList});
+
+        var alarmRecord = newAlarmList.length.toString();
+        for(var i = 0; i < newAlarmList.length; i++) {
+            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+        }
+
+        console.log("alarmRecord: " + alarmRecord);
+
+        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+        //this callback is executed when your Promise is resolved
+        alert("Success writing");
+        }).catch((error) => {
+        //this callback is executed when your Promise is rejected
+        console.log('Promise is rejected with error: ' + error);
+        });
     }
 
     toggleAlarm(item) {
         const list = this.props.globalState.alarmList;
-        newList = [];
+        newAlarmList = [];
         for(var i in list) {
             if(item.threshold == list[i].threshold) {
                 if(this.props.globalState.currentVolume < item.threshold) {
@@ -99,76 +135,33 @@ class AlarmComponent extends Component
                     alert("The current volume is higher than this alarm threshold volume");
                 }
             }
-            newList.push(item);
+            newAlarmList.push(list[i]);
         }
 
-        console.log(newList);
+        console.log(newAlarmList);
 
-        this.props.setGlobalState({alarmList: newList});
+        this.props.setGlobalState({alarmList: newAlarmList});
+
+        var alarmRecord = newAlarmList.length.toString();
+        for(var i = 0; i < newAlarmList.length; i++) {
+            alarmRecord = alarmRecord + ',' + newAlarmList[i].threshold + ',' + newAlarmList[i].on;
+        }
+
+        console.log("alarmRecord: " + alarmRecord);
+
+        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
+        //this callback is executed when your Promise is resolved
+        alert("Success writing");
+        }).catch((error) => {
+        //this callback is executed when your Promise is rejected
+        console.log('Promise is rejected with error: ' + error);
+        });
     }
 
-    // convertUTCDateToLocalDate(date) {
-    //     var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
-
-    //     var offset = date.getTimezoneOffset() / 60;
-    //     var hours = date.getHours();
-
-    //     newDate.setHours(hours - offset);
-
-    //     return newDate;   
-    // }
-
-    // fetchReading() {
-    //     var postObj = {
-    //         authCode: this.props.globalState.authCode,
-    //         id: this.props.globalState.id,
-    //     };
-    //     console.log(postObj);
-    //     //if able to pos
-    //     fetch('https://majestic-legend-193620.appspot.com/mobile/readings', {
-    //     // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-    //     // fetch('http://192.168.43.198:8080/mobile/readings', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(postObj)
-
-    //     })
-    //     .then((result) => result.json())
-    //     .then((json) => {
-    //         console.log('Send done');
-    //         console.log(json);
-
-    //         var csvArr = json.csv.split(/,|\n/);
-    //         csvArr.pop();
-    //         var numEntries = csvArr.length/65;
-
-    //         var newList = [];
-    //         for(var i = 0, j = 0; i < numEntries; i++) {
-    //             var time = csvArr[i * 65];
-    //             var newTime = this.convertUTCDateToLocalDate(new Date(time));
-    //             console.log("Time is: " + newTime);
-    //             var sum = 0;
-    //             for(j = 1; j < 65; j++) {
-    //                 sum += parseInt(csvArr[i * 65 + j]);
-    //             }
-    //             var avg = sum / 64;
-    //             newList.push({"time": newTime.toString(), "reading": avg});
-    //             console.log("Reading is: " + avg);
-    //         }
-
-    //         console.log(newList);
-
-    //         this.setState({historyList: newList});
-    //     }).catch((error) => {
-    //         console.log("ERROR in send " + error);
-    //     });
-    // }
-
+    
     render () {
         const list = this.props.globalState.alarmList;
         const dataSource = ds.cloneWithRows(list);
-        // const data = [ 50, 10, 40, 95, -4, -24, 85, 91, 35, 53, -53, 24, 50, -20, -80 ];
-        // const {navigate} = this.props.navigation;
         
         return (
             <SafeAreaView style = {styles.container}>
@@ -185,7 +178,6 @@ class AlarmComponent extends Component
                     renderRow = {(item) => {
                         var alarmValue = item.on == "true" ? true : false;
                         console.log(alarmValue);
-                    // const color = item.connected ? 'green' : '#fff';
                         return (
                             <TouchableHighlight onPress={() => this.editAlarmList(item) }>
                                 <View style= {[ styles.row, { flexDirection: 'row', backgroundColor: 'white'} ]}>
@@ -215,14 +207,6 @@ class AlarmComponent extends Component
         </SafeAreaView>
         );
     }
-  //   render() {
-  //   return (
-  //     <View style={{
-
-  //       }}>
-  //     </View>
-  //   );
-  // }
 }
 
 

@@ -15,6 +15,18 @@ import AddAlarmComponent from './Components/AddAlarmComponent';
 import ProfileComponent from './Components/ProfileComponent';
 import RequestDoctorChangeComponent from './Components/RequestDoctorChangeComponent';
 
+const initialState = {
+    signInCapable: false,
+    authCode: '',
+    email: '',
+    id: -1,
+    history: [],
+    alarmList: [],
+    pendingReadings: [],
+    currentVolume: 0
+};
+
+
 
 const Tabs = TabNavigator ({
     Dashboard: {
@@ -42,7 +54,9 @@ const Tabs = TabNavigator ({
                 <Icon 
                     name="add-alarm"
                     size={30} 
-                    onPress={() => navigation.navigate('AddAlarm')}
+                    onPress={() => {
+                        navigation.navigate('AddAlarm');
+                    }}
                     />
             )
         })
@@ -99,17 +113,6 @@ const App = StackNavigator ({
     }
 }
 );
-
-const initialState = {
-    signInCapable: false,
-    authCode: '',
-    email: '',
-    id: -1,
-    history: [],
-    alarmList: [],
-    pendingReadings: [],
-    currentVolume: 0
-};
 
 const nibva = () => (
     <Provider globalState={initialState}>
