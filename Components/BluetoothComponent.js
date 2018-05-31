@@ -84,6 +84,7 @@ class BLEManager extends Component
 
     componentDidMount () 
     {
+        AsyncStorage.removeItem('VolumeData');
         console.log('componentDidMount(): ');
         const intervalId = BackgroundTimer.setInterval(() => {
             console.log('BackgroundTimer.setInterval(); connectedToPatch: ' + this.state.connectedToPatch);
@@ -321,8 +322,22 @@ class BLEManager extends Component
                             console.log('about to retreiveItem()');
                             this.retrieveItem('VolumeData').then((dataRecord) => {
                                 console.log('dataRecord: '+ dataRecord + ', newCurrentVol: ' + newCurrentVolume);
-                                currentData = dataRecord + ', ' + newCurrentVolume;
-                                console.log('currentData: ' + currentData);
+
+                                if(dataRecord == undefined) {
+                                    currentData = '' + newCurrentVolume;
+                                } else {
+                                    var myArray = dataRecord.split(",");
+                                    console.log('dataRecord Array: ' + myArray);
+                                    console.log('dataRecord length: ' + myArray.length);
+                                    if (myArray.length == 3) {
+                                        console.log('dataRecord length equals target');
+                                        myArray.shift();
+                                        myArray.push(newCurrentVolume);
+                                        currentData = myArray.join();
+                                    } else {
+                                        currentData = dataRecord + ', ' + newCurrentVolume;
+                                    }
+                                }
 
                                 console.log('Current local data: ' + currentData);
                                 this.storeItem('VolumeData', currentData).then(() => {
@@ -606,27 +621,39 @@ class BLEManager extends Component
     async retrieveItem(key) {
         console.log('retreiveItem() was called; key: ' + key);
         try {
-            var currentItem = '';
-          var retrievedItem =  await AsyncStorage.getItem(key).then((patchData) => {
-            console.log('retrieveItem(): got ' + patchData);
-            currentItem = patchData;
-          }, (error) => {
-              console.log('retreiveItem() error: ' + error);
-          });
+            var myData = undefined;
+            const retrievedItem = await AsyncStorage.getItem(key).then((patchData) => {
+                console.log('retrieved item is: ' + patchData);
+                if(patchData != null) {
+                    console.log('returning patchData:' + myData);
+                    myData = patchData;
+                } else {
+                    console.log('returning undefined');
+                }
+            });
 
-          if (retrievedItem == undefined) {
-              console.log('retriveItem() storing in try');
-              this.storeItem(key, '1');
-          }
+            return myData;
+        //     var currentItem = '';
+        //     var retrievedItem =  await AsyncStorage.getItem(key).then((patchData) => {
+        //     console.log('retrieveItem(): got ' + patchData);
+        //     currentItem = patchData;
+        //   }, (error) => {
+        //       console.log('retreiveItem() error: ' + error);
+        //   });
+
+        //   if (retrievedItem == undefined) {
+        //       console.log('retriveItem() storing in try');
+        //       this.storeItem(key, '0');
+        //   }
         
-          retrievedItem = await AsyncStorage.getItem(key);
-          // const item = JSON.parse(retrievedItem);
-          console.log('retrieveItem(); retrievedItem: ' + retrievedItem);
-          const item = retrievedItem;
-          return currentItem;
+        //   retrievedItem = await AsyncStorage.getItem(key);
+        //   // const item = JSON.parse(retrievedItem);
+        //   console.log('retrieveItem(); retrievedItem: ' + retrievedItem);
+        //   const item = retrievedItem;
+        //   return currentItem;
         } catch (error) {
-          this.storeItem(key, '2');
-          const retrievedItem = await AsyncStorage.getItem(key);
+        //   this.storeItem(key, '2');
+        //   const retrievedItem = await AsyncStorage.getItem(key);
           console.log('retrieveItem(): ' + error.message);
           return retrievedItem;
         }
