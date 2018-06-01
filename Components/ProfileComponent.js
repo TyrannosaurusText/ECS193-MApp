@@ -87,19 +87,21 @@ class ProfileComponent extends Component
         
         return (
             <SafeAreaView>
-                <Text>Personal Information:</Text>
-                <Text>{this.state.givenName}, {this.state.familyName}</Text>
-                <Text>{this.state.email}</Text>
-
-                <Text>Doctor Information:</Text>
-                <Text>{this.state.doctorGivenName}, {this.state.doctorFamilyName}</Text>
-                <Text>{this.state.doctorEmail}</Text>
+                <View style={{height:window.height * 0.3}}>
+                    <Text style={{fontWeight: 'bold'}}>Personal Information:</Text>
+                    <Text>{this.state.givenName}, {this.state.familyName}</Text>
+                    <Text>{this.state.email}</Text>
+                </View>
+                <View style={{height:window.height * 0.3}}>
+                    <Text style={{fontWeight: 'bold'}}>Doctor Information:</Text>
+                    <Text>{this.state.doctorGivenName}, {this.state.doctorFamilyName}</Text>
+                    <Text>{this.state.doctorEmail}</Text>
+                </View>
 
                 <Button
                     title = "Fetch"
                     onPress = {this.fetchProfile}
                 />
-
                 <Button
                     title = "Request doctor change"
                     onPress = {() => {navigate("RequestDoctorChange")}}
