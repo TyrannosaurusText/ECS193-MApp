@@ -609,6 +609,8 @@ class BLEManager extends Component
                 console.log('Trying to disconnect from peripheral');
                 BleManager.disconnect(peripheral.id).then(() => {
                     this.state.connectedToPatch = false;
+                    this.props.setGlobalState({bluetoothConnected: false});
+
                     //this.state.myPatch = null;
                 })
                 this.resetReadings();
@@ -636,6 +638,8 @@ class BLEManager extends Component
                         this.setState({peripherals});
                     }
                     console.log('Connected to ' + peripheral.id);
+                    this.props.setGlobalState({bluetoothConnected: true});
+
 
                     // BleManager.createBond(peripheral.id).then(() => {
                     //     console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
@@ -679,21 +683,9 @@ class BLEManager extends Component
 
         return (
             <SafeAreaView style = {styles.container}>
-                <TouchableHighlight
-                    style = {{
-                        marginTop: 10,
-                        // marginRight: 50,
-                        margin: 20,
-                        padding: 20,
-                        backgroundColor:'#ccc'
-                    }}
-                    onPress = {() => this.props.navigation.navigate('Dashboard')}
-                >
-                    <Text>Back to Dashboard</Text>
-                </TouchableHighlight>
                 <TouchableHighlight 
                     style = {{
-                        marginTop: 0,
+                        marginTop: 10,
                         margin: 20, 
                         padding:20, 
                         backgroundColor:'#ccc'
@@ -713,7 +705,7 @@ class BLEManager extends Component
                 >
                     <Text>Retrieve connected peripherals</Text>
                 </TouchableHighlight>
-                {/* <TouchableHighlight
+                <TouchableHighlight
                     onPress = {() => {
                         if (this.state.autoRead == false) {
                             this.state.autoRead = true;
@@ -732,8 +724,8 @@ class BLEManager extends Component
                         backgroundColor:'#ccc'
                     }}
                 >
-                    <Text>AutoScan ({this.state.autoRead})</Text>
-                </TouchableHighlight> */}
+                    <Text>Bluetooth device setup</Text>
+                </TouchableHighlight>
                 <ScrollView style = {styles.scroll}>
                     {
                         (list.length == 0) &&

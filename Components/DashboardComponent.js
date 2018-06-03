@@ -19,7 +19,7 @@ import AlertsComponent from './AlertsComponent';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');
-const maxVolume = 1000;
+const maxVolume = 100;
 
 class DashboardComponent extends Component
 {
@@ -198,11 +198,11 @@ class DashboardComponent extends Component
                 }}>
 
                     <AnimatedCircularProgress
-                        size={window.width * 0.8}
+                        size={window.height * 0.5}
                         width={window.width * 0.08}
                         // fill={this.props.globalState.currentVolume}
-                        fill={500 / maxVolume}
-                        tintColor="#43cdcf"
+                        fill={67}
+                        tintColor="#4885ed"
                         backgroundColor="#eaeaea"
                         arcSweepAngle={360}>
                         {
@@ -216,8 +216,13 @@ class DashboardComponent extends Component
                     </AnimatedCircularProgress>
                 </View>
                 <View style = {{marginTop: window.height * 0.05}}>
-                        <Text style = {{ textAlign: 'center'}}>{this.props.globalState.email == '' ? 'You are not signed in' : 'You are signed in'}</Text>
-                    </View>
+                    {
+                        this.props.globalState.bluetoothConnected == false && <Text style = {{ textAlign: 'center', color: 'red'}}>Bluetooth: Disconnected</Text>
+                    }
+                    {
+                        this.props.globalState.bluetoothConnected == true && <Text style = {{ textAlign: 'center', color: 'green'}}>Bluetooth: Connected</Text>
+                    }
+                </View>
                 <View style={{marginTop:window.height*0.05, marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
                     <Button
                         title = {signText}
