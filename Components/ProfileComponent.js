@@ -102,10 +102,6 @@ class ProfileComponent extends Component
                     title = "Fetch"
                     onPress = {this.fetchProfile}
                 />
-                <Button
-                    title = "Request doctor change"
-                    onPress = {() => {navigate("RequestDoctorChange")}}
-                />
             </SafeAreaView>
         );
     }

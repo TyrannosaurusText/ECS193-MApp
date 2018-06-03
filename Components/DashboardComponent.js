@@ -19,7 +19,7 @@ import AlertsComponent from './AlertsComponent';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');
-const maxVolume = 100;
+const maxVolume = 1000;
 
 class DashboardComponent extends Component
 {
@@ -183,43 +183,57 @@ class DashboardComponent extends Component
     {
         let signFunc = this.props.globalState.email != '' ? this._signOut : this._signIn;
         let signText = this.props.globalState.email != '' ? 'Sign Out' : 'Sign In';
+        const {navigate} = this.props.navigation;
         
         return (
             <SafeAreaView style = {{
                 flex: 1, 
                 flexDirection: 'column',
-                justifyContent: 'center', 
-                alignItems: 'center'
+                
             }}> 
-                <AnimatedCircularProgress
-                    size={200}
-                    width={20}
-                    fill={this.props.globalState.currentVolume}
-                    tintColor="#43cdcf"
-                    backgroundColor="#eaeaea"
-                    arcSweepAngle={360}>
-                    {
-                        (fill) => (
-                            <Text>{Math.floor(this.props.globalState.currentVolume / maxVolume * 100)}%</Text>
-                        )
-                    }
-                </AnimatedCircularProgress>
-                <View style={{marginTop:window.width*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25, margin: 10}} >
-                <Button
-                    title = {signText}
-                    onPress = {signFunc}
-                />
-                <Button 
-                    title='Update circle'
-                    onPress={() => {
-                        // this.setState({percentage: this.state.percentage + 10});
-                        var newCurrentVolume = this.props.globalState.currentVolume + 10;
-                        this.props.setGlobalState({currentVolume: newCurrentVolume});
-                        console.log("Update circle: " + this.props.globalState.currentVolume);
+                <View style = {{
+                    marginTop: window.height * 0.1,
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
 
-                        console.log(this.props.globalState.currentVolume);
-                        this.checkAlarm(newCurrentVolume);
-                    }}/>
+                    <AnimatedCircularProgress
+                        size={window.width * 0.8}
+                        width={window.width * 0.08}
+                        // fill={this.props.globalState.currentVolume}
+                        fill={500 / maxVolume}
+                        tintColor="#43cdcf"
+                        backgroundColor="#eaeaea"
+                        arcSweepAngle={360}>
+                        {
+                            (fill) => (
+                                <View>
+                                    <Text style={{ textAlign: 'center', fontSize: 20}}>Bladder volume:</Text>
+                                    <Text style = {{ textAlign: 'center', fontWeight: 'bold', fontSize: 30 }}>{500}  mL</Text>
+                                </View>
+                            )
+                        }
+                    </AnimatedCircularProgress>
+                </View>
+                <View style = {{marginTop: window.height * 0.05}}>
+                        <Text style = {{ textAlign: 'center'}}>{this.props.globalState.email == '' ? 'You are not signed in' : 'You are signed in'}</Text>
+                    </View>
+                <View style={{marginTop:window.height*0.05, marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
+                    <Button
+                        title = {signText}
+                        onPress = {signFunc}
+                        // color = 'black'
+                    />
+                    <View style = {{marginTop: window.height * 0.01}}>
+                        <Button
+                            title = 'Profile'
+                            // color = 'black'
+                            onPress = {() => {
+                                    navigate('Profile');
+                                }
+                            }
+                        />
+                    </View>
                 </View>
 
             </SafeAreaView>
@@ -308,8 +322,8 @@ class DashboardComponent extends Component
         })
         .then((res) => res.json())
         .then((json) => {
-            if (!json.hasOwnProperty('err'))
-            {
+            // if (!json.hasOwnProperty('err'))
+            // {
                 this.props.setGlobalState({
                     email: '',
                     id: -1,
@@ -327,7 +341,7 @@ class DashboardComponent extends Component
                 GoogleSignin.revokeAccess()
                     .then(() => {})
                     .catch((err) => {});
-            }
+            // }
         })
         .catch((err) => {
             console.log('ERR');

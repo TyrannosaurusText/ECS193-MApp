@@ -28,6 +28,7 @@ import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LineChart, Grid } from 'react-native-svg-charts'
 import FeedbackComponent from './FeedbackComponent';
+import AddAlarmComponent from './AddAlarmComponent';
 import { withNavigation } from 'react-navigation';
 
 
@@ -162,6 +163,7 @@ class AlarmComponent extends Component
     render () {
         const list = this.props.globalState.alarmList;
         const dataSource = ds.cloneWithRows(list);
+        const {navigate} = this.props.navigation;
         
         return (
             <SafeAreaView style = {styles.container}>
@@ -169,7 +171,7 @@ class AlarmComponent extends Component
             {
                 (list.length == 0) &&
                 <View style = {{ flex:1, margin: 20 }}>
-                    <Text style = {{ textAlign: 'center' }}>No Alarm</Text>
+                    <Text style = {{ textAlign: 'center' }}>No alarm is setup</Text>
                 </View>
             }
                 <ListView
@@ -183,9 +185,8 @@ class AlarmComponent extends Component
                                 <View style= {[ styles.row, { flexDirection: 'row', backgroundColor: 'white'} ]}>
                                     <Text 
                                         style = {{
-                                            fontSize: 14, 
+                                            fontSize: 14,
                                             textAlign: 'center', 
-                                            color: '#333333', 
                                             padding: 10,
                                         }}
                                     >Alarm at threshold value: {item.threshold}</Text>
@@ -194,7 +195,7 @@ class AlarmComponent extends Component
                                         onValueChange={() => {console.log("Toggle pressed"); this.toggleAlarm(item)}} 
                                         style={{
                                             position: 'absolute', 
-                                            right: 0,
+                                            right: 5,
                                             justifyContent: 'center',
                                         }}
                                     />
@@ -204,6 +205,26 @@ class AlarmComponent extends Component
                     }}
                 />
             </ScrollView>
+            <View style={{
+                height:window.height*0.2,
+                justifyContent: 'center',
+                marginRight:window.width*0.25, 
+                marginLeft:window.width*0.25
+                }} >
+            <Button
+                title = 'Add Alaram'
+                // color = 'black'
+                onPress = {() => {
+                    if(list.length < 10) {
+                        navigate('AddAlarm');
+                    }
+                    else {
+                        alert("There can be a maximum of 10 alarms set at once");
+                    }
+                }
+            }
+            />
+            </View>
         </SafeAreaView>
         );
     }
@@ -223,7 +244,10 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     row: {
-        margin: 10
+        margin: 10,
+        height: window.height * 0.1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

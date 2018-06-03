@@ -70,11 +70,6 @@ class AddAlarmComponent extends Component {
 		var newAlarmList = this.props.globalState.alarmList;
 		var formValues = this.formGenerator.getValues();
 
-		if(newAlarmList.length == 10) {
-			alert("There can be a maximum of 10 alarms set at once");
-			return;
-		}
-
 		for(var i in newAlarmList) {
 			console.log(newAlarmList[i].threshold);
 			console.log(formValues.amount);
@@ -101,7 +96,7 @@ class AddAlarmComponent extends Component {
 
 	        this.storeItem("alarmRecord", alarmRecord).then((stored) => {
 	                //this callback is executed when your Promise is resolved
-	                alert("Success writing");
+	                // alert("Success writing");
 	                }).catch((error) => {
 	                //this callback is executed when your Promise is rejected
 	                console.log('Promise is rejected with error: ' + error);
@@ -115,6 +110,7 @@ class AddAlarmComponent extends Component {
 		return (
 			<SafeAreaView style = {styles.container}>
 				<View>
+					<Text style = {{marginLeft: 20, marginTop: 20, fontSize: 15, fontWeight: 'bold'}}>At what threshold value do you want to be notified?</Text>
 					<GenerateForm
 						ref={(c) => {
 							this.formGenerator = c;
@@ -124,7 +120,7 @@ class AddAlarmComponent extends Component {
 					/>
 				</View>
 				<Button
-					title="Submit"
+					title="Setup "
 					onPress={this.handleSubmit}
 					disabled={this.state.invalid}
 				/>
