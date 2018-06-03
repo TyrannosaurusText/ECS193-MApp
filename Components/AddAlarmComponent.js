@@ -110,6 +110,7 @@ class AddAlarmComponent extends Component {
 		return (
 			<SafeAreaView style = {styles.container}>
 				<View>
+					<Text style = {{fontWeight: 'bold'}}>At what threshold value do you want to be notified?</Text>
 					<GenerateForm
 						ref={(c) => {
 							this.formGenerator = c;
@@ -119,7 +120,7 @@ class AddAlarmComponent extends Component {
 					/>
 				</View>
 				<Button
-					title="Submit"
+					title="Add alarm"
 					onPress={this.handleSubmit}
 					disabled={this.state.invalid}
 				/>

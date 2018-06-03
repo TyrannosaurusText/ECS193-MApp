@@ -171,7 +171,7 @@ class AlarmComponent extends Component
             {
                 (list.length == 0) &&
                 <View style = {{ flex:1, margin: 20 }}>
-                    <Text style = {{ textAlign: 'center' }}>No Alarm</Text>
+                    <Text style = {{ textAlign: 'center' }}>No alarm is setup</Text>
                 </View>
             }
                 <ListView
@@ -206,10 +206,15 @@ class AlarmComponent extends Component
                     }}
                 />
             </ScrollView>
-            <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
+            <View style={{
+                height:window.height*0.2,
+                justifyContent: 'center',
+                marginRight:window.width*0.25, 
+                marginLeft:window.width*0.25
+                }} >
             <Button
                 title = 'Add Alaram'
-                color = 'black'
+                // color = 'black'
                 onPress = {() => {
                     if(list.length < 10) {
                         navigate('AddAlarm');

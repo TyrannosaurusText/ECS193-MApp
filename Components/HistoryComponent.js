@@ -62,6 +62,9 @@ class HistoryComponent extends Component
     }
 
     fetchReading() {
+        if(this.props.globalState.email == '')
+            return
+
         var postObj = {
             authCode: this.props.globalState.authCode,
             id: this.props.globalState.id,
@@ -116,6 +119,18 @@ class HistoryComponent extends Component
 
         return (
             <View style = {styles.container}>
+                {
+                    (list.length == 0) &&
+                    <View style = {{margin: 20}}>
+                        <Text style = {{ textAlign: 'center' }}>No data to graph</Text>
+                    </View>
+                }
+                {
+                    (list.length != 0) &&
+                    <View style = {{margin: 20}}>
+                        <Text style = {{ textAlign: 'center' }}>Readings for the past eight hours</Text>
+                    </View>
+                }
                 <View style={{
                     flexDirection: 'row',
                     height: window.height * 0.4,
@@ -123,17 +138,16 @@ class HistoryComponent extends Component
                     // alignItems: 'center',
                     // justifyContent: 'center',
                 }}>
-                    
-                        <YAxis
-                            data={data}
-                            contentInset={{ top: 20, bottom: 20 }}
-                            style={ { 
-                                height: window.height * 0.4,
-                                width: window.width*0.1 
-                            } }
-                            svg={{ fontSize: 10, fill: 'grey' }}
-                            yAccessor={ ({ item }) => item.reading }
-                        />
+                    <YAxis
+                        data={data}
+                        contentInset={{ top: 20, bottom: 20 }}
+                        style={ { 
+                            height: window.height * 0.4,
+                            width: window.width*0.1 
+                        } }
+                        svg={{ fontSize: 10, fill: 'grey' }}
+                        yAccessor={ ({ item }) => item.reading }
+                    />
                     <View style={{
                         flex: 1,
                         width: window.width*0.9
@@ -149,7 +163,8 @@ class HistoryComponent extends Component
                             contentInset={ { top: 20, bottom: 20 } }
                             svg={{
                                 strokeWidth: 2,
-                                stroke: 'rgb(134, 65, 244)',
+                                // stroke: 'rgb(134, 65, 244)',
+                                stroke: 'rgb(72, 133, 237)'
                             }}
                         >
                             <Grid/>
@@ -170,7 +185,7 @@ class HistoryComponent extends Component
                     <Button
                         title = 'Refresh'
                         onPress = {this.fetchReading}
-                        color = 'black'
+                        // color = 'black'
                     />
                     </View>
                     <View style={{
@@ -180,7 +195,7 @@ class HistoryComponent extends Component
                     }}>
                     <Button 
                         title = 'Submit Event'
-                        color = 'black'
+                        // color = 'black'
                         onPress = {() => {
                                 if(this.props.globalState.email != '') {
                                     navigate('Feedback');

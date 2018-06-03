@@ -89,18 +89,7 @@ const Tabs = TabNavigator ({
             */
         })
     },
-    Profile: {
-        screen: ProfileComponent,
-        navigationOptions: ({navigation}) => ({
-            headerTitle: 'NIBVA',
-            headerStyle: {
-                backgroundColor: 'black'
-            },
-            headerTitleStyle: {
-                color: 'white'
-            }
-        })
-    }
+    
 },
 {
     headerMode: 'screen',
@@ -139,10 +128,16 @@ const App = StackNavigator ({
             headerTitle: 'Add new alarm',
         })
     },
-    RequestDoctorChange: {
-        screen: RequestDoctorChangeComponent,
-        navigationOptions : ({ navigation }) => ({
-            headerTitle: 'Request Doctor Change',
+    Profile: {
+        screen: ProfileComponent,
+        navigationOptions: ({navigation}) => ({
+            headerTitle: 'Profile',
+            // headerStyle: {
+            //     backgroundColor: 'black'
+            // },
+            // headerTitleStyle: {
+            //     color: 'white'
+            // }
         })
     }
 }
