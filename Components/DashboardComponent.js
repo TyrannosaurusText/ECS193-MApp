@@ -192,34 +192,27 @@ class DashboardComponent extends Component
                 alignItems: 'center'
             }}> 
                 <AnimatedCircularProgress
-                    size={200}
-                    width={20}
+                    size={window.width * 0.7}
+                    width={window.width * 0.1}
                     fill={this.props.globalState.currentVolume}
                     tintColor="#43cdcf"
                     backgroundColor="#eaeaea"
                     arcSweepAngle={360}>
                     {
                         (fill) => (
+                            <View>
+                            <Text>Bladder volume:</Text>
                             <Text>{Math.floor(this.props.globalState.currentVolume / maxVolume * 100)}%</Text>
+                            </View>
                         )
                     }
                 </AnimatedCircularProgress>
-                <View style={{marginTop:window.width*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25, margin: 10}} >
+                <View style={{marginTop:window.height*0.125, marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
                 <Button
                     title = {signText}
                     onPress = {signFunc}
+                    color = 'black'
                 />
-                <Button 
-                    title='Update circle'
-                    onPress={() => {
-                        // this.setState({percentage: this.state.percentage + 10});
-                        var newCurrentVolume = this.props.globalState.currentVolume + 10;
-                        this.props.setGlobalState({currentVolume: newCurrentVolume});
-                        console.log("Update circle: " + this.props.globalState.currentVolume);
-
-                        console.log(this.props.globalState.currentVolume);
-                        this.checkAlarm(newCurrentVolume);
-                    }}/>
                 </View>
 
             </SafeAreaView>

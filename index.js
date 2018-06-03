@@ -32,24 +32,50 @@ const Tabs = TabNavigator ({
     Dashboard: {
         screen: DashboardComponent,
         navigationOptions : ({ navigation }) => ({
-            headerTitle: 'Dashboard',
+            headerTitle: 'NIBVA',
+            headerStyle: {
+                backgroundColor: 'black'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            }
         })
     },
     Bluetooth: {
         screen: BluetoothComponent,
         navigationOptions : ({ navigation }) => ({
-            headerTitle: 'Bluetooth',
+            headerTitle: 'NIBVA',
+            headerStyle: {
+                backgroundColor: 'black'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            }
         })
     },
     History: {
         screen: HistoryComponent,
         navigationOptions : ({ navigation }) => ({
-            headerTitle: 'History',
+            headerTitle: 'NIBVA',
+            headerStyle: {
+                backgroundColor: 'black'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            }
         })
     },
     Alarm: {screen: AlarmComponent,
         navigationOptions : ({ navigation }) => ({
-            headerTitle: 'Alarms',
+            headerTitle: 'NIBVA',
+            headerStyle: {
+                backgroundColor: 'black'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            }
+            /*
+            {
             headerRight: (
                 <Icon 
                     name="add-alarm"
@@ -59,12 +85,20 @@ const Tabs = TabNavigator ({
                     }}
                     />
             )
+            }
+            */
         })
     },
     Profile: {
         screen: ProfileComponent,
         navigationOptions: ({navigation}) => ({
-            headerTitle: 'Profile',
+            headerTitle: 'NIBVA',
+            headerStyle: {
+                backgroundColor: 'black'
+            },
+            headerTitleStyle: {
+                color: 'white'
+            }
         })
     }
 },
@@ -82,7 +116,7 @@ const Tabs = TabNavigator ({
     },
     lazy: false,
     removeClippedSubviews: false,
-    swipeEnabled: false,
+    swipeEnabled: true,
     tabBarPosition: 'bottom',
     animationEnabled: true
 });

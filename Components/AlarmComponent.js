@@ -28,6 +28,7 @@ import { withGlobalState } from 'react-globally';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { LineChart, Grid } from 'react-native-svg-charts'
 import FeedbackComponent from './FeedbackComponent';
+import AddAlarmComponent from './AddAlarmComponent';
 import { withNavigation } from 'react-navigation';
 
 
@@ -162,6 +163,7 @@ class AlarmComponent extends Component
     render () {
         const list = this.props.globalState.alarmList;
         const dataSource = ds.cloneWithRows(list);
+        const {navigate} = this.props.navigation;
         
         return (
             <SafeAreaView style = {styles.container}>
@@ -204,6 +206,21 @@ class AlarmComponent extends Component
                     }}
                 />
             </ScrollView>
+            <View style={{marginRight:window.width*0.25, marginLeft:window.width*0.25}} >
+            <Button
+                title = 'Add Alaram'
+                color = 'black'
+                onPress = {() => {
+                    if(list.length < 10) {
+                        navigate('AddAlarm');
+                    }
+                    else {
+                        alert("There can be a maximum of 10 alarms set at once");
+                    }
+                }
+            }
+            />
+            </View>
         </SafeAreaView>
         );
     }

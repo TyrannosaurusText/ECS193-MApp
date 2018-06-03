@@ -170,6 +170,7 @@ class HistoryComponent extends Component
                     <Button
                         title = 'Refresh'
                         onPress = {this.fetchReading}
+                        color = 'black'
                     />
                     </View>
                     <View style={{
@@ -179,6 +180,7 @@ class HistoryComponent extends Component
                     }}>
                     <Button 
                         title = 'Submit Event'
+                        color = 'black'
                         onPress = {() => {
                                 if(this.props.globalState.email != '') {
                                     navigate('Feedback');
