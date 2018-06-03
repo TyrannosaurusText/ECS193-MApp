@@ -185,7 +185,7 @@ class AlarmComponent extends Component
                                 <View style= {[ styles.row, { flexDirection: 'row', backgroundColor: 'white'} ]}>
                                     <Text 
                                         style = {{
-                                            fontSize: 14,
+                                            fontSize: 16,
                                             textAlign: 'center', 
                                             padding: 10,
                                         }}
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
     },
     row: {
         margin: 10,
-        height: window.height * 0.1,
+        height: window.height * 0.07,
         justifyContent: 'center',
         alignItems: 'center',
     },
