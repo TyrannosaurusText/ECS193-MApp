@@ -185,9 +185,8 @@ class AlarmComponent extends Component
                                 <View style= {[ styles.row, { flexDirection: 'row', backgroundColor: 'white'} ]}>
                                     <Text 
                                         style = {{
-                                            fontSize: 14, 
+                                            fontSize: 14,
                                             textAlign: 'center', 
-                                            color: '#333333', 
                                             padding: 10,
                                         }}
                                     >Alarm at threshold value: {item.threshold}</Text>
@@ -196,7 +195,7 @@ class AlarmComponent extends Component
                                         onValueChange={() => {console.log("Toggle pressed"); this.toggleAlarm(item)}} 
                                         style={{
                                             position: 'absolute', 
-                                            right: 0,
+                                            right: 5,
                                             justifyContent: 'center',
                                         }}
                                     />
@@ -245,7 +244,10 @@ const styles = StyleSheet.create({
         margin: 10,
     },
     row: {
-        margin: 10
+        margin: 10,
+        height: window.height * 0.1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

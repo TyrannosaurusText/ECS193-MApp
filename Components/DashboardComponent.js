@@ -19,7 +19,7 @@ import AlertsComponent from './AlertsComponent';
 import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const window = Dimensions.get('window');
-const maxVolume = 100;
+const maxVolume = 1000;
 
 class DashboardComponent extends Component
 {
@@ -200,15 +200,16 @@ class DashboardComponent extends Component
                     <AnimatedCircularProgress
                         size={window.width * 0.8}
                         width={window.width * 0.08}
-                        fill={this.props.globalState.currentVolume}
+                        // fill={this.props.globalState.currentVolume}
+                        fill={500 / maxVolume}
                         tintColor="#43cdcf"
                         backgroundColor="#eaeaea"
                         arcSweepAngle={360}>
                         {
                             (fill) => (
                                 <View>
-                                <Text style={{ textAlign: 'center', fontSize: 20}}>Bladder volume:</Text>
-                                <Text style = {{ textAlign: 'center', fontWeight: 'bold', fontSize: 30 }}>0</Text>
+                                    <Text style={{ textAlign: 'center', fontSize: 20}}>Bladder volume:</Text>
+                                    <Text style = {{ textAlign: 'center', fontWeight: 'bold', fontSize: 30 }}>{500}  mL</Text>
                                 </View>
                             )
                         }
@@ -321,8 +322,8 @@ class DashboardComponent extends Component
         })
         .then((res) => res.json())
         .then((json) => {
-            if (!json.hasOwnProperty('err'))
-            {
+            // if (!json.hasOwnProperty('err'))
+            // {
                 this.props.setGlobalState({
                     email: '',
                     id: -1,
@@ -340,7 +341,7 @@ class DashboardComponent extends Component
                 GoogleSignin.revokeAccess()
                     .then(() => {})
                     .catch((err) => {});
-            }
+            // }
         })
         .catch((err) => {
             console.log('ERR');

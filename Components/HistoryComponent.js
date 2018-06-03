@@ -128,7 +128,7 @@ class HistoryComponent extends Component
                 {
                     (list.length != 0) &&
                     <View style = {{margin: 20}}>
-                        <Text style = {{ textAlign: 'center' }}>Readings for the past eight hours</Text>
+                        <Text style = {{ fontSize: 20, fontWeight: 'bold', textAlign: 'center' }}>Readings For The Past Eight Hours</Text>
                     </View>
                 }
                 <View style={{
@@ -226,15 +226,15 @@ class HistoryComponent extends Component
                             <View style= {[ styles.row, { backgroundColor: 'white'} ]}>
                                 <Text 
                                     style = {{
-                                        fontSize: 14, 
+                                        fontSize: 12, 
                                         textAlign: 'center', 
                                         color: '#333333', 
                                         padding: 10,
                                     }}
-                                >Timestamp: {item.time}</Text>
+                                >{item.time}</Text>
                                 <Text 
                                     style = {{
-                                        fontSize: 12, 
+                                        fontSize: 14, 
                                         textAlign: 'center', 
                                         color: '#333333', 
                                         padding: 10,
