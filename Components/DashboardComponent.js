@@ -198,7 +198,7 @@ class DashboardComponent extends Component
                 }}>
 
                     <AnimatedCircularProgress
-                        size={window.width * 0.8}
+                        size={window.height * 0.5}
                         width={window.width * 0.08}
                         // fill={this.props.globalState.currentVolume}
                         fill={67}

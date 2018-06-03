@@ -677,7 +677,7 @@ class BLEManager extends Component
                 >
                     <Text>Retrieve connected peripherals</Text>
                 </TouchableHighlight>
-                {/* <TouchableHighlight
+                <TouchableHighlight
                     onPress = {() => {
                         if (this.state.autoRead == false) {
                             this.state.autoRead = true;
@@ -696,8 +696,8 @@ class BLEManager extends Component
                         backgroundColor:'#ccc'
                     }}
                 >
-                    <Text>AutoScan ({this.state.autoRead})</Text>
-                </TouchableHighlight> */}
+                    <Text>Bluetooth device setup</Text>
+                </TouchableHighlight>
                 <ScrollView style = {styles.scroll}>
                     {
                         (list.length == 0) &&
