@@ -63,6 +63,8 @@ class BLEManager extends Component
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
         this.isConnected = this.isConnected.bind(this);
+        this.badAuthSignOut = this.badAuthSignOut.bind(this);
+        this.updateInternalStorage = this.updateInternalStorage.bind(this);
     }
 
     /**
@@ -347,6 +349,7 @@ class BLEManager extends Component
                                 .then((json) => {
                                     console.log('ReSend done, prev resendCount=' + this.state.resendCount);
                                     console.log(json);
+                                    this.badAuthSignOut(json);
                                     pendingReadings = [];
                                     this.props.setGlobalState({pendingReadings});
 
@@ -411,6 +414,7 @@ class BLEManager extends Component
                                         .then((json) => {
                                             console.log('Send done, resendCount=' + this.state.resendCount);
                                             console.log(json);
+                                            this.badAuthSignOut(json);
                                             pendingReadings = [];
                                             this.props.setGlobalState({pendingReadings});
                                         });
@@ -434,6 +438,7 @@ class BLEManager extends Component
                                         .then((json) => {
                                             console.log('Send done, resendCount=' + this.state.resendCount);
                                             console.log(json);
+                                            this.badAuthSignOut(json);
                                             pendingReadings = [];
                                             this.props.setGlobalState({pendingReadings});
                                         });
@@ -490,6 +495,29 @@ class BLEManager extends Component
         }
         var readCharBound = readChar.bind(this);
         readCharBound();
+    }
+
+    badAuthSignOut(json) {
+        if (json.hasOwnProperty('err') && json.err == 'Bad Auth') {
+            
+            this.props.setGlobalState({
+                email: '',
+                id: -1,
+                authCode: ''
+            });
+            var signInRecord = ',,-1';
+                    
+            this.storeItem("signInRecord", signInRecord).then((stored) => {
+            //this callback is executed when your Promise is resolved
+            alert("Success writing");
+            }).catch((error) => {
+            //this callback is executed when your Promise is rejected
+            console.log('Promise is rejected with error: ' + error);
+            });
+            GoogleSignin.revokeAccess()
+                .then(() => {})
+                .catch((err) => {});
+        }        
     }
 
     updateInternalStorage(key, newValue) {
