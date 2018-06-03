@@ -39,16 +39,18 @@ class BLEManager extends Component
         for (var j = 0; j < 64; j++) newStore[j] = 0;
         
         this.state = {
-            scanning:false,
-            peripherals: new Map(),
-            appState: '',
-            reading: false,
-            readingsCompleted: 0,
-            curReadings: newStore,
-            charsRead: 0,
-            myPatch: null,
-            connectedToPatch: false,
-            autoRead: false
+            scanning:false,             // is ble adapter scanning for devices
+            peripherals: new Map(),     // list of found ble devices
+            appState: '',               // state of application
+            reading: false,             // is phone currently reading from ble device
+            curReadings: newStore,      // current characteristic value readings (array of 64 floats)
+            charsRead: 0,               // how many total reads has occured for this interval of reading               
+            myPatch: null,              // ble object for the patch
+            connectedToPatch: false,    // whether the phone is currently connected to the patch
+            autoRead: false,            // will the phone automatically connect to a stored device or not
+            resendCount: 0,             // sets of readings that failed to be sent to server, need to be resent 
+            maxStore: 6,                // max amount of readings to store 
+            maxPlotData: 40             // max amount of readings to display on plot at a time 
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -63,29 +65,55 @@ class BLEManager extends Component
         this.isConnected = this.isConnected.bind(this);
     }
 
+    /**
+     * resetReadings()
+     * Reset to a state ready for another set of readings
+     */
     resetReadings () {
-        console.log('resetReadings() before, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        // console.log('resetReadings(): before, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        /**
+         * Set phone state to: not reading characteristic data, zero currently
+         * read data, no stored raw characteristic data
+         */
         this.state.reading = false;
         this.state.charsRead = 0;
         var newStore = new Array(64);
         for (var j = 0; j < 64; j++) newStore[j] = 0;
         this.setState({curReadings: newStore});
-        console.log('resetReadings() after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
+        // console.log('resetReadings(): after, reading: ' + this.state.reading + ', charsRead: ' + this.state.charsRead);
     }
 
+    /**
+     * processData()
+     * @param {*} floats_64  Raw characteristic data
+     * Processes raw characteristic data to usable volume data (64 floats
+     * of raw data -> 1 float of volumetric data)
+     */
     processData (floats_64) {
-        dataValue = 0;
+        var dataValue = 0;
         for (var i = 0; i < 64; i++) dataValue += floats_64[i];
         dataValue = dataValue / 64;
-
-        console.log('processData(): ' + dataValue);
+        // console.log('processData(): ' + dataValue);
         return dataValue;
     }
 
+    /**
+     * componentDidMount()
+     * Sets up component tasks on mounting
+     */
     componentDidMount () 
     {
-        AsyncStorage.removeItem('VolumeData');
         console.log('componentDidMount(): ');
+
+        /**
+         * Reset phone internal storage (for testing purposes)
+         */
+        AsyncStorage.removeItem('VolumeData');
+        AsyncStorage.removeItem('JSONData');
+
+        /**
+         * Start ble background task
+         */
         const intervalId = BackgroundTimer.setInterval(() => {
             console.log('BackgroundTimer.setInterval(); connectedToPatch: ' + this.state.connectedToPatch);
             if(this.state.connectedToPatch == false) {
@@ -95,7 +123,7 @@ class BLEManager extends Component
                 console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
             }
-        }, 30000);
+        }, 10000);
 
         AppState.addEventListener('change', this.handleAppStateChange);
 
@@ -132,10 +160,21 @@ class BLEManager extends Component
 
     }
 
+    /**
+     * isConnected()
+     * @param {*} peripheral Ble peripheral
+     * Check if phone is connected to peripheral. 
+     */
     isConnected(peripheral) {
         this.retrieveConnected();
         return this.state.peripherals.has(peripheral.id);
     }
+
+    /**
+     * handleAppStateChange()
+     * @param {*} nextAppState Application state
+     * Do certain actions depending on app state change.
+     */
     handleAppStateChange (nextAppState) 
     {
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') 
@@ -244,8 +283,9 @@ class BLEManager extends Component
                         for (var j = 0; j < 64; j++)
                         {
                             curr[j] += readings[j];
-                            this.setState({curReadings: curr});
                         }
+
+                        this.setState({curReadings: curr});
 
                         // if (data.value == 4)
                         if (this.state.charsRead == 31)
@@ -290,79 +330,150 @@ class BLEManager extends Component
                             console.log(postObj);
 
                             //if able to post
-                            if(this.props.globalState.email != '') {
+                            var savedData;
+                            var resendData = (oldData) => {
+                                console.log('resendAllData(): oldData=' + oldData)
+                                var indexResend = oldData.length - this.state.resendCount;
+                                console.log('About to resend: ' + oldData[indexResend]);
                                 fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(postObj)
+                                    body: oldData[indexResend]
                                 })
-                                .then((result) => result.json())
+                                .then((result) => result.json(), (error) => {
+                                    console.log('Resend failed: resendCount=' + this.state.resendCount + ',error=' + error);
+                                    
+                                })
                                 .then((json) => {
-                                    console.log('Send done');
+                                    console.log('ReSend done, prev resendCount=' + this.state.resendCount);
                                     console.log(json);
                                     pendingReadings = [];
                                     this.props.setGlobalState({pendingReadings});
+
+                                    if(json != undefined) {
+                                        this.state.resendCount -= 1;
+                                        console.log('ReSend done, curr resendCount=' + this.state.resendCount);
+                                        if(this.state.resendCount > 0) {
+                                            resendData(savedData);
+                                        }
+                                    }
                                 });
                             }
-                            // Local storage
-                            // else {
-                            //     var newReadingList = [];
-                            //     this.retrievedItem("offlineReadings").then((offlineReadings) => {
-                            //         // Need to parse offlineReadings
-                            //         // newReadingList = offlineReadings;
-                            //         var offlineEntry;
-                            //         newReadingList.push({offlineEntry});
-                            //     });
-                            // }
+
+                            var resendAllData = resendData.bind(this);
+
+                            if(this.props.globalState.email != '') {
+                                /**
+                                 * Resend data that failed to send
+                                 */
+                                if(this.state.resendCount != 0) {
+                                    /**
+                                     * Retrieve locally stored data
+                                     */
+                                    console.log('resendCount != 0')
+                                    this.retrieveItem('JSONData').then((dataRecord) => {
+                                        // console.log('dataRecord: '+ dataRecord);
+                            
+                                        var myArray;
+                                        if(dataRecord == undefined) {
+                                            myArray = null;
+                                        } else {
+                                            myArray = dataRecord.split(";");
+                                            // console.log('dataRecord Array: ' + myArray);
+                                            // console.log('dataRecord length: ' + myArray.length);
+                                        }
+                                        savedData = myArray;
+                                    }).then(() => {
+                                        /**
+                                         * Resend old data
+                                         */
+                                      //  if(savedData != null && savedData != undefined) {
+                                            return resendAllData(savedData);
+                                       // } else {
+                                     //       return null;
+                                     //   }
+                                    }).then((resendPromise) => {
+
+                                        /**
+                                        * Send current data
+                                        */
+                                        fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(postObj)
+                                        })
+                                        .then((result) => result.json(), (error) => {
+                                            if (this.state.resendCount < this.state.maxStore) {
+                                                this.state.resendCount += 1;
+                                            }
+                                            console.log('Send failed: count=' + this.state.resendCount + ', error=' + error);
+                                        })
+                                        .then((json) => {
+                                            console.log('Send done, resendCount=' + this.state.resendCount);
+                                            console.log(json);
+                                            pendingReadings = [];
+                                            this.props.setGlobalState({pendingReadings});
+                                        });
+                                    });
+                                } else {
+                                        /**
+                                        * Send current data
+                                        */
+                                       console.log('resendCount == 0');
+                                       fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+                                        method: 'POST',
+                                        headers: { 'Content-Type': 'application/json' },
+                                        body: JSON.stringify(postObj)
+                                        })
+                                        .then((result) => result.json(), (error) => {
+                                            if (this.state.resendCount < this.state.maxStore) {
+                                                this.state.resendCount += 1;
+                                            }
+                                            console.log('Send failed: count=' + this.state.resendCount + ', error=' + error);
+                                        })
+                                        .then((json) => {
+                                            console.log('Send done, resendCount=' + this.state.resendCount);
+                                            console.log(json);
+                                            pendingReadings = [];
+                                            this.props.setGlobalState({pendingReadings});
+                                        });
+                                } 
+                            } else {
+                                if (this.state.resendCount < this.state.maxStore) {
+                                    this.state.resendCount += 1;
+                                }
+                                
+                                console.log('Not signed in: resendCount=' + this.state.resendCount);
+                            }
+
                             var newCurrentVolume = this.processData(avg);
                             this.props.setGlobalState({currentVolume: newCurrentVolume});
+                            var currHistory = this.props.globalState.history;
 
-
-                            var currentData = '';
-                            console.log('about to retreiveItem()');
-                            this.retrieveItem('VolumeData').then((dataRecord) => {
-                                console.log('dataRecord: '+ dataRecord + ', newCurrentVol: ' + newCurrentVolume);
-
-                                if(dataRecord == undefined) {
-                                    currentData = '' + newCurrentVolume;
-                                } else {
-                                    var myArray = dataRecord.split(",");
-                                    console.log('dataRecord Array: ' + myArray);
-                                    console.log('dataRecord length: ' + myArray.length);
-                                    if (myArray.length == 3) {
-                                        console.log('dataRecord length equals target');
-                                        myArray.shift();
-                                        myArray.push(newCurrentVolume);
-                                        currentData = myArray.join();
-                                    } else {
-                                        currentData = dataRecord + ', ' + newCurrentVolume;
-                                    }
+                            currHistory.push(
+                                {
+                                    time: utc,
+                                    reading: newCurrentVolume
                                 }
+                            );
 
-                                console.log('Current local data: ' + currentData);
-                                this.storeItem('VolumeData', currentData).then(() => {
-                                    console.log('Data stored in Ble successful: ' + currentData);
-                                }).catch((error) => {
-                                    console.log('Data failed to be stored in Ble');
-                                })
+                            if(currHistory.length > this.state.maxPlotData) {
+                                currHistory.shift();
+                            }
 
-                            }).catch((error) => {
-                                console.log('Bluetooth retreive data promise is rejected with error: ' + error);
-                                currentData += newCurrentVolume;
-                            });
+                            this.props.setGlobalState({history: currHistory});
 
-                            // console.log('Current local data: ' + currentData);
-                            // this.storeItem('VolumeData', currentData).then(() => {
-                            //     console.log('Data stored in Ble successful: ' + currentData);
-                            // }).catch((error) => {
-                            //     console.log('Data failed to be stored in Ble');
-                            // })
+                            /**
+                             * Update internal storage with new current values
+                             */
+                            this.updateInternalStorage('VolumeData', utc + ', ' + newCurrentVolume);
+                            this.updateInternalStorage('JSONData', JSON.stringify(postObj));
 
+                            /**
+                             * Check to set if alarm threshold reached and
+                             * prepare for next set of readings.
+                             */
                             this.checkAlarm(newCurrentVolume);
-
-                            // var newStore = new Array(64);
-                            // for (var j = 0; j < 64; j++) newStore[j] = 0;
-                            //     this.setState({curReadings: newStore});
                             this.resetReadings();
                         }
                     }
@@ -379,6 +490,38 @@ class BLEManager extends Component
         }
         var readCharBound = readChar.bind(this);
         readCharBound();
+    }
+
+    updateInternalStorage(key, newValue) {
+        var currentData = '';
+        // console.log('updateInternalStorage(): key=' + key + ', newValue=' + newValue);
+        this.retrieveItem(key).then((dataRecord) => {
+            // console.log('dataRecord: '+ dataRecord + ', newValue: ' + newValue);
+
+            if(dataRecord == undefined) {
+                currentData = '' + newValue;
+            } else {
+                var myArray = dataRecord.split(";");
+                // console.log('dataRecord Array: ' + myArray);
+                // console.log('dataRecord length: ' + myArray.length);
+                if (myArray.length == this.state.maxStore) {
+                    // console.log('dataRecord length equals target');
+                    myArray.shift();
+                    myArray.push(newValue);
+                    currentData = myArray.join(';');
+                } else {
+                    currentData = dataRecord + '; ' + newValue;
+                }
+            }
+
+            // console.log('Current local data: ' + key + '=' + currentData);
+            this.storeItem(key, currentData).then(() => {
+                // console.log('Data stored in Ble successful: ' + key + '=' + currentData);
+            }).catch((error) => {
+                console.log('Data failed to be stored in Ble');
+            });
+
+        })
     }
 
     handleStopScan () 
@@ -633,27 +776,7 @@ class BLEManager extends Component
             });
 
             return myData;
-        //     var currentItem = '';
-        //     var retrievedItem =  await AsyncStorage.getItem(key).then((patchData) => {
-        //     console.log('retrieveItem(): got ' + patchData);
-        //     currentItem = patchData;
-        //   }, (error) => {
-        //       console.log('retreiveItem() error: ' + error);
-        //   });
-
-        //   if (retrievedItem == undefined) {
-        //       console.log('retriveItem() storing in try');
-        //       this.storeItem(key, '0');
-        //   }
-        
-        //   retrievedItem = await AsyncStorage.getItem(key);
-        //   // const item = JSON.parse(retrievedItem);
-        //   console.log('retrieveItem(); retrievedItem: ' + retrievedItem);
-        //   const item = retrievedItem;
-        //   return currentItem;
         } catch (error) {
-        //   this.storeItem(key, '2');
-        //   const retrievedItem = await AsyncStorage.getItem(key);
           console.log('retrieveItem(): ' + error.message);
           return retrievedItem;
         }
