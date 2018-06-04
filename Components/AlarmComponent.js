@@ -117,7 +117,7 @@ class AlarmComponent extends Component
 
         this.storeItem("alarmRecord", alarmRecord).then((stored) => {
         //this callback is executed when your Promise is resolved
-        alert("Success writing");
+        // alert("Success writing");
         }).catch((error) => {
         //this callback is executed when your Promise is rejected
         console.log('Promise is rejected with error: ' + error);
@@ -152,7 +152,7 @@ class AlarmComponent extends Component
 
         this.storeItem("alarmRecord", alarmRecord).then((stored) => {
         //this callback is executed when your Promise is resolved
-        alert("Success writing");
+        // alert("Success writing");
         }).catch((error) => {
         //this callback is executed when your Promise is rejected
         console.log('Promise is rejected with error: ' + error);

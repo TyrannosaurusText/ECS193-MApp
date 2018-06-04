@@ -128,7 +128,7 @@ class FeedbackComponent extends Component {
             console.log(json);
             if(json.status == 200) {
                 // this.setState({result: "Success!"});
-                alert("Success!");
+                alert("Successfully sent!");
             }
             else {
                 // this.setState({result: "Failure: " + json.status});

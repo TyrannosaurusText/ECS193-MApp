@@ -14,14 +14,17 @@ import {
     ScrollView,
     AppState,
     Dimensions,
-    AsyncStorage
+    AsyncStorage,
+    Alert,
+    Vibration
 } from 'react-native';
 import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
-// import PushNotification from 'react-native-push-notification';
 import { Buffer } from 'buffer';
 import { withGlobalState } from 'react-globally';
 import BackgroundTimer from 'react-native-background-timer';
+import {NotificationsAndroid} from 'react-native-notifications';
+
 
 const window = Dimensions.get('window');
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -63,6 +66,7 @@ class BLEManager extends Component
         this.retrieveItem = this.retrieveItem.bind(this);
         this.storeItem = this.storeItem.bind(this);
         this.isConnected = this.isConnected.bind(this);
+        this.fireAlarm = this.fireAlarm.bind(this);
     }
 
     /**
@@ -128,13 +132,6 @@ class BLEManager extends Component
         AppState.addEventListener('change', this.handleAppStateChange);
 
         BleManager.start({showAlert: false});
-
-        // PushNotification.configure({
-        //     onNotification: function(notification) {
-        //         console.log('NOTIFICATION: ', notification);
-        //     },
-        //     popInitialNotification: true,
-        // });
 
         this.handlerDiscover = bleManagerEmitter.addListener('BleManagerDiscoverPeripheral', this.handleDiscoverPeripheral );
         this.handlerStop = bleManagerEmitter.addListener('BleManagerStopScan', this.handleStopScan );
@@ -774,22 +771,40 @@ class BLEManager extends Component
         }
     }
 
+    fireAlarm() {
+        if(!this.props.globalState.alarmTriggered) {
+            NotificationsAndroid.localNotification({
+                title: "NIBVA",
+                body: "Threshold value reached!",
+                // extra: "data"
+            });
+            this.props.setGlobalState({alarmTriggered: true});
+            var pattern = [1000, 2000];
+            Vibration.vibrate(pattern, true);
+
+            Alert.alert(
+                'Alarm',
+                '',
+                [
+                    {text: 'Stop', onPress: () => {
+                        Vibration.cancel();
+                        this.props.setGlobalState({alarmTriggered: false});
+                    }},
+                    // {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+                ],
+                { cancelable: false }
+            );
+        }
+    }
+
     checkAlarm(volume) {
         var newAlarmList = this.props.globalState.alarmList;
         console.log("Check alarm: " + volume);
         for(var i = 0; i < newAlarmList.length; i++) {
             console.log('storedAlarm: ' + typeof(parseFloat(newAlarmList[i].threshold)) + ' <= nextVolume: ' + typeof(volume) + 'on? ' + newAlarmList[i].on);
             if(parseFloat(newAlarmList[i].threshold) <= volume && newAlarmList[i].on == "true") {
-                // sendNotification();
+                this.fireAlarm();
                 newAlarmList[i].on = "false";
-                console.log('Trying to send notification');
-                // PushNotification.localNotification({
-                //     message: 'Threshold volume reached, current volume is ' + volume,
-                //     // ongoing: true,
-                //     // autoCancel: false,
-                //     vibration: 30000
-                // });
-                console.log('Tried to send notification');
             }
         }
     
@@ -804,7 +819,7 @@ class BLEManager extends Component
     
         this.storeItem("alarmRecord", alarmRecord).then((stored) => {
                 //this callback is executed when your Promise is resolved
-                alert("Success writing");
+                // alert("Success writing");
                 }).catch((error) => {
                 //this callback is executed when your Promise is rejected
                 console.log('Promise is rejected with error: ' + error);

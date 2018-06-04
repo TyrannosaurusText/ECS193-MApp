@@ -22,7 +22,8 @@ const initialState = {
     alarmList: [],
     pendingReadings: [],
     currentVolume: 0,
-    bluetoothConnected: false
+    bluetoothConnected: false,
+    alarmTriggered: false
 };
 
 
