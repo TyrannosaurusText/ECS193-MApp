@@ -37,6 +37,8 @@ class DashboardComponent extends Component
         this.storeItem = this.storeItem.bind(this);
         this.checkAlarm = this.checkAlarm.bind(this);
         this.fireAlarm = this.fireAlarm.bind(this);
+        this.fetchProfile = this.fetchProfile.bind(this);
+
     }
 
     componentDidMount ()
@@ -53,6 +55,27 @@ class DashboardComponent extends Component
                 authCode: signInArr[0],
                 email: signInArr[1],
                 id: parseInt(signInArr[2])
+            });
+        }).catch((error) => {
+            console.log('Promise is rejected with error: ' + error);
+        });
+
+
+        this.retrieveItem("profileRecord").then((profileRecord) => {
+            var profileRecordArr = profileRecord.split(',');
+            console.log(profileRecordArr);
+
+            // authCode: '',
+            //     email: '',
+            //     id: -1,
+
+            this.props.setGlobalState({
+               familyName: profileRecordArr[0],
+                givenName: profileRecordArr[1],
+                email: profileRecordArr[2],
+                doctorFamilyName: profileRecordArr[3],
+                doctorGivenName: profileRecordArr[4],
+                doctorEmail: profileRecordArr[5]
             });
         }).catch((error) => {
             console.log('Promise is rejected with error: ' + error);
@@ -193,16 +216,6 @@ class DashboardComponent extends Component
                                 }
                             }
                         />
-                        <Button
-                            title = 'Vibrate'
-                            // color = 'black'
-                            onPress = {() => {
-                                    // navigate('Profile');
-                                    this.fireAlarm();
-                                }
-                            }
-                        />
-                        
                     </View>
                 </View>
 
@@ -210,8 +223,51 @@ class DashboardComponent extends Component
         );
     }
 
-    //SIGN IN METHODS
+    fetchProfile() {
+        var postObj = {
+            authCode: this.props.globalState.authCode,
+            id: this.props.globalState.id,
+        };
+        console.log(postObj);
+        //if able to pos
+        fetch('https://majestic-legend-193620.appspot.com/fetch/singleMeta', {
+        // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+        // fetch('http://192.168.43.198:8080/mobile/readings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postObj)
 
+        })
+        .then((result) => result.json())
+        .then((json) => {
+            console.log('Send done');
+            console.log(json);
+
+            this.props.setGlobalState({
+                familyName: json.familyName,
+                givenName: json.givenName,
+                email: json.email,
+                doctorFamilyName: json.doctorFamilyName,
+                doctorGivenName: json.doctorGivenName,
+                doctorEmail: json.doctorEmail
+            });
+
+            var profileRecord = json.familyName + ',' + json.givenName + ',' + json.email + ',' + json.doctorFamilyName + ',' + json.doctorGivenName + ',' + json.doctorEmail;
+
+            this.storeItem("profileRecord", profileRecord).then((stored) => {
+            //this callback is executed when your Promise is resolved
+            // alert("Success writing");
+            }).catch((error) => {
+            //this callback is executed when your Promise is rejected
+            console.log('Promise is rejected with error: ' + error);
+            });
+
+        }).catch((error) => {
+            console.log("ERROR in send " + error);
+        });
+    }
+
+    //SIGN IN METHODS
     _signIn ()
     {
         GoogleSignin
@@ -254,6 +310,8 @@ class DashboardComponent extends Component
                         //this callback is executed when your Promise is rejected
                         console.log('Promise is rejected with error: ' + error);
                         });
+
+                        this.fetchProfile();
                     }
                 })
                 .catch((err) => {

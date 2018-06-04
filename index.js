@@ -23,7 +23,13 @@ const initialState = {
     pendingReadings: [],
     currentVolume: 0,
     bluetoothConnected: false,
-    alarmTriggered: false
+    alarmTriggered: false,
+    familyName: '',
+    givenName: '',
+    email: '',
+    doctorFamilyName: '',
+    doctorGivenName: '',
+    doctorEmail: ''
 };
 
 

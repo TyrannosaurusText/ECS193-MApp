@@ -16,6 +16,7 @@ import {
     ScrollView,
     AppState,
     Dimensions,
+    Linking
 } from 'react-native';
 // import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
@@ -34,51 +35,6 @@ class ProfileComponent extends Component
     constructor() 
     {
         super();
-
-        this.state = {
-            familyName: '',
-            givenName: '',
-            email: '',
-            doctorFamilyName: '',
-            doctorGivenName: '',
-            doctorEmail: ''
-        }
-
-        this.fetchProfile = this.fetchProfile.bind(this);
-    }
-
-    fetchProfile() {
-        var postObj = {
-            authCode: this.props.globalState.authCode,
-            id: this.props.globalState.id,
-        };
-        console.log(postObj);
-        //if able to pos
-        fetch('https://majestic-legend-193620.appspot.com/fetch/singleMeta', {
-        // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
-        // fetch('http://192.168.43.198:8080/mobile/readings', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(postObj)
-
-        })
-        .then((result) => result.json())
-        .then((json) => {
-            console.log('Send done');
-            console.log(json);
-
-            this.setState({
-                familyName: json.familyName,
-                givenName: json.givenName,
-                email: json.email,
-                doctorFamilyName: json.doctorFamilyName,
-                doctorGivenName: json.doctorGivenName,
-                doctorEmail: json.doctorEmail
-            });
-
-        }).catch((error) => {
-            console.log("ERROR in send " + error);
-        });
     }
 
     render () 
@@ -86,22 +42,37 @@ class ProfileComponent extends Component
         const {navigate} = this.props.navigation;
         
         return (
+
             <SafeAreaView>
+            {   
+                (this.props.globalState.givenName == '') && <View style = {{height: window.height * 0.8, width: window.width}}>
+                <Text style = {{ fontWeight: 'bold', fontSize: 20, textAlign: 'center' }}>Please sign in first</Text>
+                </View>
+            }
+            {   (this.props.globalState.givenName != '') && <View>
+
                 <View style={{height:window.height * 0.3}}>
-                    <Text style={{fontWeight: 'bold'}}>Personal Information:</Text>
-                    <Text>{this.state.givenName}, {this.state.familyName}</Text>
-                    <Text>{this.state.email}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 20}}>Personal Information:</Text>
+                    <Text style={{fontSize: 15}}>{this.props.globalState.givenName}, {this.props.globalState.familyName}</Text>
+                    <Text style={{fontSize: 15}}>{this.props.globalState.email}</Text>
                 </View>
                 <View style={{height:window.height * 0.3}}>
-                    <Text style={{fontWeight: 'bold'}}>Doctor Information:</Text>
-                    <Text>{this.state.doctorGivenName}, {this.state.doctorFamilyName}</Text>
-                    <Text>{this.state.doctorEmail}</Text>
+                    <Text style={{fontWeight: 'bold', fontSize: 20}}>Doctor Information:</Text>
+                    <Text style={{fontSize: 15}}>{this.props.globalState.doctorGivenName}, {this.props.globalState.doctorFamilyName}</Text>
+                    <Text style={{fontSize: 15}}>{this.props.globalState.doctorEmail}</Text>
                 </View>
 
-                <Button
-                    title = "Fetch"
-                    onPress = {this.fetchProfile}
-                />
+                <View style={{marginTop:window.height*0.05, marginRight:window.width*0.25, marginLeft:window.width*0.25}} >                
+                <View style = {{marginTop: window.height * 0.01}}>
+                    <Button
+                        title = "Contact your doctor"
+                        onPress={() => Linking.openURL('mailto:' + this.props.globalState.doctorEmail) } 
+                    />
+                </View>
+                </View>
+                </View>
+            }
+
             </SafeAreaView>
         );
     }
