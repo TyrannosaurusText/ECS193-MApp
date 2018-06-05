@@ -52,7 +52,7 @@ class BLEManager extends Component
             connectedToPatch: false,    // whether the phone is currently connected to the patch
             autoRead: false,            // will the phone automatically connect to a stored device or not
             resendCount: 0,             // sets of readings that failed to be sent to server, need to be resent 
-            maxStore: 6,                // max amount of readings to store 
+            maxStore: 32,                // max amount of readings to store 
             maxPlotData: 40             // max amount of readings to display on plot at a time 
         }
 
@@ -127,7 +127,7 @@ class BLEManager extends Component
                 console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
             }
-        }, 10000);
+        }, 15 * 60000);
 
         AppState.addEventListener('change', this.handleAppStateChange);
 

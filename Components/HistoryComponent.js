@@ -90,8 +90,9 @@ class HistoryComponent extends Component
 
             var newList = [];
             for(var i = 0, j = 0; i < numEntries; i++) {
-                var time = csvArr[i * 65];
-                var newTime = this.convertUTCDateToLocalDate(new Date(time));
+                var newTime = csvArr[i * 65];
+                // console.log("Old time is: " + time);
+                // var newTime = this.convertUTCDateToLocalDate(new Date(time));
                 console.log("Time is: " + newTime);
                 var sum = 0;
                 for(j = 1; j < 65; j++) {

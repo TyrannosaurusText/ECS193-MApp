@@ -61,25 +61,25 @@ class DashboardComponent extends Component
         });
 
 
-        this.retrieveItem("profileRecord").then((profileRecord) => {
-            var profileRecordArr = profileRecord.split(',');
-            console.log(profileRecordArr);
+        // this.retrieveItem("profileRecord").then((profileRecord) => {
+        //     var profileRecordArr = profileRecord.split(',');
+        //     console.log(profileRecordArr);
 
-            // authCode: '',
-            //     email: '',
-            //     id: -1,
+        //     // authCode: '',
+        //     //     email: '',
+        //     //     id: -1,
 
-            this.props.setGlobalState({
-               familyName: profileRecordArr[0],
-                givenName: profileRecordArr[1],
-                email: profileRecordArr[2],
-                doctorFamilyName: profileRecordArr[3],
-                doctorGivenName: profileRecordArr[4],
-                doctorEmail: profileRecordArr[5]
-            });
-        }).catch((error) => {
-            console.log('Promise is rejected with error: ' + error);
-        });
+        //     this.props.setGlobalState({
+        //        familyName: profileRecordArr[0],
+        //         givenName: profileRecordArr[1],
+        //         email: profileRecordArr[2],
+        //         doctorFamilyName: profileRecordArr[3],
+        //         doctorGivenName: profileRecordArr[4],
+        //         doctorEmail: profileRecordArr[5]
+        //     });
+        // }).catch((error) => {
+        //     console.log('Promise is rejected with error: ' + error);
+        // });
 
         AppState.addEventListener('change', this.handleAppStateChange);
 
@@ -207,16 +207,19 @@ class DashboardComponent extends Component
                         onPress = {signFunc}
                         // color = 'black'
                     />
-                    <View style = {{marginTop: window.height * 0.01}}>
-                        <Button
-                            title = 'Profile'
-                            // color = 'black'
-                            onPress = {() => {
-                                    navigate('Profile');
+                    
+                    {
+                        (this.props.globalState.email != '') && <View style = {{marginTop: window.height * 0.01}}>
+                            <Button
+                                title = 'Profile'
+                                // color = 'black'
+                                onPress = {() => {
+                                        navigate('Profile');
+                                    }
                                 }
-                            }
-                        />
-                    </View>
+                            />
+                        </View>
+                    }
                 </View>
 
             </SafeAreaView>
@@ -246,21 +249,21 @@ class DashboardComponent extends Component
             this.props.setGlobalState({
                 familyName: json.familyName,
                 givenName: json.givenName,
-                email: json.email,
+                // email: json.email,
                 doctorFamilyName: json.doctorFamilyName,
                 doctorGivenName: json.doctorGivenName,
                 doctorEmail: json.doctorEmail
             });
 
-            var profileRecord = json.familyName + ',' + json.givenName + ',' + json.email + ',' + json.doctorFamilyName + ',' + json.doctorGivenName + ',' + json.doctorEmail;
+            var profileRecord = json.familyName + ',' + json.givenName + ',' + ',' + json.doctorFamilyName + ',' + json.doctorGivenName + ',' + json.doctorEmail;
 
-            this.storeItem("profileRecord", profileRecord).then((stored) => {
-            //this callback is executed when your Promise is resolved
-            // alert("Success writing");
-            }).catch((error) => {
-            //this callback is executed when your Promise is rejected
-            console.log('Promise is rejected with error: ' + error);
-            });
+            // this.storeItem("profileRecord", profileRecord).then((stored) => {
+            // //this callback is executed when your Promise is resolved
+            // // alert("Success writing");
+            // }).catch((error) => {
+            // //this callback is executed when your Promise is rejected
+            // console.log('Promise is rejected with error: ' + error);
+            // });
 
         }).catch((error) => {
             console.log("ERROR in send " + error);
