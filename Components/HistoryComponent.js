@@ -4,7 +4,7 @@ import {
     StyleSheet,
     Text,
     View,
-    // TouchableHighlight,
+    TouchableHighlight,
     // NativeAppEventEmitter,
     // NativeEventEmitter,
     // NativeModules,
@@ -16,6 +16,7 @@ import {
     ScrollView,
     AppState,
     Dimensions,
+    Alert
 } from 'react-native';
 // import BleManager from 'react-native-ble-manager';
 import { SafeAreaView } from 'react-navigation';
@@ -99,7 +100,7 @@ class HistoryComponent extends Component
                     sum += parseInt(csvArr[i * 65 + j]);
                 }
                 var avg = sum / 64;
-                newList.push({"time": newTime.toString(), "reading": avg});
+                newList.push({"time": newTime.toString(), "reading": avg, "status": 0});
                 console.log("Reading is: " + avg);
             }
 
@@ -221,10 +222,29 @@ class HistoryComponent extends Component
                     enableEmptySections = {true}
                     dataSource = {dataSource}
                     renderRow = {(item) => {
-                    // const color = item.connected ? 'green' : '#fff';
+                        var colors = ['white', 'green', 'red'];
+
                         return (
-                            // <TouchableHighlight onPress={() => this.test(item) }>
-                            <View style= {[ styles.row, { backgroundColor: 'white'} ]}>
+                            <TouchableHighlight onPress={() => {
+                                Alert.alert(
+                                    'Rate reading',
+                                    '',
+                                    [
+                                        {text: 'Accurate', onPress: () => {
+                                            item.status = 1;
+                                            this.setState(this.state);
+                                        }},
+                                        {text: 'Inaccurate', onPress: () => {
+                                            item.status = 2;
+                                            this.setState(this.state);
+                                        }},
+                                    ],
+                                    // { cancelable: false }
+                                );
+                                // this.setState(this.state);
+                            } }>
+
+                            <View style= {[ styles.row, { backgroundColor: colors[item.status]} ]}>
                                 <Text 
                                     style = {{
                                         fontSize: 12, 
@@ -240,8 +260,9 @@ class HistoryComponent extends Component
                                         color: '#333333', 
                                         padding: 10,
                                     }}
-                                >Average reading: {item.reading}</Text>
+                                >Average reading: {item.reading} mL</Text>
                             </View>
+                            </TouchableHighlight>
                         );
                     }}
                 />

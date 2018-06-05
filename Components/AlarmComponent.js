@@ -189,7 +189,7 @@ class AlarmComponent extends Component
                                             textAlign: 'center', 
                                             padding: 10,
                                         }}
-                                    >Alarm at threshold value: {item.threshold}</Text>
+                                    >Alarm at threshold value: {item.threshold} mL</Text>
                                     <Switch
                                         value={alarmValue}
                                         onValueChange={() => {console.log("Toggle pressed"); this.toggleAlarm(item)}} 

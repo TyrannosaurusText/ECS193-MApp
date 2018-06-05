@@ -17,7 +17,7 @@ var fields = [
 		type: 'number',
 		name: 'amount',
 		required: true,
-		label: 'Threshold Amount',
+		label: 'Threshold Amount (mL)',
 		hidden: false,
 	}
 ]
