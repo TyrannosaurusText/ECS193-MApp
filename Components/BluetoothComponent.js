@@ -50,7 +50,12 @@ class BLEManager extends Component
             autoRead: false,            // will the phone automatically connect to a stored device or not
             resendCount: 0,             // sets of readings that failed to be sent to server, need to be resent 
             maxStore: 6,                // max amount of readings to store 
-            maxPlotData: 40             // max amount of readings to display on plot at a time 
+            maxPlotData: 40,            // max amount of readings to display on plot at a time 
+            lastReadTime: Date.now(),   // time since last set of readings in ms
+            timeBtwnReadings: 30000,    // time between readings in ms
+            notDone: false,             // whether there any old intervals still doing work 
+            patchAddress: '',           // address of currently remembered device
+            readEnabled: true           // is reading enabled
         }
 
         this.handleDiscoverPeripheral = this.handleDiscoverPeripheral.bind(this);
@@ -65,6 +70,8 @@ class BLEManager extends Component
         this.isConnected = this.isConnected.bind(this);
         this.badAuthSignOut = this.badAuthSignOut.bind(this);
         this.updateInternalStorage = this.updateInternalStorage.bind(this);
+        this.saveAddress = this.saveAddress.bind(this);
+        this.disconnectFromAllDevices = this.disconnectFromAllDevices.bind(this);
     }
 
     /**
@@ -110,22 +117,106 @@ class BLEManager extends Component
         /**
          * Reset phone internal storage (for testing purposes)
          */
-        AsyncStorage.removeItem('VolumeData');
-        AsyncStorage.removeItem('JSONData');
+        // AsyncStorage.removeItem('VolumeData');
+        // AsyncStorage.removeItem('JSONData');
 
         /**
          * Start ble background task
          */
         const intervalId = BackgroundTimer.setInterval(() => {
-            console.log('BackgroundTimer.setInterval(); connectedToPatch: ' + this.state.connectedToPatch);
-            if(this.state.connectedToPatch == false) {
-                console.log('connectedToPatch: ', this.state.connectedToPatch);
-                this.startScan();
+            console.log('BackgroundTimer.setInterval(); connectedToPatch: ' + this.state.connectedToPatch
+                + ', oldThreadWorking=' + this.state.notDone);
+
+            /**
+             * Calculate time since last set of readings. If it is less than
+             * time designated time between readings skip readings. If any 
+             * old intervals are still running, skip the task this time.
+             */
+            var timeDiff = Date.now() - this.state.lastReadTime;
+            console.log('before timeDiff=' + timeDiff);
+
+            if(this.state.notDone == true) {
+                console.log('Old thread not done with work');
+                return;
+            } else if(timeDiff < this.state.timeBtwnReadings) {
+                console.log('timeDiff=' + timeDiff + ", skip readings for this interval");
+                this.state.readEnabled = false;
+                this.state.notDone = true;
+                this.isConnected();
+                if (this.state.connectedToPatch == false || this.state.myPatch == null) {
+                    this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
+                        if (patchAddress != undefined) {
+                            this.state.patchAddress = patchAddress;
+                        } else {
+                            this.state.patchAddress = '';
+                        }
+                        console.log('readEnabled false: isconnectedToPatch: ' + this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
+                        this.startScan();
+                    }, (error) => {
+                        console.log('Failed to retrieve MyDeviceAddress');
+                    });
+                }
             } else {
-                console.log('connectedToPatch: ', this.state.connectedToPatch);
-                this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+                this.state.readEnabled = true;
+                this.state.notDone = true;
+                this.isConnected();
+                console.log('isconnectedToPatch: ' + this.state.connectedToPatch + ', myPatch:' + this.state.myPatch);
+                if (this.state.connectedToPatch == true && this.state.myPatch != null) {
+                    console.log('already connected to patch');
+                    this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+                } else {
+                    this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
+                        if (patchAddress != undefined) {
+                            this.state.patchAddress = patchAddress;
+                        } else {
+                            this.state.patchAddress = '';
+                        }
+                        console.log('readEnabled true: isconnectedToPatch: ' + this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
+                        this.startScan();
+                    }, (error) => {
+                        console.log('Failed to retrieve MyDeviceAddress');
+                    });
+                }
             }
-        }, 10000);
+
+            /**
+             * If not connected to patch, start scanning for devices before
+             * doing readings. If already connected, start reading 
+             * immediately.
+             */
+            // this.state.notDone = true;
+            // var connected = this.isConnected();
+            // if (connected == false) {
+            //     this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
+            //         if (patchAddress != undefined) {
+            //             this.state.patchAddress = patchAddress;
+            //         }
+            //         console.log('isconnectedToPatch: ', this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
+            //         this.startScan();
+            //     }, (error) => {
+            //         console.log('Failed to retrieve MyDeviceAddress');
+            //     });
+            // } else {
+            //         console.log('isconnectedToPatch: ', this.state.connectedToPatch);
+            //         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+            // }
+
+            // console.log('updateInternalStorage(): key=' + key + ', newValue=' + newValue);
+            // if(this.state.connectedToPatch == false) {
+            //     console.log('connectedToPatch: ', this.state.connectedToPatch);
+            //     this.startScan();
+            // } else {
+            //     console.log('connectedToPatch: ', this.state.connectedToPatch);
+            //     this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+            // }
+        
+            console.log('Done with Background Task1: oldThreadWorking=' + this.state.notDone);
+            this.state.notDone = false;
+            console.log('Done with Background Task2: oldThreadWorking=' + this.state.notDone);
+            timeDiff = Date.now() - this.state.lastReadTime;
+            console.log('after timeDiff=' + timeDiff);
+
+        }, 15000);
 
         AppState.addEventListener('change', this.handleAppStateChange);
 
@@ -167,9 +258,68 @@ class BLEManager extends Component
      * @param {*} peripheral Ble peripheral
      * Check if phone is connected to peripheral. 
      */
-    isConnected(peripheral) {
-        this.retrieveConnected();
-        return this.state.peripherals.has(peripheral.id);
+    async isConnected(/*peripheral*/) {
+        // this.retrieveConnected();
+        // return this.state.peripherals.has(peripheral.id);
+
+        /**
+         * Get all connected devices and check if result is
+         * empty
+         */
+        var connected;
+        await BleManager.getConnectedPeripherals([]).then((results) => {
+            console.log('isConnected(): results=' + results + ', len=' + results.length);
+
+            for(var i = 0; i < results.length; i++) {
+                console.log('Connected to peripheral: ' + JSON.stringify(results[i], null, 4));
+            }
+
+            
+            if(results.length == 0) {
+                this.state.connectedToPatch = false;
+            } else {
+                this.state.connectedToPatch = true;
+            }
+
+            console.log('isConnected(): result=' + connected);
+        });
+
+        return connected;
+    }
+
+    async disconnectFromAllDevices() {
+
+        var count = 0;
+        var devices;
+        var disconnectDevice = () => {
+            console.log('devices discconected from: ' + count);
+            BleManager.disconnect(devices[i].id).then(() => {
+                console.log('Successfully disconnected from: ' + devices[i].id);
+            }, (error) => {
+                console.log('Failed to disconnected from: ' + devices[i].id);
+            }).then(() => {
+                count += 1;
+                if(count < devices.length) {
+                    this.disconnectFromAll();
+                }
+            });
+        } 
+
+        var disconnectFromAll = disconnectDevice.bind(this);
+
+        await BleManager.getConnectedPeripherals([]).then((results) => {
+            console.log('disconnectFromAllDevices(): success');
+            devices = results;
+
+            if(count < devices.length) {
+                this.disconnectFromAll();
+            }
+
+        },(error) => {
+            console.log('disconnectFromAllDevices(): error:' + error);
+        });
+
+        this.state.patchAddress = '';
     }
 
     /**
@@ -182,9 +332,9 @@ class BLEManager extends Component
         if (this.state.appState.match(/inactive|background/) && nextAppState === 'active') 
         {
             console.log('App has come to the foreground!')
-            BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
-                console.log('Connected peripherals: ' + peripheralsArray.length);
-            });
+            // BleManager.getConnectedPeripherals([]).then((peripheralsArray) => {
+            //     console.log('Connected peripherals: ' + peripheralsArray.length);
+            // });
         } 
         this.setState({appState: nextAppState});
     }
@@ -218,9 +368,10 @@ class BLEManager extends Component
 
     handleUpdateValueForCharacteristic (data) 
     {
-        if (this.state.reading == true) {
+        if (this.state.reading == true || this.state.readEnabled == false) {
             return;
         } else {
+            this.state.lastReadTime = Date.now();
             this.state.reading = true;
         }
 
@@ -498,8 +649,9 @@ class BLEManager extends Component
     }
 
     badAuthSignOut(json) {
+        console.log('badAuthSignOut()');
         if (json.hasOwnProperty('err') && json.err == 'Bad Auth') {
-            
+            console.log('badAuthSignOut(): bad Auth detected, sign out');
             this.props.setGlobalState({
                 email: '',
                 id: -1,
@@ -573,14 +725,16 @@ class BLEManager extends Component
     retrieveConnected ()
     {
         BleManager.getConnectedPeripherals([]).then((results) => {
-            console.log(results);
+            console.log('retrieveConnected(): results=' + results);
             var peripherals = this.state.peripherals;
+            console.log('retrieveConnected(): peripherals=' + peripherals);
             for (var i = 0; i < results.length; i++) 
             {
                 var peripheral = results[i];
                 peripheral.connected = true;
                 peripherals.set(peripheral.id, peripheral);
-                this.setState({ peripherals });
+                this.setState({ peripherals });                    
+                console.log('Connected to peripheral: ' + JSON.stringify(results[i], null, 4));
             }
         });
     }
@@ -593,24 +747,30 @@ class BLEManager extends Component
             console.log('Got ble peripheral', peripheral);
             peripherals.set(peripheral.id, peripheral);
             this.setState({ peripherals })
-            if(peripheral.name == "PatchSim") {
-                console.log('handleDiscoverPeripheral(); Calling test on peripheral');
+            console.log('ble peripheral address: ' + peripheral.id + 'vs saved address: ' + this.state.patchAddress);
+            if(this.state.patchAddress != '' && peripheral.id == this.state.patchAddress) {
+                console.log('handleDiscoverPeripheral(): Calling test on peripheral: ' + peripheral.name);
                 this.state.myPatch = peripheral;
                 this.test(peripheral);
             }
+            // if(peripheral.name == "PatchSim") {
+            //     console.log('handleDiscoverPeripheral(); Calling test on peripheral');
+            //     this.state.myPatch = peripheral;
+            //     this.test(peripheral);
+            // }
         }
     }
 
     test (peripheral) 
     {
+        // this.state.notDone = true;
         if (peripheral)
         {
             if (peripheral.connected) {
                 console.log('Trying to disconnect from peripheral');
                 BleManager.disconnect(peripheral.id).then(() => {
                     this.state.connectedToPatch = false;
-                    this.props.setGlobalState({bluetoothConnected: false});
-
+                    this.state.patchAddress = '';
                     //this.state.myPatch = null;
                 })
                 this.resetReadings();
@@ -628,6 +788,9 @@ class BLEManager extends Component
                 }, (err) => {
                     console.log('Stop scanning failed: ' + err);
                 });
+                this.disconnectFromAllDevices();
+
+                console.log('about to try to connect after disconnecting');
                 BleManager.connect(peripheral.id).then(() => {
                     let peripherals = this.state.peripherals;
                     let p = peripherals.get(peripheral.id);
@@ -638,8 +801,7 @@ class BLEManager extends Component
                         this.setState({peripherals});
                     }
                     console.log('Connected to ' + peripheral.id);
-                    this.props.setGlobalState({bluetoothConnected: true});
-
+                    this.state.patchAddress = peripheral.id;
 
                     // BleManager.createBond(peripheral.id).then(() => {
                     //     console.log('Bonded to: ' + peripheral.name + ', ' + peripheral.id);
@@ -665,6 +827,8 @@ class BLEManager extends Component
                             // });
                             this.handleUpdateValueForCharacteristic({peripheral: peripheral.id, value: [7]});
 
+                        }).then(() => {
+                            this.storeItem('MyDeviceAddress', this.state.patchAddress);
                         });
 
                     //}, 900);
@@ -683,9 +847,21 @@ class BLEManager extends Component
 
         return (
             <SafeAreaView style = {styles.container}>
-                <TouchableHighlight 
+                <TouchableHighlight
                     style = {{
                         marginTop: 10,
+                        // marginRight: 50,
+                        margin: 20,
+                        padding: 20,
+                        backgroundColor:'#ccc'
+                    }}
+                    onPress = {() => this.props.navigation.navigate('Dashboard')}
+                >
+                    <Text>Back to Dashboard</Text>
+                </TouchableHighlight>
+                <TouchableHighlight 
+                    style = {{
+                        marginTop: 0,
                         margin: 20, 
                         padding:20, 
                         backgroundColor:'#ccc'
@@ -724,7 +900,7 @@ class BLEManager extends Component
                         backgroundColor:'#ccc'
                     }}
                 >
-                    <Text>Bluetooth device setup</Text>
+                    <Text>Bluetooth Device Setup</Text>
                 </TouchableHighlight>
                 <ScrollView style = {styles.scroll}>
                     {
@@ -739,7 +915,7 @@ class BLEManager extends Component
                         renderRow = {(item) => {
                             const color = item.connected ? 'green' : '#fff';
                             return (
-                                <TouchableHighlight onPress={() => this.test(item) }>
+                                <TouchableHighlight onPress={() => this.saveAddress(item) }>
                                     <View style={[ styles.row, { backgroundColor: color } ]}>
                                         <Text 
                                             style = {{
@@ -800,6 +976,12 @@ class BLEManager extends Component
           console.log('retrieveItem(): ' + error.message);
           return retrievedItem;
         }
+    }
+
+    saveAddress(item) {
+        console.log('saveAddress(): id=' + item.id + ', name=' + item.name);
+        this.state.patchAddress = item.id;
+        this.storeItem('MyDeviceAddress', this.state.patchAddress);
     }
 
     checkAlarm(volume) {
