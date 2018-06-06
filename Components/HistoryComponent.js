@@ -48,6 +48,7 @@ class HistoryComponent extends Component
         }
 
         this.fetchReading = this.fetchReading.bind(this);
+        this.submitFeedback = this.submitFeedback.bind(this);
         this.convertUTCDateToLocalDate = this.convertUTCDateToLocalDate.bind(this);
     }
 
@@ -60,6 +61,50 @@ class HistoryComponent extends Component
         newDate.setHours(hours - offset);
 
         return newDate;   
+    }
+
+    submitFeedback(time, value) {
+        this.setState({result: "Submitting..."});
+
+        var postObj = {
+            authCode: this.props.globalState.authCode,
+            timestamp: time,
+        };
+
+        // var formValues = this.formGenerator.getValues();
+        // if(formValues.event == 'Void') {
+            // postObj["amount"] = formValues.amount;
+        // }
+
+        postObj["feedback"] = value;
+
+        console.log(postObj);
+
+        fetch('https://majestic-legend-193620.appspot.com/mobile/feedback', {
+        // fetch('https://majestic-legend-193620.appspot.com/insert/reading', {
+        // fetch('http://192.168.43.198:8080/mobile/readings', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(postObj)
+
+        })
+        .then((json) => {
+            console.log('Send done');
+            console.log(json);
+            if(json.status == 200) {
+                // this.setState({result: "Success!"});
+                alert("Successfully sent!");
+            }
+            else {
+                // this.setState({result: "Failure: " + json.status});
+                alert("Failure: " + json.status);
+            }
+
+        }).catch((error) => {
+            console.log("ERROR in send " + error);
+            // this.setState({result: "Failure: " + error});
+            alert("Failure: " + error);
+        });
     }
 
     fetchReading() {
@@ -87,20 +132,21 @@ class HistoryComponent extends Component
 
             var csvArr = json.csv.split(/,|\n/);
             csvArr.pop();
-            var numEntries = csvArr.length/65;
+            var numEntries = csvArr.length/67;
 
             var newList = [];
             for(var i = 0, j = 0; i < numEntries; i++) {
-                var newTime = csvArr[i * 65];
+                var newTime = csvArr[i * 67];
                 // console.log("Old time is: " + time);
                 // var newTime = this.convertUTCDateToLocalDate(new Date(time));
                 console.log("Time is: " + newTime);
                 var sum = 0;
                 for(j = 1; j < 65; j++) {
-                    sum += parseInt(csvArr[i * 65 + j]);
+                    sum += parseInt(csvArr[i * 67 + j]);
                 }
+                var status = csvArr[i * 67 + j] == 'null' ? 0 : parseInt(csvArr[i * 67 + j]);
                 var avg = sum / 64;
-                newList.push({"time": newTime.toString(), "reading": avg, "status": 0});
+                newList.push({"time": newTime.toString(), "reading": avg, "status": status});
                 console.log("Reading is: " + avg);
             }
 
@@ -114,9 +160,9 @@ class HistoryComponent extends Component
 
     render () 
     {
-        const list = this.state.historyList;
+        const list = this.state.historyList.reverse();
         const dataSource = ds.cloneWithRows(list);
-        const data = this.state.historyList;
+        const data = list;
         const {navigate} = this.props.navigation;
 
         return (
@@ -222,7 +268,7 @@ class HistoryComponent extends Component
                     enableEmptySections = {true}
                     dataSource = {dataSource}
                     renderRow = {(item) => {
-                        var colors = ['white', 'green', 'red'];
+                        var colors = ['red', 'white', 'green'];
 
                         return (
                             <TouchableHighlight onPress={() => {
@@ -232,10 +278,12 @@ class HistoryComponent extends Component
                                     [
                                         {text: 'Accurate', onPress: () => {
                                             item.status = 1;
+                                            this.submitFeedback(item.time, 1);
                                             this.setState(this.state);
                                         }},
                                         {text: 'Inaccurate', onPress: () => {
-                                            item.status = 2;
+                                            item.status = -1;
+                                            this.submitFeedback(item.time, -1);    
                                             this.setState(this.state);
                                         }},
                                     ],
@@ -244,7 +292,7 @@ class HistoryComponent extends Component
                                 // this.setState(this.state);
                             } }>
 
-                            <View style= {[ styles.row, { backgroundColor: colors[item.status]} ]}>
+                            <View style= {[ styles.row, { backgroundColor: colors[item.status + 1]} ]}>
                                 <Text 
                                     style = {{
                                         fontSize: 12, 
