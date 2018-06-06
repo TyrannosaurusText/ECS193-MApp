@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk-rKZ/values-kk-rKZ.xml",
+        "outputFile": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-kk-rKZ\\values-kk-rKZ.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 162
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 233,
+                        "startOffset": 284,
                         "endColumn": 111,
-                        "endOffset": 340
+                        "endOffset": 391
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 270
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 345,
+                        "startOffset": 396,
                         "endColumn": 107,
-                        "endOffset": 448
+                        "endOffset": 499
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 393
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 453,
+                        "startOffset": 504,
                         "endColumn": 122,
-                        "endOffset": 571
+                        "endOffset": 622
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 496
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 576,
+                        "startOffset": 627,
                         "endColumn": 102,
-                        "endOffset": 674
+                        "endOffset": 725
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 606
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 679,
+                        "startOffset": 730,
                         "endColumn": 109,
-                        "endOffset": 784
+                        "endOffset": 835
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 691
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 789,
+                        "startOffset": 840,
                         "endColumn": 84,
-                        "endOffset": 869
+                        "endOffset": 920
                     }
                 }
             },
@@ -125,13 +125,13 @@
                     "endOffset": 797
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 874,
+                        "startOffset": 925,
                         "endColumn": 105,
-                        "endOffset": 975
+                        "endOffset": 1026
                     }
                 }
             },
@@ -144,13 +144,13 @@
                     "endOffset": 916
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 980,
+                        "startOffset": 1031,
                         "endColumn": 118,
-                        "endOffset": 1094
+                        "endOffset": 1145
                     }
                 }
             },
@@ -163,13 +163,13 @@
                     "endOffset": 997
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 1099,
+                        "startOffset": 1150,
                         "endColumn": 80,
-                        "endOffset": 1175
+                        "endOffset": 1226
                     }
                 }
             },
@@ -178,17 +178,17 @@
                     "startLine": 11,
                     "startColumn": 4,
                     "startOffset": 1002,
-                    "endColumn": 79,
-                    "endOffset": 1077
+                    "endColumn": 102,
+                    "endOffset": 1100
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 1180,
-                        "endColumn": 79,
-                        "endOffset": 1255
+                        "startOffset": 1231,
+                        "endColumn": 102,
+                        "endOffset": 1329
                     }
                 }
             },
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1082,
-                    "endColumn": 80,
-                    "endOffset": 1158
+                    "startOffset": 1105,
+                    "endColumn": 104,
+                    "endOffset": 1205
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 1260,
-                        "endColumn": 80,
-                        "endOffset": 1336
+                        "startOffset": 1334,
+                        "endColumn": 104,
+                        "endOffset": 1434
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1163,
-                    "endColumn": 102,
-                    "endOffset": 1261
+                    "startOffset": 1210,
+                    "endColumn": 97,
+                    "endOffset": 1303
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1341,
-                        "endColumn": 102,
-                        "endOffset": 1439
+                        "startOffset": 1439,
+                        "endColumn": 97,
+                        "endOffset": 1532
                     }
                 }
             },
@@ -234,18 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1266,
-                    "endColumn": 104,
-                    "endOffset": 1366
+                    "startOffset": 1308,
+                    "endColumn": 106,
+                    "endOffset": 1410
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1444,
-                        "endColumn": 104,
-                        "endOffset": 1544
+                        "startOffset": 1537,
+                        "endColumn": 106,
+                        "endOffset": 1639
                     }
                 }
             },
@@ -253,18 +253,18 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 1371,
-                    "endColumn": 97,
-                    "endOffset": 1464
+                    "startOffset": 1415,
+                    "endColumn": 108,
+                    "endOffset": 1519
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1549,
-                        "endColumn": 97,
-                        "endOffset": 1642
+                        "startOffset": 1644,
+                        "endColumn": 108,
+                        "endOffset": 1748
                     }
                 }
             },
@@ -272,18 +272,18 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 1469,
-                    "endColumn": 106,
-                    "endOffset": 1571
+                    "startOffset": 1524,
+                    "endColumn": 99,
+                    "endOffset": 1619
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
-                        "startOffset": 1647,
-                        "endColumn": 106,
-                        "endOffset": 1749
+                        "startOffset": 1753,
+                        "endColumn": 99,
+                        "endOffset": 1848
                     }
                 }
             },
@@ -291,18 +291,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1576,
-                    "endColumn": 108,
-                    "endOffset": 1680
+                    "startOffset": 1624,
+                    "endColumn": 114,
+                    "endOffset": 1734
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1754,
-                        "endColumn": 108,
-                        "endOffset": 1858
+                        "startOffset": 1853,
+                        "endColumn": 114,
+                        "endOffset": 1963
                     }
                 }
             },
@@ -310,18 +310,18 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 1685,
-                    "endColumn": 99,
-                    "endOffset": 1780
+                    "startOffset": 1739,
+                    "endColumn": 98,
+                    "endOffset": 1833
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1863,
-                        "endColumn": 99,
-                        "endOffset": 1958
+                        "startOffset": 1968,
+                        "endColumn": 98,
+                        "endOffset": 2062
                     }
                 }
             },
@@ -329,56 +329,18 @@
                 "to": {
                     "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1785,
-                    "endColumn": 114,
-                    "endOffset": 1895
+                    "startOffset": 1838,
+                    "endColumn": 100,
+                    "endOffset": 1934
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-kk-rKZ\\values-kk-rKZ.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1963,
-                        "endColumn": 114,
-                        "endOffset": 2073
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 1900,
-                    "endColumn": 98,
-                    "endOffset": 1994
-                },
-                "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 2078,
-                        "endColumn": 98,
-                        "endOffset": 2172
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 21,
-                    "startColumn": 4,
-                    "startOffset": 1999,
-                    "endColumn": 100,
-                    "endOffset": 2095
-                },
-                "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-kk-rKZ/values-kk-rKZ.xml",
-                    "position": {
-                        "startLine": 23,
-                        "startColumn": 4,
-                        "startOffset": 2177,
+                        "startOffset": 2067,
                         "endColumn": 100,
-                        "endOffset": 2273
+                        "endOffset": 2163
                     }
                 }
             }

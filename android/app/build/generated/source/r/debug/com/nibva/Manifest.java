@@ -9,6 +9,8 @@ package com.nibva;
 
 public final class Manifest {
     public static final class permission {
+        /**  Permissions required for enabling GCM. 
+         */
         public static final String C2D_MESSAGE="com.nibva.permission.C2D_MESSAGE";
     }
 }

@@ -9,10 +9,11 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../node_modules/react-native-background-task/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-background-timer/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-ble-manager/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-google-signin/android" />
-            <option value="$PROJECT_DIR$/../node_modules/react-native-push-notification/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-notifications/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-svg/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-vector-icons/android" />
           </set>
         </option>

@@ -3,399 +3,381 @@
 
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-background-task/unspecified/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\react-native-svg\unspecified\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="3eeebdaa2eb6fa6a914fa757ec9c23e4569825f0">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-background-task-unspecified_a953fbff9bb78ce92c8108a158ef0c1c7becd4c1.jar" />
+        sha1="6a484d92545cfb921fb52b52a1a9b152514ed1a6">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-react-native-svg-unspecified_f461d1c64ad86bc546c0b24ef3d41841339e4767.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.soloader/soloader/0.1.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.soloader-soloader-0.1.0_e62b3af3fecaf1b4d2c6911719c909e0343b3a2c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fbui.textlayoutbuilder/textlayoutbuilder/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_8a6a154c8a719b7f767024335f35f459626ebdce.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-base-11.0.4_b23215bf04c7847aa53d1f64445e96284e1aa624.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-common-11.0.4_f38c30e9e302e8bf2a6297a09b04dd8fa7b852c4.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fresco/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fresco-1.3.0_4a42ce5ddb00f6a5e9a6777d32d72c500b7b8dfd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-base-11.0.4_92bd5a416f5881e7df52f2e05c4eb24e2293eb81.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-iid/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="dd282bdeaa904c59d77e57dedd7e0a241c9b679d">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-iid-11.0.4_696555af03f445facff03cbe5fe75d016d03ec63.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-25.2.0_46858f44c60521d9593d12359a1feb684e0f5eff.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-ble-manager/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fd6b4737e3f28aee2adef0039a536a409fd2445d">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-ble-manager-unspecified_aff251a85303a3126d55b1192fb07926b9ccac84.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e5b429c146094a612134910688d169ec08deeefb">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-11.0.4_df89852638cdcf9da380ea5dc6c49b7cbeadfa6c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.evernote/android-job/1.1.11/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="978a742818fa8e1d6a014f26db191b7f72de2880">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.evernote-android-job-1.1.11_9b7de59521976628f56086f31f18a7bcf00a916d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_994a3503e32d46e95565c203fda6e52f9e53353a.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-iid-11.0.4_eacc457061e79797626abe1cb1b7a247c1ebcc72.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.facebook.fbui.textlayoutbuilder/staticlayout-proxy/1.0/f162442a19fff13995fbd51ba414d9ee05579080/staticlayout-proxy-1.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/staticlayout-proxy-1.0_d831898a5d410b11b70cfa1e3038c243afb23421.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="112e6935caed6ca1c65d627777c76f0296f62867">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.54.2_89b2150d169d3dc3d0e6fa637f21f6cba3494311.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-fragment/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-fragment-25.2.0_5c87a8567bf67ad8b240ebaf0e13a306a8f774ef.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-auth-11.0.4_7f665d0eabbc0bdf3e1850cd694a26dfb6ce568d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-utils-25.2.0_48d32901f1fd8485d68e87bdfbe192db860e10c2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/net.vrallev.android/cat/1.0.5/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c61a0369f93fb7901fde1bdae68fc71de256244c">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/net.vrallev.android-cat-1.0.5_8b34fb44c7c901dbe26c9419d6043b009495b52c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-compat/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-compat-25.2.0_b49a3d35c0616fa6c82cebca868fb91ccf7e7835.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="6975da39a7040257bd51d21a231b76c915872d38">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/javax.inject-1_cfc09e29f7128d5459cf8f97737bc7f9026eb662.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_73a7b3c34a725647d14a2d74c88be6f01c8011bf.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_299809dcf7aa77c2538309565c273f7c6cf3c054.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-core-ui-25.2.0_c299d597aa60427bd3e0d073d3d164c6551f1efd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/25.2.0/support-annotations-25.2.0.jar"
+        jar="C:\Users\whenk\AppData\Local\Android\Sdk\extras\android\m2repository\com\android\support\support-annotations\25.2.0\support-annotations-25.2.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="4a5a82a027706397fff621b22fd6fa796e91d7c5">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/support-annotations-25.2.0_57984021a6cb77a53101c4ff64fdd56a0b5f9fbe.jar" />
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\support-annotations-25.2.0_5c67945a21036e92ee33901e82c04e7f9a71e9fc.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp-urlconnection/3.6.0/3f9b16b774f2c36cfd86dd2053d0b3059531dacc/okhttp-urlconnection-3.6.0.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-base\11.0.4\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/okhttp-urlconnection-3.6.0_64a6bf49b1b178a138c2453ada5faa4c3654fe62.jar" />
+        sha1="70ffe00aaf049893f59d1dad57bd82992faa38ef">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-base-11.0.4_3378e96a94117c456f40981f6d650e7c49ae536a.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/25.2.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-media-compat-25.2.0_6f78705a3cc176a5956c1dfd296dc64da808263e.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-okhttp3-1.3.0_fa0d624d21846154a087ba8db5251ae2ff01a06b.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.firebase-firebase-analytics-impl-11.0.4_c00e8e1879e8ca99623659947fa4560f95ea8c2d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/11.0.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-basement-11.0.4_5c9bf78bf7f38b1ba149d6a67f07dbba5ea4f66d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_4898b35533bcac5af64c263a9574406354e4942d.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5c5699834e9722f1c288fea2de82725d078ba127">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.1.1_1f7f4bf16b40bccc924266392a665e3ba1a4162c.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-google-signin/unspecified/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d9df3cab8cddcdd0c94dbdf31f9e176eb0495d17">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-google-signin-unspecified_8655a23c7db78cbda4ec8f5f5d91dc2f6e3a37b2.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/jsr305-3.0.0_626ce2efee0ab671b5dadfb4d7b71781db729abd.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.2/jars/libs/infer-annotations-4.0.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.54.2\jars\libs\infer-annotations-4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_5c40b084f892e8c53e2bc215825053ec6097a786.jar" />
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\infer-annotations-4.0_79454894acfcb79a71895538e1cd9311ee23b0e3.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-vector-icons/unspecified/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth-base\11.0.4\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-vector-icons-unspecified_748cf112b49c99de2601d94e36cdf9955cc6247d.jar" />
+        sha1="0bffdc0bd4f7ca0e27c5bfeef39569f8da00aa26">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-auth-base-11.0.4_ae8ba98589462aaaf593ee289d8fa700e3ec81b8.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/11.0.4/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\reactnativenotifications\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="074b7bbf8da17ae634b4e89d9c7e353947fd76fd">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-reactnativenotifications-unspecified_affe42dcfdf7b4694042482f7e35316723691940.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-iid\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ed87ccdcb70c17d71ba4e6e4ac16afa62d3c49fb">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-iid-11.0.4_1d20ee2a35e300ebd4e433c586b60dd589aa3d92.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp-urlconnection\3.6.0\3f9b16b774f2c36cfd86dd2053d0b3059531dacc\okhttp-urlconnection-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="3f9b16b774f2c36cfd86dd2053d0b3059531dacc">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\okhttp-urlconnection-3.6.0_2e5e5aee5195798363571ecc5675203538ff7425.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fresco\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fe85b87215e405f5917d40ae4960488ac9224b74">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fresco-1.3.0_65df70adf74f207dd748c25389a96b87a848acb6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.google.code.findbugs\jsr305\3.0.0\5871fb60dc68d67da54a663c3fd636a10a532948\jsr305-3.0.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="5871fb60dc68d67da54a663c3fd636a10a532948">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\jsr305-3.0.0_2dacf6aa015ef86d3f5ce36a2121b9d1c57c5814.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="67eb33110dbacb46a48175b08ae0c96761d2c17d">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-compat-25.2.0_0b82eb8b78d0b015efe39e0691fa2f2c95a59886.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\react-native-google-signin\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="b717c2decdcab90411cd6aee7a001044eb424401">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-react-native-google-signin-unspecified_55f37abd91da2c6e293e78f9c55a19b6089c8a06.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-iid\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="dd282bdeaa904c59d77e57dedd7e0a241c9b679d">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-iid-11.0.4_d90f5f33d679e0d08c754ceaae973ee286f09cfa.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics-impl\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e1625e48a836779b5fa141d22e5d05563aaccc9a">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-impl-11.0.4_8b75af29d3c7b6f7e1afd332c04f84b5acf7afc8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fbui.textlayoutbuilder\textlayoutbuilder\1.0.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f90b593491e4044903f0bbf68dc3fa2790b151b9">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fbui.textlayoutbuilder-textlayoutbuilder-1.0.0_b5e593fcdd15644e6bd1510ff7669a70b58fe76c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-auth\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f5ff5e3811e8c9485fd27f9052ae4d4d23a22d9d">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-auth-11.0.4_70b641ddacdfb5e475e56c074e7a06b1ba7e3c11.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-core-utils\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e820b7be8c035dd522da4bc822e8a76c8e27921a">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-utils-25.2.0_996590cef35713f9ba53d248dd242b7a6e8164e2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-media-compat\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="ee394a892dd21c03a528139c1e8d4e0e1264ac84">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-media-compat-25.2.0_28d26c73f4c8ce629d8ef69edc62e06688dfef3c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-tasks\11.0.4\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="2430e711762a749feb00b3d64858ca4768251b9d">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-tasks-11.0.4_413db572604b520937368c9f8b2cb31b44fb98ee.jar" />
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-tasks-11.0.4_8a5260dbb14f9cf6eaec66b034c6e8c6cc7388c1.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/NIBVA/react-native-push-notification/unspecified/jars/classes.jar"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\javax.inject\javax.inject\1\6975da39a7040257bd51d21a231b76c915872d38\javax.inject-1.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="3e4f60b98cadc3209acdaff70a1ba1231bb925ef">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/NIBVA-react-native-push-notification-unspecified_9759b95b4eb954799e48de5d01c91eb1e9e35449.jar" />
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\javax.inject-1_618bcbdd5f774ce4bbb71f1147e7564a97fb26e3.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/11.0.4/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.soloader\soloader\0.1.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="d8942ee348aaa9341f08f7e2437063893fe27542">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.google.android.gms-play-services-gcm-11.0.4_da7ec2ea85bb22325e7cf343a108409aaef69f52.jar" />
+        sha1="8f615bca00639150c9eb6175d4b5471193f70794">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.soloader-soloader-0.1.0_f64a25efe8ccb41b3554bcceb2341f0b5e8ee3e3.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-okhttp3\1.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
-        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_6f848dc42ca7b8c2d863b005389a6feaeb9f9a76.jar" />
+        sha1="c03c08c9934b23c8c09c803345ec51a74119127b">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-okhttp3-1.3.0_360042dd492b819f83cda868617b57a2927e1e6a.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/home/whenkek/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.6.0/69edde9fc4b01c9fd51d25b83428837478c27254/okhttp-3.6.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/okhttp-3.6.0_2cb15f9074d44c8e47b55fbb4bb21e111e1f9837.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/me.leolin/ShortcutBadger/1.1.8/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="531c33d3697000a05e9493a2d0f09ba41fa114d3">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/me.leolin-ShortcutBadger-1.1.8_d18b322fe88270e76fad9c4d6413cdd6aa6555d6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.facebook.fresco/fbcore/1.3.0/jars/classes.jar"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\fbcore\1.3.0\jars\classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="37345de2ed2772f385eaeec37a9c2ff0fea99ad7">
-        <dex dex="/home/whenkek/ECS193-MApp/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-fbcore-1.3.0_61d591ca2ae4a1ce9a25289287111c1dfd0ceb3f.jar" />
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-fbcore-1.3.0_27b18a5e2467366b3ceace3f7fb86857894ca7d4.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-core-ui\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="fa0446a14ed5dd3725047d6399ffea771a564b30">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-core-ui-25.2.0_d89899cd3e8bd5a5643ca2cbf465aad1475821b7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-common\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="43e9789bd3240271265ab30ce1be9f224843f5a8">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-common-11.0.4_d2c429dc64d1bb0ffc88672e94c182f196863f5c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.react\react-native\0.54.2\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="112e6935caed6ca1c65d627777c76f0296f62867">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.react-react-native-0.54.2_61f2c652bd6726a3da906b2562856e5311623fe8.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline-base\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-base-1.3.0_3611c957e118a331fe27fd958150e380325db445.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-v4\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-25.2.0_e15c9d15f05fa423f2b1d89a99dcbafc812d828d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.facebook.fbui.textlayoutbuilder\staticlayout-proxy\1.0\f162442a19fff13995fbd51ba414d9ee05579080\staticlayout-proxy-1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f162442a19fff13995fbd51ba414d9ee05579080">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\staticlayout-proxy-1.0_233578cdea794d8923d729775d5782a4981e4645.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.firebase\firebase-analytics\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="e5b429c146094a612134910688d169ec08deeefb">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.firebase-firebase-analytics-11.0.4_bf58f4acf0e8e89adca2fe4e28ea00c2639a7966.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-23.0.1_7c8fe4d8984aff0288efe463b09191801b4b7ac2.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\drawee\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-drawee-1.3.0_6b1828b85c77656ecf7361fef41a55d118076a01.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.parse.bolts\bolts-tasks\1.4.0\d85884acf6810a3bbbecb587f239005cbc846dc4\bolts-tasks-1.4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\bolts-tasks-1.4.0_47b6435ed98ef358151b22bc094afd5780d1df3e.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-gcm\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d8942ee348aaa9341f08f7e2437063893fe27542">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-gcm-11.0.4_adf6d8e135c5e18a3693152efde37b28bbd251cf.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.squareup.okhttp3\okhttp\3.6.0\69edde9fc4b01c9fd51d25b83428837478c27254\okhttp-3.6.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="69edde9fc4b01c9fd51d25b83428837478c27254">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\okhttp-3.6.0_d4e736264364ea3dd61f055806429e849b4d1476.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\.gradle\caches\modules-2\files-2.1\com.squareup.okio\okio\1.13.0\a9283170b7305c8d92d25aff02a6ab7e45d06cbe\okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\okio-1.13.0_1565508a45d4aaaa810900907f356f418b35b3dc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.android.support\support-fragment\25.2.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="8fe8a8f77d651982ce5e18f6187dc4daf914ac57">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.android.support-support-fragment-25.2.0_6f95537fea171cd467230964a0c6361cb95babba.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\react-native-background-timer\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="832fc04398f09286d944049027fbcc02597b362a">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-react-native-background-timer-unspecified_a50c298357c465a47b2fce6b843721d852480e5b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.facebook.fresco\imagepipeline\1.3.0\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.facebook.fresco-imagepipeline-1.3.0_bc4df56792a86bb467fe2bd4781263e588dd4921.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\react-native-vector-icons\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="f2cf527de8d0bd35d72088fafea02395ba4a9eec">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-react-native-vector-icons-unspecified_22271e0f5d11fbba0266cd538a5ac1d8417215e3.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\com.google.android.gms\play-services-basement\11.0.4\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="364364bf77b4a71afc5930fc3ae57b3f0eea637c">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\com.google.android.gms-play-services-basement-11.0.4_5ea2c92e018c1967ad12a8eb844924f3ed699625.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\exploded-aar\NIBVA\react-native-ble-manager\unspecified\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="05e122d59dc698223ef20dfd596e357803937275">
+        <dex dex="C:\Users\whenk\Desktop\ECS193-MApp\android\app\build\intermediates\pre-dexed\debug\NIBVA-react-native-ble-manager-unspecified_7dc95e57a6712fbc51fdd83a53f76647fc36160d.jar" />
     </item>
 
 </items>

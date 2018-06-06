@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-is-rIS/values-is-rIS.xml",
+        "outputFile": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-is-rIS\\values-is-rIS.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 150
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 233,
+                        "startOffset": 284,
                         "endColumn": 99,
-                        "endOffset": 328
+                        "endOffset": 379
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 258
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
-                        "startOffset": 333,
+                        "startOffset": 384,
                         "endColumn": 107,
-                        "endOffset": 436
+                        "endOffset": 487
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 381
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
-                        "startOffset": 441,
+                        "startOffset": 492,
                         "endColumn": 122,
-                        "endOffset": 559
+                        "endOffset": 610
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 478
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 564,
+                        "startOffset": 615,
                         "endColumn": 96,
-                        "endOffset": 656
+                        "endOffset": 707
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 590
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 661,
+                        "startOffset": 712,
                         "endColumn": 111,
-                        "endOffset": 768
+                        "endOffset": 819
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 675
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 773,
+                        "startOffset": 824,
                         "endColumn": 84,
-                        "endOffset": 853
+                        "endOffset": 904
                     }
                 }
             },
@@ -125,13 +125,13 @@
                     "endOffset": 776
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 858,
+                        "startOffset": 909,
                         "endColumn": 100,
-                        "endOffset": 954
+                        "endOffset": 1005
                     }
                 }
             },
@@ -144,13 +144,13 @@
                     "endOffset": 890
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 11,
                         "startColumn": 4,
-                        "startOffset": 959,
+                        "startOffset": 1010,
                         "endColumn": 113,
-                        "endOffset": 1068
+                        "endOffset": 1119
                     }
                 }
             },
@@ -159,17 +159,17 @@
                     "startLine": 10,
                     "startColumn": 4,
                     "startOffset": 895,
-                    "endColumn": 79,
-                    "endOffset": 970
+                    "endColumn": 80,
+                    "endOffset": 971
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 12,
                         "startColumn": 4,
-                        "startOffset": 1073,
-                        "endColumn": 79,
-                        "endOffset": 1148
+                        "startOffset": 1124,
+                        "endColumn": 80,
+                        "endOffset": 1200
                     }
                 }
             },
@@ -177,18 +177,18 @@
                 "to": {
                     "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 975,
-                    "endColumn": 79,
-                    "endOffset": 1050
+                    "startOffset": 976,
+                    "endColumn": 109,
+                    "endOffset": 1081
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 1153,
-                        "endColumn": 79,
-                        "endOffset": 1228
+                        "startOffset": 1205,
+                        "endColumn": 109,
+                        "endOffset": 1310
                     }
                 }
             },
@@ -196,18 +196,18 @@
                 "to": {
                     "startLine": 12,
                     "startColumn": 4,
-                    "startOffset": 1055,
-                    "endColumn": 80,
-                    "endOffset": 1131
+                    "startOffset": 1086,
+                    "endColumn": 107,
+                    "endOffset": 1189
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 14,
                         "startColumn": 4,
-                        "startOffset": 1233,
-                        "endColumn": 80,
-                        "endOffset": 1309
+                        "startOffset": 1315,
+                        "endColumn": 107,
+                        "endOffset": 1418
                     }
                 }
             },
@@ -215,18 +215,18 @@
                 "to": {
                     "startLine": 13,
                     "startColumn": 4,
-                    "startOffset": 1136,
-                    "endColumn": 109,
-                    "endOffset": 1241
+                    "startOffset": 1194,
+                    "endColumn": 97,
+                    "endOffset": 1287
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1314,
-                        "endColumn": 109,
-                        "endOffset": 1419
+                        "startOffset": 1423,
+                        "endColumn": 97,
+                        "endOffset": 1516
                     }
                 }
             },
@@ -234,18 +234,18 @@
                 "to": {
                     "startLine": 14,
                     "startColumn": 4,
-                    "startOffset": 1246,
-                    "endColumn": 107,
-                    "endOffset": 1349
+                    "startOffset": 1292,
+                    "endColumn": 108,
+                    "endOffset": 1396
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1424,
-                        "endColumn": 107,
-                        "endOffset": 1527
+                        "startOffset": 1521,
+                        "endColumn": 108,
+                        "endOffset": 1625
                     }
                 }
             },
@@ -253,18 +253,18 @@
                 "to": {
                     "startLine": 15,
                     "startColumn": 4,
-                    "startOffset": 1354,
-                    "endColumn": 97,
-                    "endOffset": 1447
+                    "startOffset": 1401,
+                    "endColumn": 98,
+                    "endOffset": 1495
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1532,
-                        "endColumn": 97,
-                        "endOffset": 1625
+                        "startOffset": 1630,
+                        "endColumn": 98,
+                        "endOffset": 1724
                     }
                 }
             },
@@ -272,18 +272,18 @@
                 "to": {
                     "startLine": 16,
                     "startColumn": 4,
-                    "startOffset": 1452,
-                    "endColumn": 108,
-                    "endOffset": 1556
+                    "startOffset": 1500,
+                    "endColumn": 102,
+                    "endOffset": 1598
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 18,
                         "startColumn": 4,
-                        "startOffset": 1630,
-                        "endColumn": 108,
-                        "endOffset": 1734
+                        "startOffset": 1729,
+                        "endColumn": 102,
+                        "endOffset": 1827
                     }
                 }
             },
@@ -291,18 +291,18 @@
                 "to": {
                     "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1561,
-                    "endColumn": 98,
-                    "endOffset": 1655
+                    "startOffset": 1603,
+                    "endColumn": 117,
+                    "endOffset": 1716
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 19,
                         "startColumn": 4,
-                        "startOffset": 1739,
-                        "endColumn": 98,
-                        "endOffset": 1833
+                        "startOffset": 1832,
+                        "endColumn": 117,
+                        "endOffset": 1945
                     }
                 }
             },
@@ -310,18 +310,18 @@
                 "to": {
                     "startLine": 18,
                     "startColumn": 4,
-                    "startOffset": 1660,
-                    "endColumn": 102,
-                    "endOffset": 1758
+                    "startOffset": 1721,
+                    "endColumn": 97,
+                    "endOffset": 1814
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 20,
                         "startColumn": 4,
-                        "startOffset": 1838,
-                        "endColumn": 102,
-                        "endOffset": 1936
+                        "startOffset": 1950,
+                        "endColumn": 97,
+                        "endOffset": 2043
                     }
                 }
             },
@@ -329,56 +329,18 @@
                 "to": {
                     "startLine": 19,
                     "startColumn": 4,
-                    "startOffset": 1763,
-                    "endColumn": 117,
-                    "endOffset": 1876
+                    "startOffset": 1819,
+                    "endColumn": 100,
+                    "endOffset": 1915
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-is-rIS\\values-is-rIS.xml",
                     "position": {
                         "startLine": 21,
                         "startColumn": 4,
-                        "startOffset": 1941,
-                        "endColumn": 117,
-                        "endOffset": 2054
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 20,
-                    "startColumn": 4,
-                    "startOffset": 1881,
-                    "endColumn": 97,
-                    "endOffset": 1974
-                },
-                "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
-                    "position": {
-                        "startLine": 22,
-                        "startColumn": 4,
-                        "startOffset": 2059,
-                        "endColumn": 97,
-                        "endOffset": 2152
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 21,
-                    "startColumn": 4,
-                    "startOffset": 1979,
-                    "endColumn": 100,
-                    "endOffset": 2075
-                },
-                "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-is-rIS/values-is-rIS.xml",
-                    "position": {
-                        "startLine": 23,
-                        "startColumn": 4,
-                        "startOffset": 2157,
+                        "startOffset": 2048,
                         "endColumn": 100,
-                        "endOffset": 2253
+                        "endOffset": 2144
                     }
                 }
             }

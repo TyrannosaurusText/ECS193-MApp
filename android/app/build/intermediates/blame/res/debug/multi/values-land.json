@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-land/values-land.xml",
+        "outputFile": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-land\\values-land.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 112
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 229,
+                        "startOffset": 280,
                         "endColumn": 61,
-                        "endOffset": 286
+                        "endOffset": 337
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 184
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 466,
+                        "startOffset": 568,
                         "endColumn": 71,
-                        "endOffset": 533
+                        "endOffset": 635
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 254
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 10,
                         "startColumn": 4,
-                        "startOffset": 722,
+                        "startOffset": 875,
                         "endColumn": 69,
-                        "endOffset": 787
+                        "endOffset": 940
                     }
                 }
             },
@@ -68,13 +68,13 @@
                     "endOffset": 318
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 13,
                         "startColumn": 4,
-                        "startOffset": 967,
+                        "startOffset": 1171,
                         "endColumn": 63,
-                        "endOffset": 1026
+                        "endOffset": 1230
                     }
                 }
             },
@@ -87,13 +87,13 @@
                     "endOffset": 389
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 16,
                         "startColumn": 4,
-                        "startOffset": 1215,
+                        "startOffset": 1470,
                         "endColumn": 70,
-                        "endOffset": 1281
+                        "endOffset": 1536
                     }
                 }
             },
@@ -106,13 +106,13 @@
                     "endOffset": 457
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-land/values-land.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-land\\values-land.xml",
                     "position": {
                         "startLine": 17,
                         "startColumn": 4,
-                        "startOffset": 1286,
+                        "startOffset": 1541,
                         "endColumn": 67,
-                        "endOffset": 1349
+                        "endOffset": 1604
                     }
                 }
             }

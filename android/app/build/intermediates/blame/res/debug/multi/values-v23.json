@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v23/values-v23.xml",
+        "outputFile": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
         "map": [
             {
                 "to": {
@@ -11,13 +11,13 @@
                     "endOffset": 185
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
-                        "startOffset": 239,
+                        "startOffset": 290,
                         "endColumn": 134,
-                        "endOffset": 369
+                        "endOffset": 420
                     }
                 }
             },
@@ -30,13 +30,13 @@
                     "endOffset": 260
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
-                        "startOffset": 553,
+                        "startOffset": 655,
                         "endColumn": 74,
-                        "endOffset": 623
+                        "endOffset": 725
                     }
                 }
             },
@@ -49,13 +49,13 @@
                     "endOffset": 347
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
-                        "startOffset": 628,
+                        "startOffset": 730,
                         "endColumn": 86,
-                        "endOffset": 710
+                        "endOffset": 812
                     }
                 }
             },
@@ -64,59 +64,59 @@
                     "startLine": 5,
                     "startColumn": 4,
                     "startOffset": 352,
-                    "endLine": 13,
+                    "endLine": 10,
                     "endColumn": 12,
-                    "endOffset": 905
+                    "endOffset": 675
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,
-                        "startOffset": 715,
-                        "endLine": 17,
+                        "startOffset": 817,
+                        "endLine": 14,
                         "endColumn": 12,
-                        "endOffset": 1268
+                        "endOffset": 1140
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 14,
+                    "startLine": 11,
                     "startColumn": 4,
-                    "startOffset": 910,
-                    "endLine": 22,
+                    "startOffset": 680,
+                    "endLine": 16,
                     "endColumn": 12,
-                    "endOffset": 1475
+                    "endOffset": 1015
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
-                        "startLine": 18,
+                        "startLine": 15,
                         "startColumn": 4,
-                        "startOffset": 1273,
-                        "endLine": 26,
+                        "startOffset": 1145,
+                        "endLine": 20,
                         "endColumn": 12,
-                        "endOffset": 1838
+                        "endOffset": 1480
                     }
                 }
             },
             {
                 "to": {
-                    "startLine": 23,
+                    "startLine": 17,
                     "startColumn": 4,
-                    "startOffset": 1480,
+                    "startOffset": 1020,
                     "endColumn": 104,
-                    "endOffset": 1580
+                    "endOffset": 1120
                 },
                 "from": {
-                    "file": "/home/whenkek/ECS193-MApp/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/values-v23/values-v23.xml",
+                    "file": "C:\\Users\\whenk\\Desktop\\ECS193-MApp\\android\\app\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\23.0.1\\res\\values-v23\\values-v23.xml",
                     "position": {
-                        "startLine": 29,
+                        "startLine": 23,
                         "startColumn": 4,
-                        "startOffset": 2022,
+                        "startOffset": 1715,
                         "endColumn": 104,
-                        "endOffset": 2122
+                        "endOffset": 1815
                     }
                 }
             }
