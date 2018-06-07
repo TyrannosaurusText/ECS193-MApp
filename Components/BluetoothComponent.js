@@ -127,7 +127,7 @@ class BLEManager extends Component
                 console.log('connectedToPatch: ', this.state.connectedToPatch);
                 this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
             }
-        }, 15 * 60000);
+        }, 0.5 * 60000);
 
         AppState.addEventListener('change', this.handleAppStateChange);
 

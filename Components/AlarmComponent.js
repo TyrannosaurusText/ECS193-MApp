@@ -212,7 +212,7 @@ class AlarmComponent extends Component
                 marginLeft:window.width*0.25
                 }} >
             <Button
-                title = 'Add Alaram'
+                title = 'Add Alarm'
                 // color = 'black'
                 onPress = {() => {
                     if(list.length < 10) {
