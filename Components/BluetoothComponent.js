@@ -135,87 +135,69 @@ class BLEManager extends Component
             var timeDiff = Date.now() - this.state.lastReadTime;
             console.log('before timeDiff=' + timeDiff);
 
-            if(this.state.notDone == true) {
-                console.log('Old thread not done with work');
+            if (this.state.notDone == true) { 
+                console.log('Oldthread not done with work');
                 return;
-            } else if(timeDiff < this.state.timeBtwnReadings) {
-                console.log('timeDiff=' + timeDiff + ", skip readings for this interval");
-                this.state.readEnabled = false;
-                this.state.notDone = true;
-                this.isConnected();
-                if (this.state.connectedToPatch == false || this.state.myPatch == null) {
-                    this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
-                        if (patchAddress != undefined) {
-                            this.state.patchAddress = patchAddress;
-                        } else {
-                            this.state.patchAddress = '';
-                        }
-                        console.log('readEnabled false: isconnectedToPatch: ' + this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
-                        this.startScan();
-                    }, (error) => {
-                        console.log('Failed to retrieve MyDeviceAddress');
-                    });
-                }
             } else {
-                this.state.readEnabled = true;
                 this.state.notDone = true;
-                this.isConnected();
-                console.log('isconnectedToPatch: ' + this.state.connectedToPatch + ', myPatch:' + this.state.myPatch);
-                if (this.state.connectedToPatch == true && this.state.myPatch != null) {
-                    console.log('already connected to patch');
-                    this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-                } else {
-                    this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
-                        if (patchAddress != undefined) {
-                            this.state.patchAddress = patchAddress;
-                        } else {
-                            this.state.patchAddress = '';
-                        }
-                        console.log('readEnabled true: isconnectedToPatch: ' + this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
-                        this.startScan();
-                    }, (error) => {
-                        console.log('Failed to retrieve MyDeviceAddress');
-                    });
-                }
-            }
-
-            /**
-             * If not connected to patch, start scanning for devices before
-             * doing readings. If already connected, start reading 
-             * immediately.
-             */
-            // this.state.notDone = true;
-            // var connected = this.isConnected();
-            // if (connected == false) {
-            //     this.retrieveItem('MyDeviceAddress').then((patchAddress) => {
-            //         if (patchAddress != undefined) {
-            //             this.state.patchAddress = patchAddress;
-            //         }
-            //         console.log('isconnectedToPatch: ', this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
-            //         this.startScan();
-            //     }, (error) => {
-            //         console.log('Failed to retrieve MyDeviceAddress');
-            //     });
-            // } else {
-            //         console.log('isconnectedToPatch: ', this.state.connectedToPatch);
-            //         this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-            // }
-
-            // console.log('updateInternalStorage(): key=' + key + ', newValue=' + newValue);
-            // if(this.state.connectedToPatch == false) {
-            //     console.log('connectedToPatch: ', this.state.connectedToPatch);
-            //     this.startScan();
-            // } else {
-            //     console.log('connectedToPatch: ', this.state.connectedToPatch);
-            //     this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
-            // }
+                Promise.all([BleManager.getConnectedPeripherals([]), this.retrieveItem('MyDeviceAddress')])
+                .then((results) => {
+                    
+                    console.log('isConnected(): results=' + results[0] + ', len=' + results[0].length);
         
-            console.log('Done with Background Task1: oldThreadWorking=' + this.state.notDone);
-            this.state.notDone = false;
-            console.log('Done with Background Task2: oldThreadWorking=' + this.state.notDone);
-            timeDiff = Date.now() - this.state.lastReadTime;
-            console.log('after timeDiff=' + timeDiff);
+                    /**
+                     * Check if phone is connected to device via ble
+                     */
+                    for(var i = 0; i < results[0].length; i++) {
+                        console.log('Connected to peripheral: ' + JSON.stringify(results[0][i], null, 4));
+                    }
+        
+                    
+                    if(results[0].length == 0) {
+                        this.state.connectedToPatch = false;
+                    } else {
+                        this.state.connectedToPatch = true;
+                    }
+        
+                    console.log('isConnected(): result=' + this.state.connectedToPatch);
+                    
+                    /**
+                     * Get ready to search for saved patch Address
+                     */
+                    if (results[1] != undefined) {
+                        this.state.patchAddress = results[1];
+                    } else {
+                        this.state.patchAddress = '';
+                        }
+                }).then(() => {
+                   if (timeDiff < this.state.timeBtwnReadings && !this.state.connectedToPatch) {
+                        console.log('readEnabled false: isconnectedToPatch: ' + this.state.connectedToPatch + 'try to connect to:' + this.state.patchAddress);
+                        this.state.readEnabled = false;   
+                        this.setState({ scanning: false }); 
+                        this.startScan();
+                   } else if (timeDiff >= this.state.timeBtwnReadings) {
+                        this.state.readEnabled = true;
+                        
+                        console.log('isconnectedToPatch: ' + this.state.connectedToPatch + ', myPatch:' + this.state.myPatch + ', scanning: ' + this.state.scanning);
+                        if (this.state.connectedToPatch == true && this.state.myPatch != null) {
+                            console.log('already connected to patch');
+                            this.handleUpdateValueForCharacteristic({peripheral: this.state.myPatch.id, value: [7]});
+                        } else {
+                            this.setState({ scanning: false });
+                            this.startScan();
+                        }                    
+                   }
 
+                }).then(() => {
+                    console.log('Done with Background Task1: oldThreadWorking=' + this.state.notDone);
+                    this.state.notDone = false;
+                    console.log('Done with Background Task2: oldThreadWorking=' + this.state.notDone);
+                    timeDiff = Date.now() - this.state.lastReadTime;
+                    console.log('after timeDiff=' + timeDiff);
+                }).catch((error) => {
+                    console.log('BackgroundTask Error: ' + error);
+                });
+            }
         }, 15000);
 
         AppState.addEventListener('change', this.handleAppStateChange);
@@ -718,6 +700,11 @@ class BLEManager extends Component
             BleManager.scan([], 3, true).then((results) => {
                 console.log('Scanning...');
                 this.setState({scanning:true});
+            });
+        } else {
+            this.stopScan().then(() => {
+                console.log("stopScan()");
+                this.startScan();
             });
         }
     }
